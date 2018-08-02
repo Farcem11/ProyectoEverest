@@ -4,22 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import logic.Algorithms.Sorting.QuickSort;
+import logic.Operations.CalculationStrategy;
 
 public class StatisticalManager 
 {
-    private ArrayList<Double> numbers;
-    private double sum;
+    private Double[] numbers;
+    private double total;
     private double max;
     private double min;
-    private int size;
     
     public StatisticalManager(String filePath)
     {
-        numbers = new ArrayList<>();
-        sum = 0;
-        max = Double.NEGATIVE_INFINITY;
-        min = Double.POSITIVE_INFINITY;
-        size = 0;
+        ArrayList<Double> numbersList = new ArrayList<>();
+        total = 0;
         
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) 
         {
@@ -28,20 +26,17 @@ public class StatisticalManager
             for(String textNumber : textNumbers)
             {
                 double number = Double.valueOf(textNumber);
-                
-                sum += number;
-                
-                if(number > max)
-                    max = number;
-                
-                if(number < min)
-                    min = number;
-                
-                numbers.add(number);
-                
-                size++;
+                total += number;             
+                numbersList.add(number);                
             }
-        } 
+            
+            numbers = new Double[numbersList.size()];
+            numbersList.toArray(numbers);
+            new QuickSort().sort(numbers);
+            
+            max = numbers[numbers.length - 1];
+            min = numbers[0];
+        }
         catch(IOException e) 
         {
             e.printStackTrace();
@@ -49,19 +44,19 @@ public class StatisticalManager
     }
 
     /**
-     * @return the numbers
+     * @return the numbersList
      */
-    public ArrayList<Double> getNumbers() 
+    public Double[] getNumbers() 
     {
         return numbers;
     }
 
     /**
-     * @return the sum
+     * @return the total
      */
-    public double getSum() 
+    public double getTotal() 
     {
-        return sum;
+        return total;
     }
 
     /**
@@ -79,11 +74,4 @@ public class StatisticalManager
     {
         return min;
     }  
-
-    /**
-     * @return the size
-     */
-    public int getSize() {
-        return size;
-    }
 }

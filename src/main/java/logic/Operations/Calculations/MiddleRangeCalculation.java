@@ -1,5 +1,6 @@
-package logic.Operations;
+package logic.Operations.Calculations;
 
+import logic.Operations.CalculationStrategy;
 import logic.StatisticalManager;
 
 public class MiddleRangeCalculation  implements CalculationStrategy 

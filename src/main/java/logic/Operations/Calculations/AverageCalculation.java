@@ -1,5 +1,6 @@
-package logic.Operations;
+package logic.Operations.Calculations;
 
+import logic.Operations.CalculationStrategy;
 import logic.StatisticalManager;
 
 public class AverageCalculation implements CalculationStrategy
@@ -7,6 +8,6 @@ public class AverageCalculation implements CalculationStrategy
     @Override
     public double doCalculation(StatisticalManager statisticalManager) 
     {
-        return statisticalManager.getSum() / statisticalManager.getSize();
+        return statisticalManager.getTotal() / statisticalManager.getNumbers().length;
     }
 }
