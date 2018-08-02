@@ -13,7 +13,8 @@ public enum StatisticalCalculator
     MIN(new MinCalculation()),
     QUARTILE_ONE(new QuartileOneCalculation()),
     QUARTILE_THREE(new QuartileThreeCalculation()),
-    VARIANCE(new VarianceCalculation());
+    VARIANCE(new VarianceCalculation()),
+    STANDARD_DEVIATION(new StandardDeviationCalculation());
     
     StatisticalCalculator(CalculationStrategy strategy)
     {
