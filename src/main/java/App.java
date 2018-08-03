@@ -1,14 +1,10 @@
-
-import logic.StatisticalCalculator;
+import logic.FileValidator;
 import logic.StatisticalManager;
 
 public class App 
 {
     public static void main(String[] args) 
     {
-        StatisticalManager manager = new StatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\numbers.txt");
-        
-        StatisticalCalculator.MODE.calculate(manager); 
-
+        StatisticalManager manager = FileValidator.newStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\Numbers.txt");
     }
 }

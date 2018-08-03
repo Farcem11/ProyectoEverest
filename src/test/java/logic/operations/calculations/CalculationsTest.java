@@ -1,5 +1,6 @@
 package logic.operations.calculations;
 
+import logic.FileValidator;
 import logic.StatisticalCalculator;
 import logic.StatisticalManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,7 @@ public class CalculationsTest
         @BeforeEach
         public void createNewStatisticalManager() 
         {
-            manager = new StatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\numbers.txt");
+            manager = FileValidator.newStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\Numbers.txt");
         }
         
         @Test
@@ -39,11 +40,18 @@ public class CalculationsTest
         }
         
         @Test
-        void testMedian()
+        void testMedianOdd()
         {
             assertEquals(3.4, StatisticalCalculator.MEDIAN.calculate(manager));
         }
         
+        @Test
+        void testMedianPair()
+        {
+            manager = FileValidator.newStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\NumbersPair.txt");
+            assertEquals(5.0, StatisticalCalculator.MEDIAN.calculate(manager));
+        }
+
         @Test
         void testRange()
         {
@@ -53,6 +61,7 @@ public class CalculationsTest
         @Test
         void testMode()
         {
+            manager = FileValidator.newStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\NumbersMultipleRepeats.txt");
             assertEquals(9.4, StatisticalCalculator.MODE.calculate(manager));
         }
         
