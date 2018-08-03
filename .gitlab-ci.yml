@@ -19,20 +19,20 @@ build:
     paths:
       - build/libs/*.jar
   tags:
-      - gitlab-org
+      - localhostRunner
 test:
   stage: test
   script:
     - gradle test
   tags:
-      - gitlab-org
+      - localhostRunner
 
 sonarqube:
   stage: sonarqube
   script: 
     - gradle sonarqube
   tags:
-      - gitlab-org
+      - localhostRunner
 
 deploy_dev:
   stage: deploy_dev
@@ -41,7 +41,7 @@ deploy_dev:
   only:
     - master
   tags:
-      - gitlab-org
+      - localhostRunner
 
 deploy_qa:
   stage: deploy_qa
@@ -50,7 +50,7 @@ deploy_qa:
   only:
     - qa
   tags:
-      - gitlab-org
+      - localhostRunner
   when: manual
     
 deploy_prod:
@@ -60,5 +60,5 @@ deploy_prod:
   only:
     - prod
   tags:
-      - gitlab-org
+      - localhostRunner
   when: manual
