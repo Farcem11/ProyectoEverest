@@ -18,6 +18,7 @@ build:
   artifacts:
     paths:
       - build/libs/ProyectoEverest.jar
+      - `pwd`/.gradle/
   tags:
       - localhostRunner
 test:
