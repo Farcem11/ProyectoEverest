@@ -1,8 +1,7 @@
-package logic.Operations.Calculations;
+package logic.operations.calculations;
 
 import logic.StatisticalManager;
-import logic.Algorithms.Sorting.QuickSort;
-import logic.Operations.CalculationStrategy;
+import logic.operations.CalculationStrategy;
 
 public class MedianCalculation implements CalculationStrategy
 {

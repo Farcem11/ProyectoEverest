@@ -1,4 +1,4 @@
-package logic.Algorithms.Sorting;
+package logic.algorithms.sorting;
 
 public interface SortingStrategy 
 {

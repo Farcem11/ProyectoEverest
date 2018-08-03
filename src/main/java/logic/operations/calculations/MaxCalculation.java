@@ -1,6 +1,6 @@
-package logic.Operations.Calculations;
+package logic.operations.calculations;
 
-import logic.Operations.CalculationStrategy;
+import logic.operations.CalculationStrategy;
 import logic.StatisticalManager;
 
 public class MaxCalculation implements CalculationStrategy

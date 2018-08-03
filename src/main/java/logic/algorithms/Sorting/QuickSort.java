@@ -1,4 +1,4 @@
-package logic.Algorithms.Sorting;
+package logic.algorithms.sorting;
 
 public class QuickSort implements SortingStrategy
 { 

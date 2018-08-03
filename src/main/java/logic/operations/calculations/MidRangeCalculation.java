@@ -1,9 +1,9 @@
-package logic.Operations.Calculations;
+package logic.operations.calculations;
 
-import logic.Operations.CalculationStrategy;
+import logic.operations.CalculationStrategy;
 import logic.StatisticalManager;
 
-public class MiddleRangeCalculation  implements CalculationStrategy 
+public class MidRangeCalculation  implements CalculationStrategy 
 {
     @Override
     public double doCalculation(StatisticalManager statisticalManager) 

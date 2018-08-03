@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import logic.Algorithms.Sorting.QuickSort;
-import logic.Operations.CalculationStrategy;
+import logic.algorithms.sorting.QuickSort;
 
 public class StatisticalManager 
 {
@@ -25,7 +24,7 @@ public class StatisticalManager
             String[] textNumbers = line.split(",");
             for(String textNumber : textNumbers)
             {
-                double number = Double.valueOf(textNumber);
+                double number = Double.parseDouble(textNumber);
                 total += number;             
                 numbersList.add(number);                
             }

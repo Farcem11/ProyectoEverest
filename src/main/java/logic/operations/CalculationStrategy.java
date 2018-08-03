@@ -1,4 +1,4 @@
-package logic.Operations;
+package logic.operations;
 
 import logic.StatisticalManager;
 

@@ -1,14 +1,23 @@
 package logic;
 
-import logic.Operations.CalculationStrategy;
-import logic.Operations.Calculations.*;
+import logic.operations.calculations.VarianceCalculation;
+import logic.operations.calculations.QuartileThreeCalculation;
+import logic.operations.calculations.MaxCalculation;
+import logic.operations.calculations.ModeCalculation;
+import logic.operations.calculations.StandardDeviationCalculation;
+import logic.operations.calculations.QuartileOneCalculation;
+import logic.operations.calculations.MidRangeCalculation;
+import logic.operations.calculations.MedianCalculation;
+import logic.operations.calculations.AverageCalculation;
+import logic.operations.calculations.MinCalculation;
+import logic.operations.CalculationStrategy;
 
 public enum StatisticalCalculator 
 {
     AVERAGE(new AverageCalculation()),
     MEDIAN(new MedianCalculation()),
     MODE(new ModeCalculation()),
-    MIDDLE_RANGE(new MiddleRangeCalculation()),
+    MID_RANGE(new MidRangeCalculation()),
     MAX(new MaxCalculation()),
     MIN(new MinCalculation()),
     QUARTILE_ONE(new QuartileOneCalculation()),

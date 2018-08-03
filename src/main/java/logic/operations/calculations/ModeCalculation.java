@@ -1,8 +1,6 @@
-package logic.Operations.Calculations;
+package logic.operations.calculations;
 
-import java.util.HashMap;
-import java.util.Map;
-import logic.Operations.CalculationStrategy;
+import logic.operations.CalculationStrategy;
 import logic.StatisticalManager;
 
 public class ModeCalculation implements CalculationStrategy

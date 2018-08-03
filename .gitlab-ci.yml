@@ -1,0 +1,64 @@
+image: gradle:alpine
+
+before_script:
+  - set GRADLE_USER_HOME=`pwd`/.gradle
+
+stages:
+  - build
+  - test
+  - sonarqube
+  - deploy_dev
+  - deploy_qa
+  - deploy_prod
+
+build:
+  stage: build
+  script:
+    - gradle clean build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+  tags:
+      - everest
+test:
+  stage: test
+  script:
+    - gradle test
+  tags:
+      - everest
+
+sonarqube:
+  stage: sonarqube
+  script: 
+    - gradle sonarqube
+  tags:
+      - everest
+
+deploy_dev:
+  stage: deploy_dev
+  script:
+    - gradle run
+  only:
+    - master
+  tags:
+      - everest
+
+deploy_qa:
+  stage: deploy_qa
+  script:
+    - gradle run
+  only:
+    - qa
+  tags:
+      - everest
+  when: manual
+    
+deploy_prod:
+  stage: deploy_prod
+  script:
+    - gradle run
+  only:
+    - prod
+  tags:
+      - everest
+  when: manual
