@@ -1,4 +1,4 @@
-image: java:8-jdk
+image: gradle:alpine
 
 stages:
   - build
@@ -14,11 +14,12 @@ before_script:
 cache:
   paths:
     - gradle/wrapper
+    - build
     
 build:
   stage: build
   script:
-    - gradle build
+    - ./gradlew build
   artifacts:
     paths:
       - build/libs/ProyectoEverest.jar
@@ -27,14 +28,14 @@ build:
 test:
   stage: test
   script:
-    - gradle test
+    - ./gradlew test
   tags:
       - localhostRunner
 
 sonarqube:
   stage: sonarqube
   script: 
-    - gradle sonarqube
+    - ./gradlew sonarqube
   tags:
       - localhostRunner
 
