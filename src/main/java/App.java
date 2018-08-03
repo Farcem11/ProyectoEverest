@@ -8,8 +8,7 @@ public class App
     {
         StatisticalManager manager = new StatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\numbers.txt");
         
-        StatisticalCalculator.QUARTILE_ONE.calculate(manager);    
-        StatisticalCalculator.QUARTILE_THREE.calculate(manager);
+        StatisticalCalculator.MODE.calculate(manager); 
 
     }
 }

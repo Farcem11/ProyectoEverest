@@ -13,21 +13,22 @@ public class ModeCalculation implements CalculationStrategy
         int maxCount = 1;
         int currentCount = 1;
         
-        for(double number : statisticalManager.getNumbers())
+        for(Double number : statisticalManager.getNumbers())
         {
             if(number == previousNumber)
             {
                 currentCount++;
-            }
-            else 
-            {
                 if(currentCount > maxCount)
                 {
                     maxCount = currentCount;
                     mostRepeatedNumber = previousNumber;
                 }
+            }
+            else
+            {
                 currentCount = 1;
             }
+
             previousNumber = number;
         }
         return mostRepeatedNumber;

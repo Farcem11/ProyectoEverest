@@ -23,61 +23,61 @@ public class CalculationsTest
         @Test
         void testAverage()
         {
-            assertEquals(8.0, StatisticalCalculator.AVERAGE.calculate(manager));
+            assertEquals(4.013333333333334, StatisticalCalculator.AVERAGE.calculate(manager));
         }
         
         @Test
         void testMax()
         {
-            assertEquals(15.0, StatisticalCalculator.MAX.calculate(manager));
+            assertEquals(9.4, StatisticalCalculator.MAX.calculate(manager));
         }
         
         @Test
         void testMin()
         {
-            assertEquals(1.0, StatisticalCalculator.MIN.calculate(manager));
+            assertEquals(-5.0, StatisticalCalculator.MIN.calculate(manager));
         }
         
         @Test
         void testMedian()
         {
-            assertEquals(8.0, StatisticalCalculator.MEDIAN.calculate(manager));
+            assertEquals(3.4, StatisticalCalculator.MEDIAN.calculate(manager));
         }
         
         @Test
         void testRange()
         {
-            assertEquals(8.0, StatisticalCalculator.MID_RANGE.calculate(manager));
+            assertEquals(2.2, StatisticalCalculator.MID_RANGE.calculate(manager));
         }
         
         @Test
         void testMode()
         {
-            assertEquals(Double.NaN, StatisticalCalculator.MODE.calculate(manager));
+            assertEquals(9.4, StatisticalCalculator.MODE.calculate(manager));
         }
         
         @Test
         void testQuartileThree()
         {
-            assertEquals(12.0, StatisticalCalculator.QUARTILE_THREE.calculate(manager));
+            assertEquals(8.7, StatisticalCalculator.QUARTILE_THREE.calculate(manager));
         }
         
         @Test
         void testQuartileOne()
         {
-            assertEquals(4.0, StatisticalCalculator.QUARTILE_ONE.calculate(manager));
+            assertEquals(0.8, StatisticalCalculator.QUARTILE_ONE.calculate(manager));
         }
         
         @Test
         void testVariance()
         {
-            assertEquals(18.666666666666668, StatisticalCalculator.VARIANCE.calculate(manager));
+            assertEquals(22.19448888888889, StatisticalCalculator.VARIANCE.calculate(manager));
         }
         
         @Test
         void testStandardDeviation()
         {
-            assertEquals(4.320493798938574, StatisticalCalculator.STANDARD_DEVIATION.calculate(manager));
+            assertEquals(4.711102725359413, StatisticalCalculator.STANDARD_DEVIATION.calculate(manager));
         }
     }
 }

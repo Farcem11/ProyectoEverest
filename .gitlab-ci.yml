@@ -4,12 +4,20 @@ before_script:
   - set GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
+  - clean
   - build
   - test
   - sonarqube
   - deploy_dev
   - deploy_qa
   - deploy_prod
+
+clean:
+    stage: clean
+    script: 
+      - gradle clean
+    tags:
+        - localhostRunner
 
 build:
   stage: build
