@@ -81,7 +81,7 @@ jacocoTestReport {
 
 junitPlatformTest {
     jacoco {
-        destinationFile = file("${buildDir}/jacoco/test.exec")
+        destinationFile = file("build/jacoco/test.exec")
     }
 }
 
