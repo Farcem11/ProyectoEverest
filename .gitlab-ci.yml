@@ -1,7 +1,7 @@
 image: gradle:alpine
 
 before_script:
-  - set GRADLE_USER_HOME=pwd/.gradle
+  - set GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
   - build
@@ -18,7 +18,6 @@ build:
   artifacts:
     paths:
       - build/libs/ProyectoEverest.jar
-      - pwd/.gradle/
   tags:
       - localhostRunner
 test:
