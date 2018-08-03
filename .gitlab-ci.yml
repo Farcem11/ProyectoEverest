@@ -14,25 +14,25 @@ stages:
 build:
   stage: build
   script:
-    - gradle clean build
+    - gradle clean && gradle build
   artifacts:
     paths:
       - build/libs/*.jar
   tags:
-      - everest
+      - gitlab-org
 test:
   stage: test
   script:
     - gradle test
   tags:
-      - everest
+      - gitlab-org
 
 sonarqube:
   stage: sonarqube
   script: 
     - gradle sonarqube
   tags:
-      - everest
+      - gitlab-org
 
 deploy_dev:
   stage: deploy_dev
@@ -41,7 +41,7 @@ deploy_dev:
   only:
     - master
   tags:
-      - everest
+      - gitlab-org
 
 deploy_qa:
   stage: deploy_qa
@@ -50,7 +50,7 @@ deploy_qa:
   only:
     - qa
   tags:
-      - everest
+      - gitlab-org
   when: manual
     
 deploy_prod:
@@ -60,5 +60,5 @@ deploy_prod:
   only:
     - prod
   tags:
-      - everest
+      - gitlab-org
   when: manual
