@@ -17,13 +17,16 @@ build:
     - gradle build
   artifacts:
     paths:
-      - build/libs/*.jar
+      - build/libs/ProyectoEverest.jar
   tags:
       - localhostRunner
 test:
   stage: test
   script:
     - gradle test
+  artifacts:
+    paths:
+      - build/
   tags:
       - localhostRunner
 
