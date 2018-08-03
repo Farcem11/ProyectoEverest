@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class FileValidator 
+public abstract class StatisticalValidator 
 {
     private static final Logger logger = Logger.getLogger(StatisticalManager.class.getName());
     
-    public static StatisticalManager newStatisticalManager(String filePath)
+    public static StatisticalManager getStatisticalManager(String filePath)
     {
-        String[] numbers = getNumbers(filePath);
+        String[] numbers = validateAndGetNumbers(filePath);
         if(numbers != null)
         {
             return new StatisticalManager(numbers);
@@ -21,7 +21,7 @@ public abstract class FileValidator
         return null;
     }
     
-    public static String[] getNumbers(String filePath)
+    public static String[] validateAndGetNumbers(String filePath)
     {
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) 
         {

@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import logic.algorithms.sorting.QuickSort;
-public class StatisticalManager 
+public class StatisticalManager
 {
     private final Double[] numbers;
     private double total;

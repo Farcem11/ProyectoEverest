@@ -1,10 +1,11 @@
 package logic;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class StatisticalManagerTest
+public class StatisticalValidatorTest
 {
     final String filesPath = "C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\";
     
@@ -16,25 +17,31 @@ public class StatisticalManagerTest
         @Test
         public void notExistingFileTest() 
         {
-            assertNull(FileValidator.newStatisticalManager("DoesNotExist.txt"));
+            assertNull(StatisticalValidator.getStatisticalManager("DoesNotExist.txt"));
         }
         
         @Test
         public void notCsvFormatTest() 
         {
-            assertNull(FileValidator.newStatisticalManager(filesPath + "NotCsvFormat.txt"));
+            assertNull(StatisticalValidator.getStatisticalManager(filesPath + "NotCsvFormat.txt"));
         }
         
         @Test
         public void notNumbers() 
         {
-            assertNull(FileValidator.newStatisticalManager(filesPath + "NotNumbers.txt"));
+            assertNull(StatisticalValidator.getStatisticalManager(filesPath + "NotNumbers.txt"));
         }
         
         @Test
         public void emptyFile() 
         {
-            assertNull(FileValidator.newStatisticalManager(filesPath + "EmptyFile.txt"));
+            assertNull(StatisticalValidator.getStatisticalManager(filesPath + "EmptyFile.txt"));
+        }
+        
+        @Test
+        public void correctFile() 
+        {
+            assertNotNull(StatisticalValidator.getStatisticalManager(filesPath + "Numbers.txt"));
         }
     }
 }
