@@ -44,7 +44,7 @@ repositories {
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile "com.google.guava:guava:23.0"
-    compile files('build/libs/mysql-connector-java-5.1.46.jar')
+    compile files('database/mysql-connector-java-5.1.46.jar')
     // Use JUnit test framework
     testCompile(
         'org.junit.jupiter:junit-jupiter-api:5.1.0'
