@@ -12,8 +12,13 @@ import logic.operations.calculations.MedianCalculation;
 import logic.operations.calculations.AverageCalculation;
 import logic.operations.calculations.MinCalculation;
 
-public abstract class StatisticalCalculator 
+public class StatisticalCalculator 
 {
+    private StatisticalCalculator() 
+    {
+        throw new IllegalStateException("Statistical Calculator");
+    }
+    
     public static final CalculationContext AVERAGE = new CalculationContext(new AverageCalculation());
     public static final CalculationContext MEDIAN = new CalculationContext(new MedianCalculation());
     public static final CalculationContext MODE = new CalculationContext(new ModeCalculation());
