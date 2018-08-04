@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class AlgorithmsTest 
 {
-    Double[] numbers;
+    double[] numbers;
  
     @Test
     void quickSortNullArrayTest()
@@ -22,7 +22,7 @@ public class AlgorithmsTest
     @Test
     void quickSortEmptyArrayTest()
     {
-        numbers = new Double[0];
+        numbers = new double[0];
         QuickSort.getInstance().sort(numbers);
         assertEquals(0, numbers.length);
     }
@@ -30,8 +30,8 @@ public class AlgorithmsTest
     @Test
     void quickSortSortTest()
     {
-        numbers = new Double[]{8.0, 6.0, 3.0, -4.0, 12.0, -32.2, 44.2, 0.0, -30.0, 12.0, 8.1};
-        Double[] testNumbers = numbers;
+        numbers = new double[]{8.0, 6.0, 3.0, -4.0, 12.0, -32.2, 44.2, 0.0, -30.0, 12.0, 8.1};
+        double[] testNumbers = numbers;
  
         QuickSort.getInstance().sort(numbers);
         Arrays.sort(testNumbers);
