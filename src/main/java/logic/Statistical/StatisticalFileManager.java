@@ -52,7 +52,8 @@ public class StatisticalFileManager
             double min = numbers[0];
             String filePath = file.getAbsolutePath();
             String fileName = file.getName();
-            return new StatisticalDataManager(numbers, total, max, min, fileName, filePath);
+
+            return new StatisticalDataManager(numbers, total, max, min, fileName, filePath, textFile);
         }
         catch(IOException e) 
         {

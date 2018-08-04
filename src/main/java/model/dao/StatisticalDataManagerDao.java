@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,12 +28,13 @@ public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDat
             {
                 String fileName = resultSet.getString("fileName");
                 String filePath = resultSet.getString("filePath");
-                int total = resultSet.getInt("total");
-                int max = resultSet.getInt("max");
-                int min = resultSet.getInt("min");
+                String fileContent = resultSet.getString("fileContent");
+                double total = resultSet.getDouble("total");
+                double max = resultSet.getDouble("max");
+                double min = resultSet.getDouble("min");
                 double[] numbers = StatisticalFileManager.getInstance().castStringToNumbers(resultSet.getString("numbers"));
 
-                statisticalDataManager.add(new StatisticalDataManager(numbers,total,max,min,fileName,filePath));
+                statisticalDataManager.add(new StatisticalDataManager(numbers, total, max, min, fileName, filePath, fileContent));
             }
             
             resultSet.close();
@@ -49,7 +51,22 @@ public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDat
     @Override
     public void save(StatisticalDataManager object) 
     {
-
+        try 
+        {            
+            PreparedStatement preparedStatement = MySqlConnection.getInstance().getConnection().prepareStatement("call createStatisticalDataManagers(?, ?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, object.getFileName());
+            preparedStatement.setString(2, object.getFilePath());
+            preparedStatement.setDouble(3, object.getTotal());
+            preparedStatement.setDouble(4, object.getMax());
+            preparedStatement.setDouble(5, object.getMin());
+            preparedStatement.setString(6, object.getFileContent());
+            
+            preparedStatement.execute();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+        }
     }
 
     @Override

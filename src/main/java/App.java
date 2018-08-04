@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 import java.util.List;
+import logic.statistical.StatisticalFileManager;
 import model.object.StatisticalDataManager;
 import model.service.StatisticalDataManagerService;
 
@@ -9,6 +10,7 @@ public class App
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException 
     {
-        List<StatisticalDataManager> s = statisticalDataManagerService.getStatisticalDataManagers();
+        StatisticalDataManager statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData("files/numbers.txt");
+        statisticalDataManagerService.setStatisticalDataManagers(statisticalDataManager);
     }
 }

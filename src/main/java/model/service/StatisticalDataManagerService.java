@@ -6,10 +6,15 @@ import model.object.StatisticalDataManager;
 
 public class StatisticalDataManagerService 
 {
-    StatisticalDataManagerDao statisticalDataManagerDao = new StatisticalDataManagerDao();
+    private final StatisticalDataManagerDao statisticalDataManagerDao = new StatisticalDataManagerDao();
     
     public List<StatisticalDataManager> getStatisticalDataManagers()
     {
         return statisticalDataManagerDao.get();
+    }
+    
+    public void setStatisticalDataManagers(StatisticalDataManager statisticalDataManager)
+    {
+        statisticalDataManagerDao.save(statisticalDataManager);
     }
 }

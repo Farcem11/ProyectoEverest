@@ -1,6 +1,5 @@
 package logic.statistical.calculations;
 
-import logic.statistical.calculations.CalculationStrategy;
 import model.object.StatisticalDataManager;
 
 public class ModeCalculation implements CalculationStrategy
@@ -13,7 +12,7 @@ public class ModeCalculation implements CalculationStrategy
         int maxCount = 1;
         int currentCount = 1;
         
-        for(Double number : statisticalDataManager.getNumbers())
+        for(Double number : statisticalDataManager.getNumbersArray())
         {
             if(number == previousNumber)
             {

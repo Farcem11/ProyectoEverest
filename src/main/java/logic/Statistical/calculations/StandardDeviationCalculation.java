@@ -1,6 +1,5 @@
 package logic.statistical.calculations;
 
-import logic.statistical.calculations.CalculationStrategy;
 import logic.statistical.StatisticalCalculatorManager;
 import model.object.StatisticalDataManager;
 
