@@ -1,19 +1,19 @@
-package logic.operations.calculations;
+package logic.Statistical.operations.calculations;
 
-import logic.operations.CalculationStrategy;
-import logic.StatisticalManager;
+import logic.Statistical.operations.CalculationStrategy;
+import model.StatisticalDataManager;
 
 public class ModeCalculation implements CalculationStrategy
 {
     @Override
-    public double doCalculation(StatisticalManager statisticalManager) 
+    public double doCalculation(StatisticalDataManager statisticalDataManager) 
     {
         double mostRepeatedNumber = Double.NaN;
         double previousNumber = Double.NaN;
         int maxCount = 1;
         int currentCount = 1;
         
-        for(Double number : statisticalManager.getNumbers())
+        for(Double number : statisticalDataManager.getNumbers())
         {
             if(number == previousNumber)
             {

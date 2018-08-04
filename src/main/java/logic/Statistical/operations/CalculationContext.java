@@ -1,6 +1,6 @@
-package logic.operations;
+package logic.Statistical.operations;
 
-import logic.StatisticalManager;
+import model.StatisticalDataManager;
 
 public class CalculationContext 
 {
@@ -11,7 +11,7 @@ public class CalculationContext
         this.strategy = strategy;
     }
     
-    public double calculate(StatisticalManager statisticalManager)
+    public double calculate(StatisticalDataManager statisticalManager)
     {
         return strategy.doCalculation(statisticalManager);
     }    

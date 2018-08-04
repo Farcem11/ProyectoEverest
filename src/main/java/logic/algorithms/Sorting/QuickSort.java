@@ -1,13 +1,17 @@
 package logic.algorithms.sorting;
 
-public class QuickSort implements SortingStrategy
-{ 
-    /**
-     *
-     * @param array
-     */
-    @Override
-    public void sort(Double[] array) 
+public class QuickSort
+{
+    private static final QuickSort instance = new QuickSort();
+    
+    private QuickSort(){}
+
+    public static QuickSort getInstance()
+    {
+        return instance;
+    }
+
+    public void sort(double[] array) 
     {     
         if(array == null || array.length == 0) 
         {
@@ -16,7 +20,7 @@ public class QuickSort implements SortingStrategy
         quickSort(array, 0, array.length - 1);
     }
     
-    private void quickSort(Double[] array, int lowerIndex, int higherIndex) 
+    private void quickSort(double[] array, int lowerIndex, int higherIndex) 
     {    
         int i = lowerIndex;
         int j = higherIndex;
@@ -49,7 +53,7 @@ public class QuickSort implements SortingStrategy
             quickSort(array, i, higherIndex);
     }
  
-    private void swap(Double[] array, int i, int j) 
+    private void swap(double[] array, int i, int j) 
     {
         double temp = array[i];
         array[i] = array[j];

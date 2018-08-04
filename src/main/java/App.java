@@ -1,10 +1,12 @@
-import logic.StatisticalValidator;
-import logic.StatisticalManager;
+import java.sql.SQLException;
+import model.database.StatisticalDataManagerService;
 
 public class App 
 {
-    public static void main(String[] args) 
+    static StatisticalDataManagerService statisticalDataManagerService;
+    
+    public static void main(String[] args) throws ClassNotFoundException, SQLException 
     {
-        StatisticalManager manager = StatisticalValidator.getStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\Numbers.txt");
+        
     }
 }
