@@ -1,6 +1,6 @@
 package logic.Statistical.operations.calculations;
 
-import model.StatisticalDataManager;
+import model.database.object.StatisticalDataManager;
 import logic.Statistical.operations.CalculationStrategy;
 
 public class MedianCalculation implements CalculationStrategy

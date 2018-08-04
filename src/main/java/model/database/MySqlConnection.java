@@ -1,4 +1,4 @@
-package model.database;
+package model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class MySqlConnection
 {
     private static final MySqlConnection instance = new MySqlConnection();
     private Connection connection;
-    private final String filePath = "files/database.properties";
+    private final String filePath = "database/database.properties";
     private Properties databaseProperties= new Properties();
     private FileInputStream databaseFileProperty = null;
     
@@ -33,7 +33,7 @@ public class MySqlConnection
         }
         catch(IOException e)
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.WARNING, "File is empty {0}", e.getMessage());
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
         } 
         catch(SQLException ex) 
         {

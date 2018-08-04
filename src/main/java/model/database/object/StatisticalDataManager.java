@@ -1,13 +1,9 @@
-package model;
-
-import java.util.ArrayList;
-import java.util.List;
-import logic.algorithms.sorting.QuickSort;
+package model.database.object;
 
 public class StatisticalDataManager
 {
     private final double[] numbers;
-    private double total;
+    private final double total;
     private final double max;
     private final double min;
     private final String fileName;

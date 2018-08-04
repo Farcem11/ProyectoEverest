@@ -1,8 +1,9 @@
 package mainTest;
 
 import logic.Statistical.StatisticalCalculatorManager;
-import model.StatisticalDataManager;
+
 import logic.Statistical.StatisticalFileManager;
+import model.database.object.StatisticalDataManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

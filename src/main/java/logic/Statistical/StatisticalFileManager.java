@@ -1,6 +1,6 @@
 package logic.Statistical;
 
-import model.StatisticalDataManager;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import logic.algorithms.sorting.QuickSort;
+import model.database.object.StatisticalDataManager;
 
 public class StatisticalFileManager 
 {
@@ -56,7 +57,7 @@ public class StatisticalFileManager
         }
         catch(IOException e) 
         {
-            Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "File not found {0}", e.getMessage());
+            Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
             return null;
         }
         catch(NumberFormatException e)

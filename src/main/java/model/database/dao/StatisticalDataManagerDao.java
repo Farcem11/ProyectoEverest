@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Statistical.StatisticalFileManager;
-import model.StatisticalDataManager;
-import model.database.MySqlConnection;
+import model.database.object.StatisticalDataManager;
+import model.MySqlConnection;
 
 public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDataManager>
 {

@@ -2,7 +2,7 @@ package logic.Statistical.operations.calculations;
 
 import logic.Statistical.operations.CalculationStrategy;
 import logic.Statistical.StatisticalCalculatorManager;
-import model.StatisticalDataManager;
+import model.database.object.StatisticalDataManager;
 
 public class VarianceCalculation implements CalculationStrategy
 {

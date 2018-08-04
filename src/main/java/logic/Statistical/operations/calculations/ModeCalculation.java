@@ -1,7 +1,7 @@
 package logic.Statistical.operations.calculations;
 
 import logic.Statistical.operations.CalculationStrategy;
-import model.StatisticalDataManager;
+import model.database.object.StatisticalDataManager;
 
 public class ModeCalculation implements CalculationStrategy
 {
