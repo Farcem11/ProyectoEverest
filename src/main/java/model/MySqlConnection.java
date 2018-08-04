@@ -4,13 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logic.Statistical.StatisticalFileManager;
 
 public class MySqlConnection 
 {
@@ -24,6 +21,7 @@ public class MySqlConnection
     {
         try
         {
+            Class.forName("com.mysql.jdbc.Driver");
             databaseFileProperty = new FileInputStream(filePath);
             databaseProperties.load(databaseFileProperty);
             connection = DriverManager.getConnection(
@@ -33,11 +31,15 @@ public class MySqlConnection
         }
         catch(IOException e)
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "IO Exception {0}", e.getMessage());
         } 
         catch(SQLException ex) 
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.WARNING, "SQL Exception {0}", ex.getMessage());
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+        } 
+        catch(ClassNotFoundException ex) 
+        {
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "Class Not Found Exception {0}", ex.getMessage());
         }        
     }
     
