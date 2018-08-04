@@ -1,9 +1,9 @@
 import java.sql.SQLException;
 import java.util.List;
-import model.database.object.StatisticalDataManager;
-import model.database.service.StatisticalDataManagerService;
+import model.object.StatisticalDataManager;
+import model.service.StatisticalDataManagerService;
 
-public class App 
+public class App
 {
     static StatisticalDataManagerService statisticalDataManagerService = new StatisticalDataManagerService();
     

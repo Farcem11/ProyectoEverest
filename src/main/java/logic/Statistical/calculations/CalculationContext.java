@@ -1,6 +1,6 @@
-package logic.Statistical.operations;
+package logic.statistical.calculations;
 
-import model.database.object.StatisticalDataManager;
+import model.object.StatisticalDataManager;
 
 public class CalculationContext 
 {

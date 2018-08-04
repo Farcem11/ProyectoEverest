@@ -1,7 +1,7 @@
-package logic.Statistical.operations.calculations;
+package logic.statistical.calculations;
 
-import logic.Statistical.operations.CalculationStrategy;
-import model.database.object.StatisticalDataManager;
+import logic.statistical.calculations.CalculationStrategy;
+import model.object.StatisticalDataManager;
 
 public class MaxCalculation implements CalculationStrategy
 {

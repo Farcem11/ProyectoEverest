@@ -1,8 +1,8 @@
 package mainTest;
 
 
-import logic.Statistical.StatisticalFileManager;
-import model.database.object.StatisticalDataManager;
+import logic.statistical.StatisticalFileManager;
+import model.object.StatisticalDataManager;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Nested;

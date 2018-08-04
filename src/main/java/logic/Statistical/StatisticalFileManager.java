@@ -1,5 +1,4 @@
-package logic.Statistical;
-
+package logic.statistical;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import logic.algorithms.sorting.QuickSort;
-import model.database.object.StatisticalDataManager;
+import model.object.StatisticalDataManager;
 
 public class StatisticalFileManager 
 {
