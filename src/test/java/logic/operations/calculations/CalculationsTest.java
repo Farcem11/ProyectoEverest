@@ -62,7 +62,7 @@ public class CalculationsTest
         void testMode()
         {
             manager = StatisticalValidator.getStatisticalManager("C:\\Users\\Fabian\\Documents\\Avantica\\Everest\\ProyectoEverest\\files\\NumbersMultipleRepeats.txt");
-            assertEquals(9.4, StatisticalCalculator.MODE.calculate(manager));
+            assertEquals(4.0, StatisticalCalculator.MODE.calculate(manager));
         }
         
         @Test

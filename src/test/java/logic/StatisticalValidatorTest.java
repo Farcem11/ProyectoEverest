@@ -27,21 +27,27 @@ public class StatisticalValidatorTest
         }
         
         @Test
-        public void notNumbers() 
+        public void notNumbersTest() 
         {
             assertNull(StatisticalValidator.getStatisticalManager(filesPath + "NotNumbers.txt"));
         }
         
         @Test
-        public void emptyFile() 
+        public void emptyFileTest()
         {
             assertNull(StatisticalValidator.getStatisticalManager(filesPath + "EmptyFile.txt"));
         }
         
         @Test
-        public void correctFile() 
+        public void correctFileTest()
         {
             assertNotNull(StatisticalValidator.getStatisticalManager(filesPath + "Numbers.txt"));
+        }
+        
+        @Test
+        public void firstLineEmptyTest()
+        {
+            assertNull(StatisticalValidator.getStatisticalManager(filesPath + "FirstLineEmpty.txt"));
         }
     }
 }

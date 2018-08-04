@@ -28,13 +28,17 @@ public abstract class StatisticalValidator
             String textFile = br.readLine();
             String nextLine = br.readLine();
             
-            if(textFile == null || textFile.isEmpty())
+            if(textFile == null)
             {
                 logger.log(Level.WARNING, "File is empty", filePath);
                 return null;
             }
-            
-            if(nextLine != null)
+            else if(textFile.isEmpty())
+            {
+                logger.log(Level.WARNING, "First line is empty", filePath);
+                return null;
+            }
+            else if(nextLine != null)
             {
                 logger.log(Level.WARNING, "File has more than one line", filePath);
                 return null;
@@ -49,17 +53,17 @@ public abstract class StatisticalValidator
         }
         catch(FileNotFoundException e) 
         {
-            logger.log(Level.WARNING, "File not found", filePath);
+            logger.log(Level.WARNING, "File not found", e.getMessage());
             return null;
         } 
         catch(IOException e) 
         {
-            logger.log(Level.WARNING, "IO Exception", filePath);
+            logger.log(Level.WARNING, "IO Exception", e.getMessage());
             return null;
         }
         catch(NumberFormatException e)
         {
-            logger.log(Level.WARNING, "Not a number", filePath);
+            logger.log(Level.WARNING, "Is not a list of numbers", e.getMessage());
             return null;
         }
     }
