@@ -1,5 +1,5 @@
 package logic.statistical.calculations;
-;
+
 import model.object.StatisticalDataManager;
 
 public class AverageCalculation implements CalculationStrategy

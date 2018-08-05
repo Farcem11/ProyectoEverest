@@ -17,4 +17,9 @@ public class StatisticalDataManagerService
     {
         statisticalDataManagerDao.save(statisticalDataManager);
     }
+    
+    public void updateStatisticalDataManagers(StatisticalDataManager statisticalDataManager)
+    {
+        statisticalDataManagerDao.update(statisticalDataManager);
+    }
 }

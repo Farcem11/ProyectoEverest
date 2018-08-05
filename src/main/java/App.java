@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.util.List;
 import logic.statistical.StatisticalFileManager;
 import model.object.StatisticalDataManager;
 import model.service.StatisticalDataManagerService;
