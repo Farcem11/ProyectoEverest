@@ -1,7 +1,9 @@
+
+
 import java.sql.SQLException;
-import logic.statistical.StatisticalFileManager;
-import model.object.StatisticalDataManager;
-import model.service.StatisticalDataManagerService;
+import logic.StatisticalFileManager;
+import model.StatisticalDataManager;
+import service.StatisticalDataManagerService;
 
 public class App
 {

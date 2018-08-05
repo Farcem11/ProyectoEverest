@@ -1,4 +1,4 @@
-package model.object;
+package model;
 
 public class StatisticalDataManager
 {

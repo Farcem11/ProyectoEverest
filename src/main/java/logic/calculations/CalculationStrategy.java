@@ -1,6 +1,6 @@
-package logic.statistical.calculations;
+package logic.calculations;
 
-import model.object.StatisticalDataManager;
+import model.StatisticalDataManager;
 
 public interface CalculationStrategy 
 {

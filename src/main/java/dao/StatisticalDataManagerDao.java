@@ -1,4 +1,4 @@
-package model.dao;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logic.statistical.StatisticalFileManager;
-import model.object.StatisticalDataManager;
-import model.MySqlConnection;
+import logic.StatisticalFileManager;
+import model.StatisticalDataManager;
+import database.MySqlConnection;
 
 public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDataManager>
 {

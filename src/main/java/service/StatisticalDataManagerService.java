@@ -1,8 +1,8 @@
-package model.service;
+package service;
 
 import java.util.List;
-import model.dao.StatisticalDataManagerDao;
-import model.object.StatisticalDataManager;
+import dao.StatisticalDataManagerDao;
+import model.StatisticalDataManager;
 
 public class StatisticalDataManagerService 
 {
