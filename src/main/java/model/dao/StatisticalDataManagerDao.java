@@ -72,6 +72,21 @@ public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDat
     @Override
     public void update(StatisticalDataManager object) 
     {
-
+        try 
+        {            
+            PreparedStatement preparedStatement = MySqlConnection.getInstance().getConnection().prepareStatement("call updateStatisticalDataManagers(?, ?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, object.getFileName());
+            preparedStatement.setString(2, object.getFilePath());
+            preparedStatement.setDouble(3, object.getTotal());
+            preparedStatement.setDouble(4, object.getMax());
+            preparedStatement.setDouble(5, object.getMin());
+            preparedStatement.setString(6, object.getFileContent());
+            
+            preparedStatement.execute();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+        }
     }    
 }
