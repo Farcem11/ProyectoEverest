@@ -35,7 +35,6 @@ public class AlgorithmsTest
  
         QuickSort.getInstance().sort(numbers);
         Arrays.sort(testNumbers);
-        
         assertArrayEquals(testNumbers, numbers);
     }
 }
