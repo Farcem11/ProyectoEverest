@@ -11,13 +11,18 @@ import model.StatisticalData;
 import service.StatisticalDataService;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder;  
+import common.StatisticalDataManager;
 import common.StatisticalFileManager;
+import database.MySqlConnection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = {"getStatisticalData", "getStatisticalData", "updateStatisticalData", "deleteStatisticalData"}, loadOnStartup = 1) 
+@WebServlet(urlPatterns = {"getStatisticalData", "saveStatisticalData", "updateStatisticalData", "deleteStatisticalData"}, loadOnStartup = 1) 
 public class StatisticalDataController extends HttpServlet 
 {
     private final String getUrlRequest = "/getStatisticalData";
-    private final String saveUrlRequest = "/getStatisticalData";
+    private final String saveUrlRequest = "/saveStatisticalData";
     private final String updateUrlRequest = "/updateStatisticalData";
     private final String deleteUrlRequest = "/deleteStatisticalData";
     
@@ -31,30 +36,51 @@ public class StatisticalDataController extends HttpServlet
         {
             builder.setPrettyPrinting(); 
             Gson gson = builder.create();
-            List<StatisticalData> statisticalDataManagers = statisticalDataManagerService.getStatisticalsData();
-            response.getWriter().print(gson.toJson(statisticalDataManagers));
+            response.getWriter().print(gson.toJson(StatisticalDataManager.getInstance().statisticalDataMap));
+        }
+        else
+        {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        if(saveUrlRequest.equals(request.getServletPath()))
+        try 
         {
-            String pathFile = request.getParameter("pathFile");
-            StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData(pathFile);
-            statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
+            if(saveUrlRequest.equals(request.getServletPath()))
+            {
+                String pathFile = request.getParameter("pathFile");
+                StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(pathFile);
+                Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
+                statisticalDataManager.setId(uniqueDatabaseId);
+                StatisticalDataManager.getInstance().statisticalDataMap.put(uniqueDatabaseId, statisticalDataManager);
+            }
+            else if(updateUrlRequest.equals(request.getServletPath()))
+            {
+                Long id = Long.parseLong(request.getParameter("id"));
+                String pathFile = request.getParameter("pathFile");
+                StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(pathFile);
+                newStatisticalDataManager.setId(id);
+                statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
+                StatisticalDataManager.getInstance().statisticalDataMap.put(id, newStatisticalDataManager);                
+            }
+            else if(deleteUrlRequest.equals(request.getServletPath()))
+            {
+                Long id = Long.parseLong(request.getParameter("id"));
+                statisticalDataManagerService.deleteStatisticalData(id);
+                StatisticalDataManager.getInstance().statisticalDataMap.remove(id);
+            }
+            else
+            {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }
         }
-        else if(updateUrlRequest.equals(request.getServletPath()))
+        catch (SQLException ex) 
         {
-            String pathFile = request.getParameter("pathFile");
-            StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData(pathFile);
-            statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
-        }
-        else if(deleteUrlRequest.equals(request.getServletPath()))
-        {
-            Long id = Long.parseLong(request.getParameter("id"));
-            statisticalDataManagerService.deleteStatisticalData(id);
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }
     }
 }

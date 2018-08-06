@@ -4,7 +4,7 @@ import java.io.File;
 
 public class StatisticalData
 {
-    private final long idStatisticalData;
+    private long id;
     private String fileContent;
     private double[] numbersArray;
     private double total;
@@ -14,7 +14,7 @@ public class StatisticalData
 
     public StatisticalData(double[] numbers, double total, double max, double min, File file, String fileContent) 
     {
-        this.idStatisticalData = 0;
+        this.id = 0L;
         this.numbersArray = numbers;
         this.total = total;
         this.max = max;
@@ -25,7 +25,7 @@ public class StatisticalData
     
     public StatisticalData(long idStatisticalManager, double[] numbers, double total, double max, double min, File file, String fileContent) 
     {
-        this.idStatisticalData = idStatisticalManager; 
+        this.id = idStatisticalManager; 
         this.numbersArray = numbers;
         this.total = total;
         this.max = max;
@@ -73,10 +73,10 @@ public class StatisticalData
     }
 
     /**
-     * @return the idStatisticalData
+     * @return the id
      */
-    public long getIdStatisticalData() {
-        return idStatisticalData;
+    public long getId() {
+        return id;
     }
 
     /**
@@ -119,5 +119,12 @@ public class StatisticalData
      */
     public File getFile() {
         return file;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }

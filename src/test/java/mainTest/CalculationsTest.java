@@ -19,75 +19,75 @@ public class CalculationsTest
         @BeforeEach
         public void createNewStatisticalManager() 
         {
-            data = StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "Numbers.txt");
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "Numbers.txt");
         }
         
         @Test
         void testAverage()
         {
-            assertEquals(4.013333333333334, StatisticalCalculatorManager.getInstance().getAverageCalculator().calculate(data));
+            assertEquals(4.013333333333334, StatisticalCalculatorManager.getInstance().getAverageCalculation(data));
         }
         
         @Test
         void testMax()
         {
-            assertEquals(9.4, StatisticalCalculatorManager.getInstance().getMaxCalculator().calculate(data));
+            assertEquals(9.4, StatisticalCalculatorManager.getInstance().getMaxCalculation(data));
         }
         
         @Test
         void testMin()
         {
-            assertEquals(-5.0, StatisticalCalculatorManager.getInstance().getMinCalculator().calculate(data));
+            assertEquals(-5.0, StatisticalCalculatorManager.getInstance().getMinCalculation(data));
         }
         
         @Test
         void testMedianOdd()
         {
-            assertEquals(3.4, StatisticalCalculatorManager.getInstance().getMedianCalculator().calculate(data));
+            assertEquals(3.4, StatisticalCalculatorManager.getInstance().getMedianCalculation(data));
         }
         
         @Test
         void testMedianPair()
         {
-            data = StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "NumbersPair.txt");
-            assertEquals(5.0, StatisticalCalculatorManager.getInstance().getMedianCalculator().calculate(data));
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NumbersPair.txt");
+            assertEquals(5.0, StatisticalCalculatorManager.getInstance().getMedianCalculation(data));
         }
 
         @Test
         void testMidRange()
         {
-            assertEquals(2.2, StatisticalCalculatorManager.getInstance().getMidRangeCalculator().calculate(data));
+            assertEquals(2.2, StatisticalCalculatorManager.getInstance().getMidRangeCalculation(data));
         }
         
         @Test
         void testMode()
         {
-            data = StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "NumbersMultipleRepeats.txt");
-            assertEquals(4.0, StatisticalCalculatorManager.getInstance().getModeCalculator().calculate(data));
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NumbersMultipleRepeats.txt");
+            assertEquals(4.0, StatisticalCalculatorManager.getInstance().getModeCalculation(data));
         }
         
         @Test
         void testQuartileThree()
         {
-            assertEquals(8.7, StatisticalCalculatorManager.getInstance().getQuartileThreeCalculator().calculate(data));
+            assertEquals(8.7, StatisticalCalculatorManager.getInstance().getQuartileThreeCalculation(data));
         }
         
         @Test
         void testQuartileOne()
         {
-            assertEquals(0.8, StatisticalCalculatorManager.getInstance().getQuartileOneCalculator().calculate(data));
+            assertEquals(0.8, StatisticalCalculatorManager.getInstance().getQuartileOneCalculation(data));
         }
         
         @Test
         void testVariance()
         {
-            assertEquals(22.19448888888889, StatisticalCalculatorManager.getInstance().getVarianceCalculator().calculate(data));
+            assertEquals(22.19448888888889, StatisticalCalculatorManager.getInstance().getVarianceCalculation(data));
         }
         
         @Test
         void testStandardDeviation()
         {
-            assertEquals(4.711102725359413, StatisticalCalculatorManager.getInstance().getStandardDeviationCalculator().calculate(data));
+            assertEquals(4.711102725359413, StatisticalCalculatorManager.getInstance().getStandardDeviationCalculation(data));
         }
     }
 }

@@ -19,37 +19,37 @@ public class StatisticalValidatorTest
         @Test
         public void notExistingFileTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData("DoesNotExist.txt"));
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData("DoesNotExist.txt"));
         }
         
         @Test
         public void notCsvFormatTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "NotCsvFormat.txt"));
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NotCsvFormat.txt"));
         }
         
         @Test
         public void notNumbersTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "NotNumbers.txt"));
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NotNumbers.txt"));
         }
         
         @Test
         public void emptyFileTest()
         {
-            assertNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "EmptyFile.txt"));
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "EmptyFile.txt"));
         }
         
         @Test
         public void correctFileTest()
         {
-            assertNotNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "Numbers.txt"));
+            assertNotNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "Numbers.txt"));
         }
         
         @Test
         public void firstLineEmptyTest()
         {
-            assertNull(StatisticalFileManager.getInstance().validateAndParseStatisticalData(filesPath + "FirstLineEmpty.txt"));
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "FirstLineEmpty.txt"));
         }
     }
 }

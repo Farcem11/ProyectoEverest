@@ -43,10 +43,12 @@ BEGIN
 		pMin,
         pFileContent
 	);
+    
+    SELECT last_insert_id() as id;
 END //
 DELIMITER ;
 
-call saveStatisticalDataManagers('files/data/MyFile.txt', 15, 5, 1, '1,2,3,4,5');
+call saveStatisticalDataManagers('files/data/MyFile3.txt', 15, 5, 1, '1,2,3,4,5');
 
 DROP PROCEDURE IF EXISTS updateStatisticalDataManagers;
 DELIMITER //
@@ -87,3 +89,5 @@ END //
 DELIMITER ;
 
 call deleteStatisticalDataManagers(1);
+
+select * from statisticaldatamanager;

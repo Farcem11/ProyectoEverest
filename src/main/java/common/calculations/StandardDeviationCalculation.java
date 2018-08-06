@@ -8,7 +8,7 @@ public class StandardDeviationCalculation implements CalculationStrategy
     @Override
     public double doCalculation(StatisticalData statisticalDataManager) 
     {
-        double variance = StatisticalCalculatorManager.getInstance().getVarianceCalculator().calculate(statisticalDataManager);
+        double variance = StatisticalCalculatorManager.getInstance().getVarianceCalculation(statisticalDataManager);
         return Math.sqrt(variance);
     }
 }

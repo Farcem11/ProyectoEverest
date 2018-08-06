@@ -1,29 +1,36 @@
 package service;
 
-import java.util.List;
 import dao.StatisticalDataDao;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import model.StatisticalData;
 
 public class StatisticalDataService 
 {
     private final StatisticalDataDao statisticalDataDao = new StatisticalDataDao();
     
-    public List<StatisticalData> getStatisticalsData()
+    public Map<Long, StatisticalData> getStatisticalDataMap() throws SQLException
     {
-        return statisticalDataDao.get();
+        Map<Long, StatisticalData> statisticalDataMap = new HashMap<>(); 
+        for(StatisticalData statisticalData : statisticalDataDao.get())
+        {
+            statisticalDataMap.put(statisticalData.getId(), statisticalData);
+        }
+        return statisticalDataMap;
     }
     
-    public void saveStatisticalData(StatisticalData statisticalDataManager)
+    public Long saveStatisticalData(StatisticalData statisticalDataManager) throws SQLException
     {
-        statisticalDataDao.save(statisticalDataManager);
+        return statisticalDataDao.save(statisticalDataManager);
     }
     
-    public void updateStatisticalData(StatisticalData statisticalDataManager)
+    public void updateStatisticalData(StatisticalData newStatisticalDataManager) throws SQLException
     {
-        statisticalDataDao.update(statisticalDataManager);
+        statisticalDataDao.update(newStatisticalDataManager);
     }
     
-    public void deleteStatisticalData(Long idStatisticalDataManager)
+    public void deleteStatisticalData(Long idStatisticalDataManager) throws SQLException
     {
         statisticalDataDao.delete(idStatisticalDataManager);
     }

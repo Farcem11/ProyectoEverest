@@ -9,7 +9,8 @@ public class VarianceCalculation implements CalculationStrategy
     public double doCalculation(StatisticalData statisticalDataManager) 
     {
         double[] numbers = statisticalDataManager.getNumbersArray();
-        double average = StatisticalCalculatorManager.getInstance().getAverageCalculator().calculate(statisticalDataManager);
+        double average = StatisticalCalculatorManager.getInstance().getAverageCalculation(statisticalDataManager);
+
         double variance = 0;
         for(double number : numbers)
         {

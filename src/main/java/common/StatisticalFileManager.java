@@ -23,7 +23,7 @@ public class StatisticalFileManager
         return instance;
     }
     
-    public StatisticalData validateAndParseStatisticalData(String fileFullPath)
+    public StatisticalData parseFileToStatisticalData(String fileFullPath)
     {
         File file = new File(fileFullPath);
         try(BufferedReader br = new BufferedReader(new FileReader(file))) 

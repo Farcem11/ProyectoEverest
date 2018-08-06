@@ -11,6 +11,7 @@ import common.calculations.MidRangeCalculation;
 import common.calculations.MedianCalculation;
 import common.calculations.AverageCalculation;
 import common.calculations.MinCalculation;
+import model.StatisticalData;
 
 public class StatisticalCalculatorManager 
 {
@@ -34,73 +35,43 @@ public class StatisticalCalculatorManager
     private final CalculationContext varianceCalculator = new CalculationContext(new VarianceCalculation());
     private final CalculationContext standardDeviationCalculator = new CalculationContext(new StandardDeviationCalculation());
 
-    /**
-     * @return the averageCalculator
-     */
-    public CalculationContext getAverageCalculator() {
-        return averageCalculator;
+    public double getAverageCalculation(StatisticalData statisticalData) {
+        return averageCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the medianCalculator
-     */
-    public CalculationContext getMedianCalculator() {
-        return medianCalculator;
+    public double getMedianCalculation(StatisticalData statisticalData) {
+        return medianCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the modeCalculator
-     */
-    public CalculationContext getModeCalculator() {
-        return modeCalculator;
+    public double getModeCalculation(StatisticalData statisticalData) {
+        return modeCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the midRangeCalculator
-     */
-    public CalculationContext getMidRangeCalculator() {
-        return midRangeCalculator;
+    public double getMidRangeCalculation(StatisticalData statisticalData) {
+        return midRangeCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the maxCalculator
-     */
-    public CalculationContext getMaxCalculator() {
-        return maxCalculator;
+    public double getMaxCalculation(StatisticalData statisticalData) {
+        return maxCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the minCalculator
-     */
-    public CalculationContext getMinCalculator() {
-        return minCalculator;
+    public double getMinCalculation(StatisticalData statisticalData) {
+        return minCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the quartileOneCalculator
-     */
-    public CalculationContext getQuartileOneCalculator() {
-        return quartileOneCalculator;
+    public double getQuartileOneCalculation(StatisticalData statisticalData) {
+        return quartileOneCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the quartileThreeCalculator
-     */
-    public CalculationContext getQuartileThreeCalculator() {
-        return quartileThreeCalculator;
+    public double getQuartileThreeCalculation(StatisticalData statisticalData) {
+        return quartileThreeCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the varianceCalculator
-     */
-    public CalculationContext getVarianceCalculator() {
-        return varianceCalculator;
+    public double getVarianceCalculation(StatisticalData statisticalData) {
+        return varianceCalculator.calculate(statisticalData);
     }
 
-    /**
-     * @return the standardDeviationCalculator
-     */
-    public CalculationContext getStandardDeviationCalculator() {
-        return standardDeviationCalculator;
+    public double getStandardDeviationCalculation(StatisticalData statisticalData) {
+        return standardDeviationCalculator.calculate(statisticalData);
     }
 }

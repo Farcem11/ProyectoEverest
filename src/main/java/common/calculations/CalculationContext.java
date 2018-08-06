@@ -11,8 +11,8 @@ public class CalculationContext
         this.strategy = strategy;
     }
     
-    public double calculate(StatisticalData statisticalManager)
+    public double calculate(StatisticalData statisticalData)
     {
-        return strategy.doCalculation(statisticalManager);
+        return strategy.doCalculation(statisticalData);
     }    
 }
