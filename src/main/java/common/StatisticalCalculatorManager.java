@@ -1,16 +1,16 @@
-package logic;
+package common;
 
-import logic.calculations.CalculationContext;
-import logic.calculations.VarianceCalculation;
-import logic.calculations.QuartileThreeCalculation;
-import logic.calculations.MaxCalculation;
-import logic.calculations.ModeCalculation;
-import logic.calculations.StandardDeviationCalculation;
-import logic.calculations.QuartileOneCalculation;
-import logic.calculations.MidRangeCalculation;
-import logic.calculations.MedianCalculation;
-import logic.calculations.AverageCalculation;
-import logic.calculations.MinCalculation;
+import common.calculations.CalculationContext;
+import common.calculations.VarianceCalculation;
+import common.calculations.QuartileThreeCalculation;
+import common.calculations.MaxCalculation;
+import common.calculations.ModeCalculation;
+import common.calculations.StandardDeviationCalculation;
+import common.calculations.QuartileOneCalculation;
+import common.calculations.MidRangeCalculation;
+import common.calculations.MedianCalculation;
+import common.calculations.AverageCalculation;
+import common.calculations.MinCalculation;
 
 public class StatisticalCalculatorManager 
 {

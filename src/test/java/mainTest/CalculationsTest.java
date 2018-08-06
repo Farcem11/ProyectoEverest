@@ -1,7 +1,7 @@
 package mainTest;
 
-import logic.StatisticalCalculatorManager;
-import logic.StatisticalFileManager;
+import common.StatisticalCalculatorManager;
+import common.StatisticalFileManager;
 import model.StatisticalDataManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logic.StatisticalFileManager;
+import common.StatisticalFileManager;
 import model.StatisticalDataManager;
 import database.MySqlConnection;
 
@@ -32,7 +32,7 @@ public class StatisticalDataManagerDao implements DataAcessObject<StatisticalDat
                 double total = resultSet.getDouble("total");
                 double max = resultSet.getDouble("max");
                 double min = resultSet.getDouble("min");
-                double[] numbers = StatisticalFileManager.getInstance().castStringToNumbers(resultSet.getString("numbers"));
+                double[] numbers = StatisticalFileManager.getInstance().castStringToNumbers(resultSet.getString("fileContent"));
 
                 statisticalDataManager.add(new StatisticalDataManager(numbers, total, max, min, fileName, filePath, fileContent));
             }

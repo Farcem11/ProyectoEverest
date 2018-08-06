@@ -1,4 +1,4 @@
-package logic.algorithms.sorting;
+package common.algorithms.sorting;
 
 public class QuickSort
 {

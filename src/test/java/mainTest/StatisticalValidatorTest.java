@@ -1,6 +1,6 @@
 package mainTest;
 
-import logic.StatisticalFileManager;
+import common.StatisticalFileManager;
 import model.StatisticalDataManager;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;

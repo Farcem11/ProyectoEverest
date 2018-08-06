@@ -1,17 +1,16 @@
-
-
 import java.sql.SQLException;
-import logic.StatisticalFileManager;
+import common.StatisticalFileManager;
+import java.util.List;
 import model.StatisticalDataManager;
 import service.StatisticalDataManagerService;
 
 public class App
 {
-    static StatisticalDataManagerService statisticalDataManagerService = new StatisticalDataManagerService();
+    private static StatisticalDataManagerService statisticalDataManagerService = new StatisticalDataManagerService();
     
-    public static void main(String[] args) throws ClassNotFoundException, SQLException 
+    public static void main(String[] args)
     {
-        StatisticalDataManager statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData("files/numbers.txt");
-        statisticalDataManagerService.setStatisticalDataManagers(statisticalDataManager);
+        List<StatisticalDataManager> statisticalDataManagers = statisticalDataManagerService.getStatisticalDataManagers();
+        
     }
 }

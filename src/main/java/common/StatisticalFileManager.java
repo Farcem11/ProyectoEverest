@@ -1,4 +1,4 @@
-package logic;
+package common;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
-import logic.algorithms.sorting.QuickSort;
+import common.algorithms.sorting.QuickSort;
 import model.StatisticalDataManager;
 
 public class StatisticalFileManager 

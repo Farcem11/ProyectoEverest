@@ -1,4 +1,4 @@
-package logic.calculations;
+package common.calculations;
 
 import model.StatisticalDataManager;
 

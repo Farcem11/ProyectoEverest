@@ -1,6 +1,6 @@
-package logic.calculations;
+package common.calculations;
 
-import logic.StatisticalCalculatorManager;
+import common.StatisticalCalculatorManager;
 import model.StatisticalDataManager;
 
 public class StandardDeviationCalculation implements CalculationStrategy
