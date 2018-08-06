@@ -1,12 +1,12 @@
 package common.calculations;
 
 import common.StatisticalCalculatorManager;
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class StandardDeviationCalculation implements CalculationStrategy
 {
     @Override
-    public double doCalculation(StatisticalDataManager statisticalDataManager) 
+    public double doCalculation(StatisticalData statisticalDataManager) 
     {
         double variance = StatisticalCalculatorManager.getInstance().getVarianceCalculator().calculate(statisticalDataManager);
         return Math.sqrt(variance);

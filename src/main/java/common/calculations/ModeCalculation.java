@@ -1,11 +1,11 @@
 package common.calculations;
 
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class ModeCalculation implements CalculationStrategy
 {
     @Override
-    public double doCalculation(StatisticalDataManager statisticalDataManager) 
+    public double doCalculation(StatisticalData statisticalDataManager) 
     {
         double mostRepeatedNumber = Double.NaN;
         double previousNumber = Double.NaN;

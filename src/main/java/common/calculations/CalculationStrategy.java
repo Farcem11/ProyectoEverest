@@ -1,8 +1,8 @@
 package common.calculations;
 
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public interface CalculationStrategy 
 {
-    public double doCalculation(StatisticalDataManager statisticalDataManager);
+    public double doCalculation(StatisticalData statisticalDataManager);
 }

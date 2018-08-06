@@ -1,12 +1,12 @@
 package common.calculations;
 
 import common.StatisticalCalculatorManager;
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class VarianceCalculation implements CalculationStrategy
 {
     @Override
-    public double doCalculation(StatisticalDataManager statisticalDataManager) 
+    public double doCalculation(StatisticalData statisticalDataManager) 
     {
         double[] numbers = statisticalDataManager.getNumbersArray();
         double average = StatisticalCalculatorManager.getInstance().getAverageCalculator().calculate(statisticalDataManager);

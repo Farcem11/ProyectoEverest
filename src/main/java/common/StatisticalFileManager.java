@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import common.algorithms.sorting.QuickSort;
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class StatisticalFileManager 
 {
@@ -23,7 +23,7 @@ public class StatisticalFileManager
         return instance;
     }
     
-    public StatisticalDataManager validateAndParseStatisticalData(String fileFullPath)
+    public StatisticalData validateAndParseStatisticalData(String fileFullPath)
     {
         File file = new File(fileFullPath);
         try(BufferedReader br = new BufferedReader(new FileReader(file))) 
@@ -33,36 +33,34 @@ public class StatisticalFileManager
             
             if(textNumbers == null)
             {
-                Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "File is empty {0}", file.getAbsolutePath());
+                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "File is empty {0}", file.getAbsolutePath());
                 return null;
             }
             else if(textNumbers.isEmpty())
             {
-                Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "First line is empty {0}", file.getAbsolutePath());
+                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "First line is empty {0}", file.getAbsolutePath());
                 return null;
             }
             else if(nextLine != null)
             {
-                Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "File has more than one line {0}", file.getAbsolutePath());
+                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "File has more than one line {0}", file.getAbsolutePath());
                 return null;
             }
             double[] numbers = castStringToNumbers(textNumbers);
             double total = DoubleStream.of(numbers).sum();
             double max = numbers[numbers.length - 1];
             double min = numbers[0];
-            String filePath = file.getAbsolutePath();
-            String fileName = file.getName();
 
-            return new StatisticalDataManager(numbers, total, max, min, fileName, filePath, textNumbers);
+            return new StatisticalData(numbers, total, max, min, file, textNumbers);
         }
         catch(IOException e) 
         {
-            Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
+            Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
             return null;
         }
         catch(NumberFormatException e)
         {
-            Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "Is not a list of numbers {0}", e.getMessage());
+            Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "Is not a list of numbers {0}", e.getMessage());
             return null;
         }
     }

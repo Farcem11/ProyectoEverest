@@ -1,11 +1,11 @@
 package common.calculations;
 
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class MidRangeCalculation  implements CalculationStrategy 
 {
     @Override
-    public double doCalculation(StatisticalDataManager statisticalDataManager) 
+    public double doCalculation(StatisticalData statisticalDataManager) 
     {
         return (statisticalDataManager.getMax() + statisticalDataManager.getMin()) / 2;
     }

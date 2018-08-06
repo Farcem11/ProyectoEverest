@@ -1,7 +1,7 @@
 package mainTest;
 
 import common.StatisticalFileManager;
-import model.StatisticalDataManager;
+import model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Nested;
@@ -14,7 +14,7 @@ public class StatisticalValidatorTest
     @Nested
     class CalculateNumbers
     {
-        StatisticalDataManager manager;
+        StatisticalData data;
         
         @Test
         public void notExistingFileTest() 

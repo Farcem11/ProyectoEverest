@@ -2,13 +2,13 @@ DROP PROCEDURE IF EXISTS getStatisticalDataManagers;
 DELIMITER //
 CREATE PROCEDURE getStatisticalDataManagers()
 BEGIN
-	SELECT 
-		fileName,
+	SELECT
+		idStatisticalDataManager,
 	  	filePath, 
  		total, 
 	  	max, 
 	  	min,
-        numbers
+        fileContent
 	FROM
 		StatisticalDataManager;
 END //
@@ -16,68 +16,74 @@ DELIMITER ;
 
 call getStatisticalDataManagers();
 
-DROP PROCEDURE IF EXISTS createStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS saveStatisticalDataManagers;
 DELIMITER //
-CREATE PROCEDURE createStatisticalDataManagers
+CREATE PROCEDURE saveStatisticalDataManagers
 (
-	IN pFileName VARCHAR(100),
 	IN pFilePath VARCHAR(260),
 	IN pTotal BIGINT,
 	IN pMax BIGINT,
 	IN pMin BIGINT,
-    IN pNumbers LONGTEXT
+    IN pFileContent LONGTEXT
 )
 BEGIN
 	INSERT INTO StatisticalDataManager
 	(
-		fileName,
 	  	filePath, 
  		total, 
 	  	max, 
 	  	min,
-        numbers
+        fileContent
 	) 
 	VALUES
 	(
-		pFileName,
 		pFilePath,
 		pTotal,
 		pMax,
 		pMin,
-        pNumbers
+        pFileContent
 	);
 END //
 DELIMITER ;
 
-call createStatisticalDataManagers('MyFile.txt', 'files/', 15, 5, 1, '1,2,3,4,5');
+call saveStatisticalDataManagers('files/data/MyFile.txt', 15, 5, 1, '1,2,3,4,5');
 
-DROP PROCEDURE IF EXISTS editStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS updateStatisticalDataManagers;
 DELIMITER //
-CREATE PROCEDURE editStatisticalDataManagers
+CREATE PROCEDURE updateStatisticalDataManagers
 (
-	IN pOldFileName VARCHAR(100),
-	IN pNewFileName VARCHAR(100),
+	IN pIdStatisticalDataManager BIGINT,
 	IN pFilePath VARCHAR(260),
 	IN pTotal BIGINT,
 	IN pMax BIGINT,
 	IN pMin BIGINT,
-    IN pNumbers LONGTEXT
+    IN pFileContent LONGTEXT
 )
 BEGIN
 	UPDATE 
 		StatisticalDataManager
 	SET
-		fileName = pNewFileName,
 		filePath = pFilePath,
 		total = pTotal,
 		max = pMax,
 		min = pMin,
-        numbers = pNumbers
+        fileContent = pFileContent
 	WHERE 
-		fileName = pOldFileName;
+		pIdStatisticalDataManager = idStatisticalDataManager;
 END //
 DELIMITER ;
 
-call editStatisticalDataManagers('MyFile.txt', 'NewFile.txt', 'files/', 40, 6, 10, '6,7,8,9,10');
+call updateStatisticalDataManagers(31, 'files/data/MyFile.txt', 40, 6, 10, '6,7,8,9,10');
 
-select * from statisticaldatamanager;
+DROP PROCEDURE IF EXISTS deleteStatisticalDataManagers;
+DELIMITER //
+CREATE PROCEDURE deleteStatisticalDataManagers(IN pIdStatisticalDataManager BIGINT)
+BEGIN
+	DELETE FROM 
+		StatisticalDataManager
+	WHERE 
+		pIdStatisticalDataManager = idStatisticalDataManager;
+END //
+DELIMITER ;
+
+call deleteStatisticalDataManagers(1);

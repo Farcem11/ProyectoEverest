@@ -1,6 +1,6 @@
 package common.calculations;
 
-import model.StatisticalDataManager;
+import model.StatisticalData;
 
 public class CalculationContext 
 {
@@ -11,7 +11,7 @@ public class CalculationContext
         this.strategy = strategy;
     }
     
-    public double calculate(StatisticalDataManager statisticalManager)
+    public double calculate(StatisticalData statisticalManager)
     {
         return strategy.doCalculation(statisticalManager);
     }    

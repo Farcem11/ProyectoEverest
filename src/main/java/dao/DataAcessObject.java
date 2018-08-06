@@ -7,4 +7,5 @@ public interface DataAcessObject<T>
     public List<T> get();
     public void save(T object);
     public void update(T object);
+    public void delete(Long id);
 }
