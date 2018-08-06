@@ -11,28 +11,38 @@ import model.StatisticalDataManager;
 import service.StatisticalDataManagerService;
 import com.google.gson.Gson; 
 import com.google.gson.GsonBuilder;  
+import common.StatisticalFileManager;
 
-@WebServlet(name = "StatisticalDataManagerController", urlPatterns = {"StatisticalDataManager"}, loadOnStartup = 1) 
+@WebServlet(urlPatterns = {"getStatisticalDataManager", "saveStatisticalDataManager", "updateStatisticalDataManager"}, loadOnStartup = 1) 
 public class StatisticalDataManagerController extends HttpServlet 
 {
+    private final String getUrlRequest = "/getStatisticalDataManager";
+    private final String saveUrlRequest = "/saveStatisticalDataManager";
+    private final String updateUrlRequest = "/updateStatisticalDataManager";
+
     private final StatisticalDataManagerService statisticalDataManagerService = new StatisticalDataManagerService();
     private final GsonBuilder builder = new GsonBuilder(); 
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        builder.setPrettyPrinting(); 
-        Gson gson = builder.create();
-        List<StatisticalDataManager> statisticalDataManagers = statisticalDataManagerService.getStatisticalDataManagers();
-        response.getWriter().print(gson.toJson(statisticalDataManagers,StatisticalDataManager.class));
+        if(getUrlRequest.equals(request.getServletPath()))
+        {
+            builder.setPrettyPrinting(); 
+            Gson gson = builder.create();
+            List<StatisticalDataManager> statisticalDataManagers = statisticalDataManagerService.getStatisticalDataManagers();
+            response.getWriter().print(gson.toJson(statisticalDataManagers));
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        String name = request.getParameter("name");
-        if (name == null) name = "World";
-        request.setAttribute("user", name);
-        request.getRequestDispatcher("response.jsp").forward(request, response); 
+        if(saveUrlRequest.equals(request.getServletPath()))
+        {
+            String pathFile = request.getParameter("pathFile");
+            StatisticalDataManager statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData(pathFile);
+            statisticalDataManagerService.saveStatisticalDataManagers(statisticalDataManager);
+        }
     }
 }

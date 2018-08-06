@@ -1,7 +1,8 @@
-import java.sql.SQLException;
 import common.StatisticalFileManager;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.StatisticalDataManager;
+
 import service.StatisticalDataManagerService;
 
 public class App
@@ -10,7 +11,8 @@ public class App
     
     public static void main(String[] args)
     {
-        List<StatisticalDataManager> statisticalDataManagers = statisticalDataManagerService.getStatisticalDataManagers();
-        
+        String pathFile = "C:\\GitLab-Runner\\builds\\b4713e69\\0\\sarcem1111\\ProyectoEverest\\files\\numbers.txt";
+        StatisticalDataManager statisticalDataManager = StatisticalFileManager.getInstance().validateAndParseStatisticalData(pathFile);
+            
     }
 }

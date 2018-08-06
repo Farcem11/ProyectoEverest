@@ -28,15 +28,15 @@ public class StatisticalFileManager
         File file = new File(fileFullPath);
         try(BufferedReader br = new BufferedReader(new FileReader(file))) 
         {
-            String textFile = br.readLine();
+            String textNumbers = br.readLine();
             String nextLine = br.readLine();
             
-            if(textFile == null)
+            if(textNumbers == null)
             {
                 Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "File is empty {0}", file.getAbsolutePath());
                 return null;
             }
-            else if(textFile.isEmpty())
+            else if(textNumbers.isEmpty())
             {
                 Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "First line is empty {0}", file.getAbsolutePath());
                 return null;
@@ -46,14 +46,14 @@ public class StatisticalFileManager
                 Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.WARNING, "File has more than one line {0}", file.getAbsolutePath());
                 return null;
             }
-            double[] numbers = castStringToNumbers(textFile);
+            double[] numbers = castStringToNumbers(textNumbers);
             double total = DoubleStream.of(numbers).sum();
             double max = numbers[numbers.length - 1];
             double min = numbers[0];
             String filePath = file.getAbsolutePath();
             String fileName = file.getName();
 
-            return new StatisticalDataManager(numbers, total, max, min, fileName, filePath, textFile);
+            return new StatisticalDataManager(numbers, total, max, min, fileName, filePath, textNumbers);
         }
         catch(IOException e) 
         {

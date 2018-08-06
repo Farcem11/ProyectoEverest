@@ -2,13 +2,13 @@ package model;
 
 public class StatisticalDataManager
 {
-    private String fileContent;
-    private double[] numbersArray;
-    private double total;
-    private double max;
-    private double min;
-    private String fileName;
-    private String filePath;
+    private final String fileContent;
+    private final double[] numbersArray;
+    private final double total;
+    private final double max;
+    private final double min;
+    private final String fileName;
+    private final String filePath;
 
     public StatisticalDataManager(double[] numbers, double total, double max, double min, String fileName, String filePath, String fileContent) 
     {
@@ -72,33 +72,5 @@ public class StatisticalDataManager
      */
     public String getFilePath() {
         return filePath;
-    }
-
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
-    }
-
-    public void setNumbersArray(double[] numbersArray) {
-        this.numbersArray = numbersArray;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public void setMax(double max) {
-        this.max = max;
-    }
-
-    public void setMin(double min) {
-        this.min = min;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
     }
 }

@@ -13,7 +13,7 @@ public class StatisticalDataManagerService
         return statisticalDataManagerDao.get();
     }
     
-    public void setStatisticalDataManagers(StatisticalDataManager statisticalDataManager)
+    public void saveStatisticalDataManagers(StatisticalDataManager statisticalDataManager)
     {
         statisticalDataManagerDao.save(statisticalDataManager);
     }
