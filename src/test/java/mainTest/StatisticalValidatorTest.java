@@ -2,9 +2,10 @@ package mainTest;
 
 import common.StatisticalFileManager;
 import java.io.File;
+import java.io.IOException;
 import model.StatisticalData;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -18,45 +19,45 @@ public class StatisticalValidatorTest
         StatisticalData data;
         
         @Test
-        public void notExistingFileTest() 
+        public void notExistingFileTest() throws IOException
         {
             File file = new File(filesPath + "DoesNotExist.csv");
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
+            assertThrows(IOException.class, () -> StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
-        public void notCsvFormatTest() 
+        public void notCsvFormatTest() throws IOException
         {
             File file = new File(filesPath + "NotCsvFormat.csv");
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
+            assertThrows(IOException.class, () -> StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
-        public void notNumbersTest() 
+        public void notNumbersTest() throws IOException
         {
             File file = new File(filesPath + "NotNumbers.csv");
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
+            assertThrows(NumberFormatException.class, () -> StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
-        public void emptyFileTest()
+        public void emptyFileTest() throws IOException
         {
             File file = new File(filesPath + "EmptyFile.csv");
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
+            assertThrows(IOException.class, () -> StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
-        public void correctFileTest()
+        public void correctFileTest() throws IOException
         {
             File file = new File(filesPath + "Numbers.csv");
             assertNotNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
-        public void firstLineEmptyTest()
+        public void firstLineEmptyTest() throws IOException
         {
             File file = new File(filesPath + "FirstLineEmpty.csv");
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
+            assertThrows(IOException.class, () -> StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
     }
 }
