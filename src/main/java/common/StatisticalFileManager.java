@@ -1,5 +1,6 @@
 package common;
 
+import com.google.common.io.Files;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,6 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import common.algorithms.sorting.QuickSort;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.IllegalFormatException;
 import model.StatisticalData;
 
 public class StatisticalFileManager 
@@ -23,9 +30,8 @@ public class StatisticalFileManager
         return instance;
     }
     
-    public StatisticalData parseFileToStatisticalData(String fileFullPath)
+    public StatisticalData parseFileToStatisticalData(File file) throws IOException
     {
-        File file = new File(fileFullPath);
         try(BufferedReader br = new BufferedReader(new FileReader(file))) 
         {
             String textNumbers = br.readLine();
@@ -33,18 +39,15 @@ public class StatisticalFileManager
             
             if(textNumbers == null)
             {
-                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "File is empty {0}", file.getAbsolutePath());
-                return null;
+                throw new IOException("File is empty: " + file.getAbsolutePath());
             }
             else if(textNumbers.isEmpty())
             {
-                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "First line is empty {0}", file.getAbsolutePath());
-                return null;
+                throw new IOException("First line is empty: " + file.getAbsolutePath());
             }
             else if(nextLine != null)
             {
-                Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "File has more than one line {0}", file.getAbsolutePath());
-                return null;
+                throw new IOException("File has more than one line: " + file.getAbsolutePath());
             }
             double[] numbers = castStringToNumbers(textNumbers);
             double total = DoubleStream.of(numbers).sum();
@@ -52,16 +55,6 @@ public class StatisticalFileManager
             double min = numbers[0];
 
             return new StatisticalData(numbers, total, max, min, file, textNumbers);
-        }
-        catch(IOException e) 
-        {
-            Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "IO Exception {0}", e.getMessage());
-            return null;
-        }
-        catch(NumberFormatException e)
-        {
-            Logger.getLogger(StatisticalData.class.getName()).log(Level.WARNING, "Is not a list of numbers {0}", e.getMessage());
-            return null;
         }
     }
     
@@ -87,5 +80,30 @@ public class StatisticalFileManager
         }
         QuickSort.getInstance().sort(numbers);
         return numbers;
+    }
+
+    public File updateFileSystem(String currentFilePath, String newFilePath, String newFileContent) throws IOException 
+    {
+        File currentFile = new File(currentFilePath);
+        
+        if(newFileContent != null)
+            overwriteFile(currentFile, newFileContent);
+        
+        if(newFilePath != null)
+        {
+            File newFile = new File(newFilePath);
+            Files.move(currentFile, newFile); // Move file to new location
+            return newFile;
+        }
+        return currentFile;
+    }
+    
+    private void overwriteFile(File file, String newFileContent) throws IOException
+    {
+        try(FileWriter fileWriter = new FileWriter(file, false)) // false to overwrite. 
+        {
+            fileWriter.write(newFileContent);
+            fileWriter.close();
+        }        
     }
 }

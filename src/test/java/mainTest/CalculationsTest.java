@@ -2,6 +2,7 @@ package mainTest;
 
 import common.StatisticalCalculatorManager;
 import common.StatisticalFileManager;
+import java.io.File;
 import model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,8 @@ public class CalculationsTest
         @BeforeEach
         public void createNewStatisticalManager() 
         {
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "Numbers.txt");
+            File file = new File(filesPath + "Numbers.csv");
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
         }
         
         @Test
@@ -49,7 +51,8 @@ public class CalculationsTest
         @Test
         void testMedianPair()
         {
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NumbersPair.txt");
+            File file = new File(filesPath + "NumbersPair.csv");
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
             assertEquals(5.0, StatisticalCalculatorManager.getInstance().getMedianCalculation(data));
         }
 
@@ -62,7 +65,8 @@ public class CalculationsTest
         @Test
         void testMode()
         {
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NumbersMultipleRepeats.txt");
+            File file = new File(filesPath + "NumbersMultipleRepeats.csv");
+            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
             assertEquals(4.0, StatisticalCalculatorManager.getInstance().getModeCalculation(data));
         }
         

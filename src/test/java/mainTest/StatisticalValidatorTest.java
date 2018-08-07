@@ -1,6 +1,7 @@
 package mainTest;
 
 import common.StatisticalFileManager;
+import java.io.File;
 import model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -19,37 +20,43 @@ public class StatisticalValidatorTest
         @Test
         public void notExistingFileTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData("DoesNotExist.txt"));
+            File file = new File(filesPath + "DoesNotExist.csv");
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
         public void notCsvFormatTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NotCsvFormat.txt"));
+            File file = new File(filesPath + "NotCsvFormat.csv");
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
         public void notNumbersTest() 
         {
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "NotNumbers.txt"));
+            File file = new File(filesPath + "NotNumbers.csv");
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
         public void emptyFileTest()
         {
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "EmptyFile.txt"));
+            File file = new File(filesPath + "EmptyFile.csv");
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
         public void correctFileTest()
         {
-            assertNotNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "Numbers.txt"));
+            File file = new File(filesPath + "Numbers.csv");
+            assertNotNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
         
         @Test
         public void firstLineEmptyTest()
         {
-            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(filesPath + "FirstLineEmpty.txt"));
+            File file = new File(filesPath + "FirstLineEmpty.csv");
+            assertNull(StatisticalFileManager.getInstance().parseFileToStatisticalData(file));
         }
     }
 }

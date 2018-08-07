@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import common.StatisticalDataManager;
 import common.StatisticalFileManager;
 import database.MySqlConnection;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,8 +52,8 @@ public class StatisticalDataController extends HttpServlet
         {
             if(saveUrlRequest.equals(request.getServletPath()))
             {
-                String pathFile = request.getParameter("pathFile");
-                StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(pathFile);
+                File file = new File(request.getParameter("filePath"));
+                StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
                 Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
                 statisticalDataManager.setId(uniqueDatabaseId);
                 StatisticalDataManager.getInstance().statisticalDataMap.put(uniqueDatabaseId, statisticalDataManager);
@@ -60,8 +61,11 @@ public class StatisticalDataController extends HttpServlet
             else if(updateUrlRequest.equals(request.getServletPath()))
             {
                 Long id = Long.parseLong(request.getParameter("id"));
-                String pathFile = request.getParameter("pathFile");
-                StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(pathFile);
+                String currentFilePath = request.getParameter("currentFilePath");
+                String newFilePath = request.getParameter("newFilePath");
+                String newFileContent = request.getParameter("newFileContent");
+                File file = StatisticalFileManager.getInstance().updateFileSystem(currentFilePath, newFilePath, newFileContent);
+                StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
                 newStatisticalDataManager.setId(id);
                 statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
                 StatisticalDataManager.getInstance().statisticalDataMap.put(id, newStatisticalDataManager);                
@@ -77,9 +81,9 @@ public class StatisticalDataController extends HttpServlet
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
         }
-        catch (SQLException ex) 
+        catch (SQLException | IOException | IllegalArgumentException ex) 
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, ex.toString(), ex.getMessage());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
         }
     }
