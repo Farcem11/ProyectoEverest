@@ -1,22 +1,14 @@
 package common;
 
-import com.google.common.io.Files;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import common.algorithms.sorting.QuickSort;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.IllegalFormatException;
 import model.StatisticalData;
 
 public class StatisticalFileManager 
@@ -94,7 +86,6 @@ public class StatisticalFileManager
         try(FileWriter fileWriter = new FileWriter(file, false)) // false to overwrite. 
         {
             fileWriter.write(newFileContent);
-            fileWriter.close();
         }        
     }
 }

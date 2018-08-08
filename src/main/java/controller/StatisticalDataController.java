@@ -26,7 +26,7 @@ public class StatisticalDataController
     @GetMapping("/get")
     public Collection<StatisticalData> getStatisticalData()
     {
-    	return StatisticalDataManager.getInstance().statisticalDataMap.values();
+    	return StatisticalDataManager.getInstance().getStatisticalDataMap().values();
     }
     
     @PostMapping("/save")
@@ -36,7 +36,7 @@ public class StatisticalDataController
         StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
         Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
         statisticalDataManager.setId(uniqueDatabaseId);
-        StatisticalDataManager.getInstance().statisticalDataMap.put(uniqueDatabaseId, statisticalDataManager);
+        StatisticalDataManager.getInstance().getStatisticalDataMap().put(uniqueDatabaseId, statisticalDataManager);
     }
     
     @PostMapping("/update")
@@ -49,7 +49,7 @@ public class StatisticalDataController
         StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
         newStatisticalDataManager.setId(id);
         statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
-        StatisticalDataManager.getInstance().statisticalDataMap.put(id, newStatisticalDataManager);                
+        StatisticalDataManager.getInstance().getStatisticalDataMap().put(id, newStatisticalDataManager);                
     }
     
     @PostMapping("/delete")
@@ -57,6 +57,6 @@ public class StatisticalDataController
     {
         Long id = Long.parseLong(request.get("id"));
         statisticalDataManagerService.deleteStatisticalData(id);
-        StatisticalDataManager.getInstance().statisticalDataMap.remove(id);           
+        StatisticalDataManager.getInstance().getStatisticalDataMap().remove(id);           
     }
 }

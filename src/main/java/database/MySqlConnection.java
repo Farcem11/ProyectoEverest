@@ -13,7 +13,7 @@ public class MySqlConnection
 {
     private static final MySqlConnection instance = new MySqlConnection();
     private Connection connection;
-    private final String filePath = "database/database.properties";
+    private static final String FILE_PATH = "database/database.properties";
     private Properties databaseProperties= new Properties();
     private FileInputStream databaseFileProperty = null;
     
@@ -22,7 +22,7 @@ public class MySqlConnection
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseFileProperty = new FileInputStream(filePath);
+            databaseFileProperty = new FileInputStream(FILE_PATH);
             databaseProperties.load(databaseFileProperty);
             connection = DriverManager.getConnection(
                 databaseProperties.getProperty("DB_URL"),
