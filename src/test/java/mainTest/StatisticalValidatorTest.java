@@ -14,8 +14,6 @@ import org.junit.jupiter.api.Test;
 
 public class StatisticalValidatorTest
 {
-    final String filesPath = "files/";
-    
     @Nested
     class CalculateNumbers
     {
