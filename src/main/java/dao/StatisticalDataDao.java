@@ -6,10 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import common.StatisticalFileManager;
+import common.StatisticalDataManager;
 import model.StatisticalData;
 import database.MySqlConnection;
-import java.io.File;
 
 public class StatisticalDataDao implements DataAcessObject<StatisticalData>
 {
@@ -24,14 +23,14 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
                 while(resultSet.next())
                 {
                     long id = resultSet.getLong("idStatisticalDataManager");
-                    File file = new File(resultSet.getString("filePath"));
-                    String fileContent = resultSet.getString("fileContent");
+                    String name = resultSet.getString("name");
+                    String numbers = resultSet.getString("numbers");
                     double total = resultSet.getDouble("total");
                     double max = resultSet.getDouble("max");
                     double min = resultSet.getDouble("min");
-                    double[] numbers = StatisticalFileManager.getInstance().castStringToNumbers(resultSet.getString("fileContent"));
+                    double[] numbersArray = StatisticalDataManager.getInstance().castStringToNumbers(resultSet.getString("fileContent"));
 
-                    statisticalDataList.add(new StatisticalData(id, numbers, total, max, min, file, fileContent));
+                    statisticalDataList.add(new StatisticalData(id, name, numbersArray, numbers, total, max, min));
                 }
                 return statisticalDataList;		
             }
@@ -44,11 +43,11 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         String procedure = "call saveStatisticalDataManagers(?, ?, ?, ?, ?)";
         try(PreparedStatement preparedStatement = MySqlConnection.getInstance().getConnection().prepareStatement(procedure))
         {
-            preparedStatement.setString(1, object.getFile().getAbsolutePath());
+            preparedStatement.setString(1, object.getName());
             preparedStatement.setDouble(2, object.getTotal());
             preparedStatement.setDouble(3, object.getMax());
             preparedStatement.setDouble(4, object.getMin());
-            preparedStatement.setString(5, object.getFileContent());
+            preparedStatement.setString(5, object.getNumbers());
 
             try(ResultSet resultSet = preparedStatement.executeQuery())
             {
@@ -70,11 +69,11 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         try(PreparedStatement preparedStatement = MySqlConnection.getInstance().getConnection().prepareStatement("call updateStatisticalDataManagers(?, ?, ?, ?, ?, ?)"))
         {
             preparedStatement.setLong(1, object.getId());
-            preparedStatement.setString(2, object.getFile().getAbsolutePath());
+            preparedStatement.setString(2, object.getName());
             preparedStatement.setDouble(3, object.getTotal());
             preparedStatement.setDouble(4, object.getMax());
             preparedStatement.setDouble(5, object.getMin());
-            preparedStatement.setString(6, object.getFileContent());
+            preparedStatement.setString(6, object.getNumbers());
 
             preparedStatement.execute();	
         }

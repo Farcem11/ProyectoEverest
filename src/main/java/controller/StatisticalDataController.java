@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import model.StatisticalData;
 import service.StatisticalDataService;
 import common.StatisticalDataManager;
-import common.StatisticalFileManager;
-import java.io.File;
 import java.sql.SQLException;
 
 @RestController
@@ -32,24 +30,24 @@ public class StatisticalDataController
     @PostMapping("/save")
     public void saveStatisticalData(@RequestBody Map<String, String> request) throws IOException, SQLException
     {
-        File file = new File(request.get("filePath"));
-        StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        String fileName = request.get("fileName");
+        String fileContent = request.get("fileContent");
+        StatisticalData statisticalDataManager = StatisticalDataManager.getInstance().validateAndParse(fileName, fileContent);
         Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
         statisticalDataManager.setId(uniqueDatabaseId);
-        StatisticalDataManager.getInstance().getStatisticalDataMap().put(uniqueDatabaseId, statisticalDataManager);
+        StatisticalDataManager.getInstance().getStatisticalDataMap().put(uniqueDatabaseId, statisticalDataManager); // Add new
     }
     
     @PostMapping("/update")
     public void updateStatisticalData(@RequestBody Map<String, String> request) throws IOException, SQLException
     {
         Long id = Long.parseLong(request.get("id"));
-        String newFilePath = request.get("newFilePath");
-        String newFileContent = request.get("newFileContent");
-        File file = StatisticalFileManager.getInstance().updateFile(newFilePath, newFileContent);
-        StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        String newName = request.get("newName");
+        String newNumbers = request.get("newNumbers");
+        StatisticalData newStatisticalDataManager = StatisticalDataManager.getInstance().validateAndParse(newName, newNumbers);
         newStatisticalDataManager.setId(id);
         statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
-        StatisticalDataManager.getInstance().getStatisticalDataMap().put(id, newStatisticalDataManager);                
+        StatisticalDataManager.getInstance().getStatisticalDataMap().put(id, newStatisticalDataManager); //Overwrite               
     }
     
     @PostMapping("/delete")

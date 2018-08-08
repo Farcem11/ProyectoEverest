@@ -1,24 +1,35 @@
 package model;
 
-import java.io.File;
-
 public class StatisticalData
 {
     private long id;
     private String name;
+    private String numbers;
     private double[] numbersArray;
     private double total;
     private double max;
     private double min;
 
-    public StatisticalData(double[] numbers, double total, double max, double min) 
+    public StatisticalData(long id, String name, double[] numbersArray, String numbers, double total, double max, double min) 
     {
-        this.id = 0L;
-        this.numbersArray = numbers;
+        this.id = id;
+        this.numbersArray = numbersArray;
         this.total = total;
         this.max = max;
         this.min = min;
         this.name = name;
+        this.numbers = numbers;
+    }
+    
+    public StatisticalData(String name, double[] numbersArray, String numbers, double total, double max, double min) 
+    {
+        this.id = 0L;
+        this.numbersArray = numbersArray;
+        this.total = total;
+        this.max = max;
+        this.min = min;
+        this.name = name;
+        this.numbers = numbers;
     }
     
     /**
@@ -54,24 +65,10 @@ public class StatisticalData
     }
 
     /**
-     * @return the fileContent
-     */
-    public String getFileContent() {
-        return fileContent;
-    }
-
-    /**
      * @return the id
      */
     public long getId() {
         return id;
-    }
-
-    /**
-     * @param fileContent the fileContent to set
-     */
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
     }
 
     /**
@@ -103,16 +100,25 @@ public class StatisticalData
     }
 
     /**
-     * @return the file
-     */
-    public File getFile() {
-        return file;
-    }
-
-    /**
      * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNumbers() {
+		return numbers;
+	}
+
+	public void setNumbers(String numbers) {
+		this.numbers = numbers;
+	}
 }

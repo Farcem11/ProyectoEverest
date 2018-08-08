@@ -18,7 +18,7 @@ public class StatisticalDataService
     public Map<Long, StatisticalData> getStatisticalDataMap()
     {
         Map<Long, StatisticalData> statisticalDataMap = new HashMap<>(); 
-        try 
+        try
         {
 			for(StatisticalData statisticalData : statisticalDataDao.get())
 			{

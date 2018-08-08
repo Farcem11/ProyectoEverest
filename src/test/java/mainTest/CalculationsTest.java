@@ -1,7 +1,7 @@
 package mainTest;
 
 import common.StatisticalCalculatorManager;
-import common.StatisticalFileManager;
+import common.StatisticalDataManager;
 import java.io.File;
 import java.io.IOException;
 import model.StatisticalData;
@@ -16,13 +16,12 @@ public class CalculationsTest
     class CalculateNumbers
     {
         StatisticalData data;
-        final String filesPath = "files/";
         
         @BeforeEach
         public void createNewStatisticalManager() throws IOException
         {
-            File file = new File(filesPath + "Numbers.csv");
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+            String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4";
+            data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
         }
         
         @Test
@@ -52,8 +51,8 @@ public class CalculationsTest
         @Test
         void testMedianPair() throws IOException
         {
-            File file = new File(filesPath + "NumbersPair.csv");
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        	String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4, 9.5";
+            data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
             assertEquals(5.0, StatisticalCalculatorManager.getInstance().getMedianCalculation(data));
         }
 
@@ -66,8 +65,8 @@ public class CalculationsTest
         @Test
         void testMode() throws IOException
         {
-            File file = new File(filesPath + "NumbersMultipleRepeats.csv");
-            data = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        	String numbers = "1,1,1,2,2,3,3,3,3,4,4,4,4,4,4,5,5,6,6,6,6,6,7,7";
+            data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
             assertEquals(4.0, StatisticalCalculatorManager.getInstance().getModeCalculation(data));
         }
         
