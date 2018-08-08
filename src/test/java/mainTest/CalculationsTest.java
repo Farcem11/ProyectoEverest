@@ -2,6 +2,7 @@ package mainTest;
 
 import common.StatisticalCalculatorManager;
 import common.StatisticalDataManager;
+import common.StatisticalDataManager;
 import java.io.File;
 import java.io.IOException;
 import model.StatisticalData;

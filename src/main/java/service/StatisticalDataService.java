@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import common.StatisticalDataManager;
+import common.StatisticalFileManager;
 import model.StatisticalData;
 
 public class StatisticalDataService 
@@ -28,7 +28,7 @@ public class StatisticalDataService
 		} 
         catch (SQLException ex) 
         {
-        	Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex);
+        	Logger.getLogger(StatisticalDataDao.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex);
             return Collections.emptyMap();
 		}
     }

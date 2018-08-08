@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import common.StatisticalCalculatorManager;
 import common.StatisticalDataManager;
+import common.StatisticalFileManager;
 import model.StatisticalData;
 import database.MySqlConnection;
 
@@ -28,7 +31,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
                     double total = resultSet.getDouble("total");
                     double max = resultSet.getDouble("max");
                     double min = resultSet.getDouble("min");
-                    double[] numbersArray = StatisticalDataManager.getInstance().castStringToNumbers(resultSet.getString("fileContent"));
+                    double[] numbersArray = StatisticalDataManager.getInstance().castStringToNumbers(resultSet.getString("numbers"));
 
                     statisticalDataList.add(new StatisticalData(id, name, numbersArray, numbers, total, max, min));
                 }

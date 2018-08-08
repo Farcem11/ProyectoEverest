@@ -1,6 +1,7 @@
 package mainTest;
 
 import common.StatisticalDataManager;
+import common.StatisticalDataManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.NoSuchElementException;
