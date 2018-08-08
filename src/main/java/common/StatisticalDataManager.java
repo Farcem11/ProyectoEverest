@@ -23,7 +23,7 @@ public class StatisticalDataManager
         catch (SQLException ex) 
         {
             Logger.getLogger(StatisticalDataManager.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
-            this.statisticalDataMap = Collections.EMPTY_MAP;
+            this.statisticalDataMap = Collections.emptyMap();
         }
     }
 

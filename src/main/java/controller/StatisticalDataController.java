@@ -1,90 +1,62 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import model.StatisticalData;
 import service.StatisticalDataService;
-import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder;  
 import common.StatisticalDataManager;
 import common.StatisticalFileManager;
-import database.MySqlConnection;
 import java.io.File;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = {"getStatisticalData", "saveStatisticalData", "updateStatisticalData", "deleteStatisticalData"}, loadOnStartup = 1) 
-public class StatisticalDataController extends HttpServlet 
+@RestController
+@RequestMapping("StatisticalData")
+public class StatisticalDataController 
 {
-    private final String getUrlRequest = "/getStatisticalData";
-    private final String saveUrlRequest = "/saveStatisticalData";
-    private final String updateUrlRequest = "/updateStatisticalData";
-    private final String deleteUrlRequest = "/deleteStatisticalData";
-    
     private final StatisticalDataService statisticalDataManagerService = new StatisticalDataService();
-    private final GsonBuilder builder = new GsonBuilder(); 
     
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    @GetMapping("/get")
+    public Collection<StatisticalData> getStatisticalData()
     {
-        if(getUrlRequest.equals(request.getServletPath()))
-        {
-            builder.setPrettyPrinting(); 
-            Gson gson = builder.create();
-            response.getWriter().print(gson.toJson(StatisticalDataManager.getInstance().statisticalDataMap));
-        }
-        else
-        {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
+    	return StatisticalDataManager.getInstance().statisticalDataMap.values();
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    
+    @PostMapping("/save")
+    public void saveStatisticalData(@RequestBody Map<String, String> request) throws IOException, SQLException
     {
-        try 
-        {
-            if(saveUrlRequest.equals(request.getServletPath()))
-            {
-                File file = new File(request.getParameter("filePath"));
-                StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
-                Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
-                statisticalDataManager.setId(uniqueDatabaseId);
-                StatisticalDataManager.getInstance().statisticalDataMap.put(uniqueDatabaseId, statisticalDataManager);
-            }
-            else if(updateUrlRequest.equals(request.getServletPath()))
-            {
-                Long id = Long.parseLong(request.getParameter("id"));
-                String currentFilePath = request.getParameter("currentFilePath");
-                String newFilePath = request.getParameter("newFilePath");
-                String newFileContent = request.getParameter("newFileContent");
-                File file = StatisticalFileManager.getInstance().updateFileSystem(currentFilePath, newFilePath, newFileContent);
-                StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
-                newStatisticalDataManager.setId(id);
-                statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
-                StatisticalDataManager.getInstance().statisticalDataMap.put(id, newStatisticalDataManager);                
-            }
-            else if(deleteUrlRequest.equals(request.getServletPath()))
-            {
-                Long id = Long.parseLong(request.getParameter("id"));
-                statisticalDataManagerService.deleteStatisticalData(id);
-                StatisticalDataManager.getInstance().statisticalDataMap.remove(id);
-            }
-            else
-            {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            }
-        }
-        catch (SQLException | IOException | IllegalArgumentException ex) 
-        {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, ex.toString(), ex.getMessage());
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
-        }
+        File file = new File(request.get("filePath"));
+        StatisticalData statisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalDataManager);
+        statisticalDataManager.setId(uniqueDatabaseId);
+        StatisticalDataManager.getInstance().statisticalDataMap.put(uniqueDatabaseId, statisticalDataManager);
+    }
+    
+    @PostMapping("/update")
+    public void updateStatisticalData(@RequestBody Map<String, String> request) throws IOException, SQLException
+    {
+        Long id = Long.parseLong(request.get("id"));
+        String newFilePath = request.get("newFilePath");
+        String newFileContent = request.get("newFileContent");
+        File file = StatisticalFileManager.getInstance().updateFile(newFilePath, newFileContent);
+        StatisticalData newStatisticalDataManager = StatisticalFileManager.getInstance().parseFileToStatisticalData(file);
+        newStatisticalDataManager.setId(id);
+        statisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
+        StatisticalDataManager.getInstance().statisticalDataMap.put(id, newStatisticalDataManager);                
+    }
+    
+    @PostMapping("/delete")
+    public void deleteStatisticalData(@RequestBody Map<String, String> request) throws SQLException
+    {
+        Long id = Long.parseLong(request.get("id"));
+        statisticalDataManagerService.deleteStatisticalData(id);
+        StatisticalDataManager.getInstance().statisticalDataMap.remove(id);           
     }
 }

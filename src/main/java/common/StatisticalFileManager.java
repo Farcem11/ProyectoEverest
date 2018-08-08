@@ -82,20 +82,11 @@ public class StatisticalFileManager
         return numbers;
     }
 
-    public File updateFileSystem(String currentFilePath, String newFilePath, String newFileContent) throws IOException 
+    public File updateFile(String newFilePath, String newFileContent) throws IOException 
     {
-        File currentFile = new File(currentFilePath);
-        
-        if(newFileContent != null)
-            overwriteFile(currentFile, newFileContent);
-        
-        if(newFilePath != null)
-        {
-            File newFile = new File(newFilePath);
-            Files.move(currentFile, newFile); // Move file to new location
-            return newFile;
-        }
-        return currentFile;
+    	File newFile = new File(newFilePath);
+        overwriteFile(newFile, newFileContent);
+        return newFile;
     }
     
     private void overwriteFile(File file, String newFileContent) throws IOException
