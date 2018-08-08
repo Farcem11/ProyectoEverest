@@ -7,9 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.StatisticalCalculatorManager;
 import common.StatisticalDataManager;
-import common.StatisticalFileManager;
 import model.StatisticalData;
 import database.MySqlConnection;
 
