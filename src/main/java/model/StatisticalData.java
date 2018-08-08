@@ -5,34 +5,22 @@ import java.io.File;
 public class StatisticalData
 {
     private long id;
-    private String fileContent;
+    private String name;
     private double[] numbersArray;
     private double total;
     private double max;
     private double min;
-    private final File file;
 
-    public StatisticalData(double[] numbers, double total, double max, double min, File file, String fileContent) 
+    public StatisticalData(double[] numbers, double total, double max, double min) 
     {
         this.id = 0L;
         this.numbersArray = numbers;
         this.total = total;
         this.max = max;
         this.min = min;
-        this.file = file;
-        this.fileContent = fileContent ;
+        this.name = name;
     }
     
-    public StatisticalData(long idStatisticalManager, double[] numbers, double total, double max, double min, File file, String fileContent) 
-    {
-        this.id = idStatisticalManager; 
-        this.numbersArray = numbers;
-        this.total = total;
-        this.max = max;
-        this.min = min;
-        this.file = file;
-        this.fileContent = fileContent;
-    }
     /**
      * @return the numbersList
      */

@@ -4,11 +4,11 @@ CREATE PROCEDURE getStatisticalDataManagers()
 BEGIN
 	SELECT
 		idStatisticalDataManager,
-	  	filePath, 
+	  	name, 
  		total, 
 	  	max, 
 	  	min,
-        fileContent
+        numbers
 	FROM
 		StatisticalDataManager;
 END //
@@ -20,56 +20,56 @@ DROP PROCEDURE IF EXISTS saveStatisticalDataManagers;
 DELIMITER //
 CREATE PROCEDURE saveStatisticalDataManagers
 (
-	IN pFilePath VARCHAR(260),
-	IN pTotal BIGINT,
-	IN pMax BIGINT,
-	IN pMin BIGINT,
-    IN pFileContent LONGTEXT
+	IN pName VARCHAR(100),
+	IN pTotal FLOAT,
+	IN pMax FLOAT,
+	IN pMin FLOAT,
+    IN pNumbers LONGTEXT
 )
 BEGIN
 	INSERT INTO StatisticalDataManager
 	(
-	  	filePath, 
+	  	name, 
  		total, 
 	  	max, 
 	  	min,
-        fileContent
+        numbers
 	) 
 	VALUES
 	(
-		pFilePath,
+		pName,
 		pTotal,
 		pMax,
 		pMin,
-        pFileContent
+        pNumbers
 	);
     
     SELECT last_insert_id() as id;
 END //
 DELIMITER ;
 
-call saveStatisticalDataManagers('files/data/MyFile3.txt', 15, 5, 1, '1,2,3,4,5');
+call saveStatisticalDataManagers('Numbers', 15, 5, 1, '1,2,3,4,5');
 
 DROP PROCEDURE IF EXISTS updateStatisticalDataManagers;
 DELIMITER //
 CREATE PROCEDURE updateStatisticalDataManagers
 (
 	IN pIdStatisticalDataManager BIGINT,
-	IN pFilePath VARCHAR(260),
-	IN pTotal BIGINT,
-	IN pMax BIGINT,
-	IN pMin BIGINT,
-    IN pFileContent LONGTEXT
+	IN pName VARCHAR(260),
+	IN pTotal FLOAT,
+	IN pMax FLOAT,
+	IN pMin FLOAT,
+    IN pNumbers LONGTEXT
 )
 BEGIN
 	UPDATE 
 		StatisticalDataManager
 	SET
-		filePath = pFilePath,
+		name = pName,
 		total = pTotal,
 		max = pMax,
 		min = pMin,
-        fileContent = pFileContent
+        numbers = pNumbers
 	WHERE 
 		pIdStatisticalDataManager = idStatisticalDataManager;
 END //
@@ -88,6 +88,6 @@ BEGIN
 END //
 DELIMITER ;
 
-call deleteStatisticalDataManagers(1);
+call deleteStatisticalDataManagers(4);
 
 select * from statisticaldatamanager;

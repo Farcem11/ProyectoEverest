@@ -16,7 +16,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public List<StatisticalData> get() throws SQLException
     {
-        List<StatisticalData> statisticalDataManager = new ArrayList<>();
+        List<StatisticalData> statisticalDataList = new ArrayList<>();
         try(Statement statement = MySqlConnection.getInstance().getConnection().createStatement())
         {
             try(ResultSet resultSet = statement.executeQuery("call getStatisticalDataManagers()"))
@@ -31,9 +31,9 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
                     double min = resultSet.getDouble("min");
                     double[] numbers = StatisticalFileManager.getInstance().castStringToNumbers(resultSet.getString("fileContent"));
 
-                    statisticalDataManager.add(new StatisticalData(id, numbers, total, max, min, file, fileContent));
+                    statisticalDataList.add(new StatisticalData(id, numbers, total, max, min, file, fileContent));
                 }
-                return statisticalDataManager;		
+                return statisticalDataList;		
             }
         }
     }
