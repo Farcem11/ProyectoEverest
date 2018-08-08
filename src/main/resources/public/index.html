@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html ng-app="appTemplate">
+<html ng-app="app">
 <head>
 	<title>Proyecto Everest</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="css/style.min.css"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 	<!-- Header -->
 	<div id="container-header">
-
+ 
 	</div>
-
+ 
 	<!-- Content -->
-	<div id="container-content">
-		
+	<div ng-controller="mainController" id="container-content">
+		<div id="filesContainer">
+			<div id="files" ng-repeat="statisticalData in statisticalDataList">
+				<div class="statisticalData">
+					<input class="numbers" type="text" ng-model="statisticalData.numbersArray"/>
+					<span class="filePath">Path: {{statisticalData.file}}</span>
+				</div>
+
+				<div class="buttons">
+					<i class="button deleteButton fas fa-minus"></i>
+					<i class="button downloadButton fas fa-file-download"></i>
+					<i class="button updateButton fas fa-sync-alt"></i>
+				</div>
+			</div>
+			<button>Add new file</button>
+		</div>
+		<div id="statisticalContainer">
+
+		</div>
 	</div>
 
 	<!-- Footer -->
@@ -23,7 +41,6 @@
 	
 	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="js/main.min.js"></script>
 </body>
 </html>

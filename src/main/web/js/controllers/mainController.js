@@ -1,14 +1,14 @@
 app.controller("mainController",function($scope, $rootScope, $http)
 {
-	$scope.title = "name";
-
-	$http.get("wrongfilename.htm")
-    .then(function(response) 
+	$scope.statisticalDataList = [];
+	
+	$http.get("http://localhost:8080/StatisticalData/get").then(
+	function(response)
     {
-        $scope.content = response.data;
-    }, 
-    function(error) 
+    	$scope.statisticalDataList = response.data;
+    },
+    function(error)
     {
-        $scope.content = "Something went wrong";
+	    console.log(error);
     });
 });

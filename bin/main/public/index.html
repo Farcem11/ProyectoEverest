@@ -1,47 +1,46 @@
 <!DOCTYPE html>
-<html ng-app="appTemplate">
+<html ng-app="app">
 <head>
-	<title>BlueBusiness</title>
+	<title>Proyecto Everest</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="css/style.min.css"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
-	<div id="container">
-		<!-- Header -->
-		<div id="container-header">
-			<div id="container-name">
-				<span>{{title}}</span>
+	<!-- Header -->
+	<div id="container-header">
+ 
+	</div>
+ 
+	<!-- Content -->
+	<div ng-controller="mainController" id="container-content">
+		<div id="filesContainer">
+			<div id="files" ng-repeat="statisticalData in statisticalDataList">
+				<div class="statisticalData">
+					<input class="numbers" type="text" ng-model="statisticalData.numbersArray"/>
+					<span class="filePath">Path: {{statisticalData.file}}</span>
+				</div>
+
+				<div class="buttons">
+					<i class="button deleteButton fas fa-minus"></i>
+					<i class="button downloadButton fas fa-file-download"></i>
+					<i class="button updateButton fas fa-sync-alt"></i>
+				</div>
 			</div>
-
-			<ul id="navigation">
-				<li><a ui-sref="hello" ui-sref-active="active">Hello</a></li>
-
-			</ul>
+			<button>Add new file</button>
+		</div>
+		<div id="statisticalContainer">
 
 		</div>
-	</div>
-
-	<!-- Content -->
-	<div id="container-content">
-		<ui-view></ui-view>
 	</div>
 
 	<!-- Footer -->
 	<div id="container-footer">
-		<div id="footer">
-			<div id="footer-copyright">
-				2017 yourbusiness.com - all rights reserved. 
-			</div>
-
-			<div id="footer-meta">
-				<a>XHTML</a> | <a>CSS</a> | <a>Design by christian-pansch.de</a>
-			</div>
-		</div>
+		
 	</div>
 	
 	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="js/main.min.js"></script>
 </body>
 </html>
