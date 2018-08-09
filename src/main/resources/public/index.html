@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" lang="en">
 <head>
 	<title>Proyecto Everest</title>
-	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.min.css"/>	
 </head>
 <body>
@@ -18,19 +19,20 @@
 			<div id="files" ng-repeat="statisticalData in statisticalDataList">
 				<div class="statisticalData">
 					<input class="numbers" type="text" ng-model="statisticalData.numbersArray"/>
-					<span class="filePath">Name: {{statisticalData.name}}</span>
-				</div> 
-
-				<div class="buttons">
-					<i ng-click="deleteStatisticalData($index)" class="button deleteButton fas fa-minus"></i>
-					<i class="button downloadButton fas fa-file-download"></i>
-					<i class="button updateButton fas fa-sync-alt"></i>
+					
+					<md-input-container class="md-block" flex-gt-sm>
+						<label>Name</label>
+						<input ng-model="statisticalData.name">
+					</md-input-container>
+					<div class="buttons">
+						<i ng-click="deleteStatisticalData($index)" class="button deleteButton fas fa-trash-alt"></i>
+						<i class="button downloadButton fas fa-file-download"></i>
+						<i class="button updateButton fas fa-sync-alt"></i>
+					</div>			        
 				</div>
 			</div>
 			<input type="file" custom-on-change="uploadFile" id="fileForUpload"/>
 			<i class="button fas fa-upload" ng-click="saveStatisticalData()"></i>
-		</div>
-		<div id="statisticalContainer">
 		</div>
 	</div>
 
@@ -39,6 +41,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-aria.min.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-messages.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
 	<script src="js/main.min.js"></script>
 </body>
 </html>
