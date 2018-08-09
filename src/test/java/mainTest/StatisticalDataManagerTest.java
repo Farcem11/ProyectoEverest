@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class StatisticalValidatorTest
+public class StatisticalDataManagerTest
 {
     @Nested
     class CalculateNumbers

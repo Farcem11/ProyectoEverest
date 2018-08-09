@@ -15,9 +15,9 @@ import model.StatisticalData;
 
 public class StatisticalCalculatorManager 
 {
-    private static final StatisticalCalculatorManager instance = new StatisticalCalculatorManager();
-
     private StatisticalCalculatorManager() {}
+
+    private static final StatisticalCalculatorManager instance = new StatisticalCalculatorManager();
     
     public static StatisticalCalculatorManager getInstance()
     {

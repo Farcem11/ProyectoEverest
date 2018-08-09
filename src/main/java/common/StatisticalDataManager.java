@@ -3,27 +3,23 @@ package common;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.DoubleStream;
 import common.algorithms.sorting.QuickSort;
 import model.StatisticalData;
-import service.StatisticalDataService;
 
 public class StatisticalDataManager 
 {
     private StatisticalDataManager() {}
 
 	private static final StatisticalDataManager instance = new StatisticalDataManager();
-    private static StatisticalDataService statisticalDataService = new StatisticalDataService();
-	public static final Map<Long, StatisticalData> statisticalDataMap = statisticalDataService.getStatisticalDataMap();
-    
+	
     public static StatisticalDataManager getInstance()
     {
         return instance;
     }
-    
-    public StatisticalData validateAndParse(String name, String fileContent) throws IOException
+
+	public StatisticalData validateAndParse(String name, String fileContent) throws IOException
     {
     	try(Scanner scanner = new Scanner(fileContent))
     	{

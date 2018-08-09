@@ -20,12 +20,13 @@ import java.sql.SQLException;
 @RequestMapping("StatisticalData")
 public class StatisticalDataController 
 {
-    private StatisticalDataService StatisticalDataManagerService = new StatisticalDataService();
+    private StatisticalDataService statisticalDataManagerService = new StatisticalDataService();
+	private final Map<Long, StatisticalData> statisticalDataMap = statisticalDataManagerService.getStatisticalDataMap();
     
     @GetMapping("/get")
     public Collection<StatisticalData> getStatisticalData()
     {
-    	return StatisticalDataManager.statisticalDataMap.values();
+    	return statisticalDataMap.values();
     }
     
     @PostMapping("/save")
@@ -34,9 +35,9 @@ public class StatisticalDataController
         String fileName = request.get("fileName");
         String fileContent = request.get("fileContent");
         StatisticalData statisticalData = StatisticalDataManager.getInstance().validateAndParse(fileName, fileContent);
-        Long uniqueDatabaseId = StatisticalDataManagerService.saveStatisticalData(statisticalData);
+        Long uniqueDatabaseId = statisticalDataManagerService.saveStatisticalData(statisticalData);
         statisticalData.setId(uniqueDatabaseId);
-        StatisticalDataManager.statisticalDataMap.put(uniqueDatabaseId, statisticalData); // Add new
+        statisticalDataMap.put(uniqueDatabaseId, statisticalData); // Add new
     }
     
     @PostMapping("/update")
@@ -45,17 +46,17 @@ public class StatisticalDataController
         Long id = Long.parseLong(request.get("id"));
         String newName = request.get("newName");
         String newNumbers = request.get("newNumbers");
-        StatisticalData newStatisticalDataManager = StatisticalDataManager.getInstance().validateAndParse(newName, newNumbers);
-        newStatisticalDataManager.setId(id);
-        StatisticalDataManagerService.updateStatisticalData(newStatisticalDataManager);
-        StatisticalDataManager.statisticalDataMap.put(id, newStatisticalDataManager); //Overwrite               
+        StatisticalData newStatisticalData = StatisticalDataManager.getInstance().validateAndParse(newName, newNumbers);
+        newStatisticalData.setId(id);
+        statisticalDataManagerService.updateStatisticalData(newStatisticalData);
+        statisticalDataMap.put(id, newStatisticalData); //Overwrite               
     }
     
     @PostMapping("/delete")
     public void deleteStatisticalData(@RequestBody Map<String, String> request) throws SQLException
     {
         Long id = Long.parseLong(request.get("id"));
-        StatisticalDataManagerService.deleteStatisticalData(id);
-        StatisticalDataManager.statisticalDataMap.remove(id);           
+        statisticalDataManagerService.deleteStatisticalData(id);
+        statisticalDataMap.remove(id);           
     }
 }
