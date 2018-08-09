@@ -12,10 +12,11 @@ import service.StatisticalDataService;
 
 public class StatisticalDataManager 
 {
-	private static final StatisticalDataManager instance = new StatisticalDataManager();
-    private final static StatisticalDataService statisticalDataService = new StatisticalDataService();
-    public static final Map<Long, StatisticalData> statisticalDataMap = statisticalDataService.getStatisticalDataMap();
     private StatisticalDataManager() {}
+
+	private static final StatisticalDataManager instance = new StatisticalDataManager();
+    private static StatisticalDataService statisticalDataService = new StatisticalDataService();
+	public static final Map<Long, StatisticalData> statisticalDataMap = statisticalDataService.getStatisticalDataMap();
     
     public static StatisticalDataManager getInstance()
     {

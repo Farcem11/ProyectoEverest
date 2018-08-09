@@ -32,7 +32,7 @@ module.exports = function(grunt)
       },
       html: 
       {
-        files: ['../resources/public/index.html'],
+        files: ['index.html','views/**/*.html'],
         tasks: ['htmlhint'],
         options: 
         {
