@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import everest.common.StatisticalDataManager;
@@ -20,13 +23,17 @@ import java.util.Map;
 
 import everest.model.StatisticalData;
 import everest.service.StatisticalDataService;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class StatisticalDataServiceTest 
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public abstract class StatisticalDataServiceTest 
 {
 	int initialDatabaseNumberOfRows;
 	
 	@Autowired
-    private StatisticalDataService statisticalDataService;
+        private StatisticalDataService statisticalDataService;
 	
 	StatisticalData savedStatisticalData;
 	Map<Long, StatisticalData> map;
