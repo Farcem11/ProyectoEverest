@@ -32,18 +32,18 @@ public class StatisticalDataService
 		}
     }
     
-    public Long saveStatisticalData(StatisticalData statisticalDataManager) throws SQLException
+    public Long saveStatisticalData(StatisticalData newStatisticalData) throws SQLException
     {
-        return statisticalDataDao.save(statisticalDataManager);
+        return statisticalDataDao.save(newStatisticalData);
     }
     
-    public void updateStatisticalData(StatisticalData newStatisticalDataManager) throws SQLException
+    public void updateStatisticalData(StatisticalData newStatisticalData) throws SQLException
     {
-        statisticalDataDao.update(newStatisticalDataManager);
+        statisticalDataDao.update(newStatisticalData);
     }
     
-    public void deleteStatisticalData(Long idStatisticalDataManager) throws SQLException
+    public void deleteStatisticalData(Long newStatisticalData) throws SQLException
     {
-        statisticalDataDao.delete(idStatisticalDataManager);
+        statisticalDataDao.delete(newStatisticalData);
     }
 }
