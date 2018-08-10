@@ -1,7 +1,7 @@
 package mainTest;
 
 import java.util.Arrays;
-import common.algorithms.sorting.QuickSort;
+import everest.common.algorithms.sorting.QuickSort;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

@@ -1,12 +1,10 @@
 package mainTest;
 
-import common.StatisticalDataManager;
-import common.StatisticalDataManager;
-import java.io.File;
+import everest.common.StatisticalDataManager;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-import model.StatisticalData;
+import everest.model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Nested;

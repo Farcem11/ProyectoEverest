@@ -5,8 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import common.StatisticalDataManager;
+import everest.common.StatisticalDataManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,14 +18,16 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Map;
 
-import model.StatisticalData;
-import service.StatisticalDataService;
+import everest.model.StatisticalData;
+import everest.service.StatisticalDataService;
 
 public class StatisticalDataServiceTest 
 {
 	int initialDatabaseNumberOfRows;
 	
-	StatisticalDataService statisticalDataService = new StatisticalDataService();
+	@Autowired
+    private StatisticalDataService statisticalDataService;
+	
 	StatisticalData savedStatisticalData;
 	Map<Long, StatisticalData> map;
 	Long lastInsertedId;

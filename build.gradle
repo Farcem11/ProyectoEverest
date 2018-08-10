@@ -36,8 +36,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-// Define the main class for the application
-mainClassName = "controller/Application"
+mainClassName = "everest/Application"
 
 bootJar {
     baseName = 'gs-spring-boot'
@@ -70,7 +69,7 @@ dependencies {
     
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-devtools")    
 }
 
 sonarqube {
