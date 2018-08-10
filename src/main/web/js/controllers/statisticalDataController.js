@@ -3,6 +3,31 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	$scope.statisticalDataList = [];
 	$scope.fileName = "";
 	$scope.fileContent = "";
+	$scope.myNumbers = 
+	[
+		{
+			"number" : 1
+		},
+		{
+			"number" : 1
+		},
+		{
+			"number" : 1
+		},
+		{
+			"number" : 1
+		}
+	];
+
+	$scope.castToJsonList = function(numbersArray) 
+	{
+		var list = [];
+		angular.forEach(numbersArray, function(number)
+		{
+			list.push({"number" : number})
+		});
+		return list;
+	};
 
     $scope.uploadFile = function()
     {
@@ -23,11 +48,31 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
         }
     };
 
+    $scope.addNumber = function(chip, index) 
+    {
+    	var numbers = chip.split(",", -1);
+    	angular.forEach(numbers, function(number, iterator)
+    	{
+    		if(isNaN(number))
+    		{
+    			$rootScope.setWarningMessage("Invalid input : Adding only numbers.");
+    			return null;
+    		};
+
+	        $scope.statisticalDataList[index].numbersArray.push({"number" : number});
+    	});
+        return null;
+    };
+
 	$scope.getStatisticalData = function() 
 	{
 		request.get('StatisticalData/get')
 		.then(function(response)
 		{
+	    	angular.forEach(response.data, function(statisticalData, index)
+	    	{
+	    		response.data[index].numbersArray = $scope.castToJsonList(statisticalData.numbersArray);
+	    	});
 	    	$scope.statisticalDataList = response.data;
 		})
 	    .catch(function(response)

@@ -17,9 +17,14 @@
 	<div ng-controller="mainController" id="container-content">
 		<div id="filesContainer" ng-controller="statisticalDataController">
 			<div id="files" ng-repeat="statisticalData in statisticalDataList">
-				<div class="statisticalData">
-					<input class="numbers" type="text" ng-model="statisticalData.numbersArray"/>
-					
+				<div class="statisticalDataContainer whiteShadow">
+					<div class="scrollbarStyle multiInputContainer">
+						<md-chips ng-model="statisticalData.numbersArray" placeholder="+..." md-removable="true" readonly="false" md-transform-chip="addNumber($chip, $index)" md-enable-chip-edit="true">
+							<md-chip-template>
+								{{$chip.number}}
+							</md-chip-template>
+						</md-chips>
+					</div>
 					<md-input-container class="md-block" flex-gt-sm>
 						<label>Name</label>
 						<input ng-model="statisticalData.name">
