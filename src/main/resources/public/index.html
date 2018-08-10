@@ -13,9 +13,20 @@
 		<i ng-class="{success:'fa fa-check', error:'fa fa-times-circle', information:'fa fa-info-circle', warning:'fa fa-exclamation-triangle'}[messageType]"></i>
 		{{message}}
 	</div>
-	<!-- Content -->
-	<div ng-controller="mainController" id="container-content">
-		<div id="filesContainer" ng-controller="statisticalDataController">
+	<!-- Main Content -->
+	<div ng-controller="statisticalDataController" id="container-content">
+		<div class="buttonsContainer buttons">
+			<md-button class="md-raised">
+				<label for="fileForUpload">
+					Upload File
+				</label>
+				<input id="fileForUpload" type="file" custom-on-change="uploadFile" style="display:none"/>
+			</md-button>
+			<md-button class="md-raised" ng-click="saveStatisticalData()">
+					Add File
+			</md-button>
+		</div>
+		<div id="filesContainer">
 			<div id="files" ng-repeat="statisticalData in statisticalDataList">
 				<div class="statisticalDataContainer whiteShadow">
 					<div class="scrollbarStyle multiInputContainer">
@@ -30,14 +41,21 @@
 						<input ng-model="statisticalData.name">
 					</md-input-container>
 					<div class="buttons">
-						<i ng-click="deleteStatisticalData($index)" class="button deleteButton fas fa-trash-alt"></i>
-						<i class="button downloadButton fas fa-file-download"></i>
-						<i class="button updateButton fas fa-sync-alt"></i>
+						<i ng-click="deleteStatisticalData($index)" class="button deleteButton fas fa-trash-alt">
+							<md-tooltip md-direction="left">Delete this file</md-tooltip>
+						</i>
+						<i class="button downloadButton fas fa-file-download">
+							<md-tooltip md-direction="top">Dowload this file</md-tooltip>
+						</i>
+						<i class="button fas fa-calculator">
+							<md-tooltip md-direction="top">Calculate statistical values</md-tooltip>
+						</i>
+						<i class="button updateButton fas fa-sync-alt">
+							<md-tooltip md-direction="right">Update this file</md-tooltip>
+						</i>
 					</div>			        
 				</div>
 			</div>
-			<input type="file" custom-on-change="uploadFile" id="fileForUpload"/>
-			<i class="button fas fa-upload" ng-click="saveStatisticalData()"></i>
 		</div>
 	</div>
 

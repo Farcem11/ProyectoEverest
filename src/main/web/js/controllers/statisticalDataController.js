@@ -3,21 +3,6 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	$scope.statisticalDataList = [];
 	$scope.fileName = "";
 	$scope.fileContent = "";
-	$scope.myNumbers = 
-	[
-		{
-			"number" : 1
-		},
-		{
-			"number" : 1
-		},
-		{
-			"number" : 1
-		},
-		{
-			"number" : 1
-		}
-	];
 
 	$scope.castToJsonList = function(numbersArray) 
 	{
@@ -40,10 +25,13 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
             reader.onload = function(event)
             {
                 $scope.fileContent = event.target.result;
+                $rootScope.setSuccessMessage("File " + file.name +" was uploaded successfully");
+                $scope.$apply();
             }
             reader.onerror = function(event) 
             {
-                $scope.fileContent = "error reading file";
+            	$rootScope.setErrorMessage("There was an error while uploading the file, please try again");
+                $scope.$apply();
             }
         }
     };
@@ -93,7 +81,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		.then(function(response)
 	    {
 	    	$scope.getStatisticalData();
-	    	$rootScope.setSuccessMessage("File added successfully");
+	    	$rootScope.setSuccessMessage("File saved successfully");
 	    })
 	    .catch(function(response)
 	    {
