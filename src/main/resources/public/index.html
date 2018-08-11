@@ -44,7 +44,7 @@
 						<i ng-click="showConfirm($event, $index, actionType.DELETE)" class="button deleteButton fas fa-trash-alt">
 							<md-tooltip md-direction="left">Delete this file</md-tooltip>
 						</i>
-						<i class="button downloadButton fas fa-file-download">
+						<i ng-click="showConfirm($event, $index, actionType.DOWNLOAD)" class="button downloadButton fas fa-file-download">
 							<md-tooltip md-direction="top">Dowload this file</md-tooltip>
 						</i>
 						<i class="button fas fa-calculator">

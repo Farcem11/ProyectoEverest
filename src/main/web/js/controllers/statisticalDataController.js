@@ -176,10 +176,16 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			     case $scope.actionType.UPDATE:
 			    	$scope.updateStatisticalData(index);
 			        break;
+			     case $scope.actionType.DOWNLOAD:
+			     	var fileName = $scope.statisticalDataList[index].originalName;
+			     	var fileContent = $scope.statisticalDataList[index].numbersArray.toString();
+			    	common.downloadFile(fileName, fileContent);
+			        break;			         
 			    default:
 			        $rootScope.setErrorMessage("Something went wrong");
 			};
-		});
+		},
+		function(){});
 	};
 
 	$scope.getStatisticalData();

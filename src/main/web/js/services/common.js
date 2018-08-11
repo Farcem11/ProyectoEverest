@@ -68,5 +68,19 @@ app.service('common', function()
 		return (JSON.stringify(array1.sort()) === JSON.stringify(array2.sort()));
 	};
 
+	common.downloadFile = function(fileName, fileContent) 
+	{
+		var element = document.createElement('a');
+		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
+		element.setAttribute('download', fileName);
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	};
+
 	return common;
 });
