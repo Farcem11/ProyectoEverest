@@ -33,7 +33,6 @@ public class StatisticalDataControllerTest
         .andExpect(status().isOk());
     }
     
-    /*
     @Test
     public void saveStatisticalDataTest() throws Exception 
     {
@@ -48,5 +47,4 @@ public class StatisticalDataControllerTest
         .content(json))
         .andExpect(status().isOk());
     }
-    */
 }

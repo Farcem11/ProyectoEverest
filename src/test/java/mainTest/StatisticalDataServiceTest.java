@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringJUnitConfig
 @SpringBootTest(classes = Application.class)
@@ -53,6 +55,13 @@ public class StatisticalDataServiceTest
         statisticalDataService.deleteStatisticalData(lastInsertedId);
         int databaseNumberOfRowsAfterDelete = statisticalDataService.getStatisticalDataMap().size();
         assertEquals(initialDatabaseNumberOfRows, databaseNumberOfRowsAfterDelete);
+    }
+    
+    @Test
+    @DisplayName("Test null on save")
+    public void saveNullDatabaseTest() throws SQLException, IOException
+    {
+        assertThrows(NullPointerException.class, () -> statisticalDataService.saveStatisticalData(null));
     }
 
     @Nested

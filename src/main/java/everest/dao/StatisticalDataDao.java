@@ -70,6 +70,10 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         {
             throw new SQLIntegrityConstraintViolationException("That file already exists");
         }
+        catch(NullPointerException ex)
+        {
+            throw new NullPointerException("The data can not be null");
+        }
     }
 
     @Override
@@ -85,6 +89,14 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
             preparedStatement.setString(6, object.getNumbers());
 
             preparedStatement.execute();	
+        }
+        catch(SQLIntegrityConstraintViolationException ex)
+        {
+            throw new SQLIntegrityConstraintViolationException("That file already exists");
+        }
+        catch(NullPointerException ex)
+        {
+            throw new NullPointerException("The data can not be null");
         }
     }    
 

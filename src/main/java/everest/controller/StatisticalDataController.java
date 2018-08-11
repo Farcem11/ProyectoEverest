@@ -75,7 +75,7 @@ public class StatisticalDataController
     }
     
     @PostMapping("/calculate")
-    public Map<String, Double> getStatisticalDataCalculations(@RequestBody Map<String, String> request) throws SQLException
+    public Map<String, Double> getStatisticalDataCalculations(@RequestBody Map<String, String> request)
     {
     	Long id = Long.parseLong(request.get("id"));
     	Map<String, Double> calculationsMap = new HashMap<>();

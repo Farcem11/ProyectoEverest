@@ -19,7 +19,7 @@ public class StatisticalDataManager
         return instance;
     }
 
-	public StatisticalData validateAndParse(String name, String fileContent) throws IOException
+    public StatisticalData validateAndParse(String name, String fileContent) throws IOException
     {
     	try(Scanner scanner = new Scanner(fileContent))
     	{
