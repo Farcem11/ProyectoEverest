@@ -9,7 +9,7 @@ public class StatisticalCalculator
 
 	private static final StatisticalCalculator instance = new StatisticalCalculator();
 	
-    public synchronized static StatisticalCalculator getInstance()
+    public static synchronized StatisticalCalculator getInstance()
     {
         return instance;
     }

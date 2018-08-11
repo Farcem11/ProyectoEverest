@@ -47,7 +47,7 @@
 						<i ng-click="showConfirm($event, $index, actionType.DOWNLOAD)" class="button downloadButton fas fa-file-download">
 							<md-tooltip md-direction="top">Dowload this file</md-tooltip>
 						</i>
-						<i class="button fas fa-calculator">
+						<i ng-click="showConfirm($event, $index, actionType.CALCULATE)" class="button fas fa-calculator">
 							<md-tooltip md-direction="top">Calculate statistical values</md-tooltip>
 						</i>
 						<i ng-click="showConfirm($event, $index, actionType.UPDATE)" class="button updateButton fas fa-sync-alt">

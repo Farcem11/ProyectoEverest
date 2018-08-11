@@ -14,7 +14,7 @@ public class StatisticalDataManager
 
 	private static final StatisticalDataManager instance = new StatisticalDataManager();
 	
-    public synchronized static StatisticalDataManager getInstance()
+    public static synchronized StatisticalDataManager getInstance()
     {
         return instance;
     }

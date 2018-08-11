@@ -153,6 +153,27 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    });
 	};
 
+	$scope.calculateStatisticalData = function(index)
+	{
+		var data =
+		{
+			"id" : $scope.statisticalDataList[index].id,
+		};
+
+		request.post("StatisticalData/calculate", data)
+		.then(function(response)
+	    {
+	    	var fileContent = common.castToCsv(response.data);
+	    	var fileName = "Statistical Calculation - " + $scope.statisticalDataList[index].originalName;
+	    	common.downloadFile(fileName, fileContent);
+	    	$rootScope.setSuccessMessage("Statistical calculation successful");	
+	    })
+	    .catch(function(response)
+	    {
+		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+	    });
+	};
+
 	$scope.showConfirm = function(event, index, actionType) 
 	{
 		var confirm = $mdDialog.confirm()
@@ -180,7 +201,10 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			     	var fileName = $scope.statisticalDataList[index].originalName;
 			     	var fileContent = $scope.statisticalDataList[index].numbersArray.toString();
 			    	common.downloadFile(fileName, fileContent);
-			        break;			         
+			        break;
+			     case $scope.actionType.CALCULATE:
+			    	$scope.calculateStatisticalData(index);
+			        break;				         
 			    default:
 			        $rootScope.setErrorMessage("Something went wrong");
 			};

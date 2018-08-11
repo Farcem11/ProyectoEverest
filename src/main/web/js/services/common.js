@@ -82,5 +82,15 @@ app.service('common', function()
 		document.body.removeChild(element);
 	};
 
+	common.castToCsv = function(json)
+	{
+		var csv = "";
+		Object.keys(json).forEach(function(key)
+		{
+    		csv += key + "," + json[key] + "\n";
+		});
+		return csv;
+	};
+
 	return common;
 });

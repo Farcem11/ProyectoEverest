@@ -27,9 +27,9 @@ public class StatisticalCalculatorStrategyFactory
     private final CalculationStrategy standardDeviationCalculation = new StandardDeviationCalculation();
     private final CalculationStrategy noCalculation = new NoCalculation();
     
-    public CalculationStrategy getCalculationStrategy(CalculationType CalculationType) 
+    public CalculationStrategy getCalculationStrategy(CalculationType calculationType) 
     {
-        switch (CalculationType) 
+        switch (calculationType) 
         {
             case AVERAGE: 
             	return averageCalculation;
