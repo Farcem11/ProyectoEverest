@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import everest.common.StatisticalDataManager;
 import everest.model.StatisticalData;
 import everest.database.MySqlConnection;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @Repository 
 public class StatisticalDataDao implements DataAcessObject<StatisticalData>
@@ -64,6 +65,10 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
                     throw new SQLException("Creating user failed, no ID obtained.");
                 }	
             }
+        }
+        catch(SQLIntegrityConstraintViolationException ex)
+        {
+            throw new SQLIntegrityConstraintViolationException("That file already exists");
         }
     }
 

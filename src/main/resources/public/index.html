@@ -22,7 +22,7 @@
 				</label>
 				<input id="fileForUpload" type="file" custom-on-change="uploadFile" style="display:none"/>
 			</md-button>
-			<md-button class="md-raised" ng-click="saveStatisticalData()">
+			<md-button ng-click="showConfirm($event, $index, actionType.SAVE)" class="md-raised" ng-click="saveStatisticalData()">
 					Add File
 			</md-button>
 		</div>
@@ -30,7 +30,7 @@
 			<div id="files" ng-repeat="statisticalData in statisticalDataList">
 				<div class="statisticalDataContainer whiteShadow">
 					<div class="scrollbarStyle multiInputContainer">
-						<md-chips ng-model="statisticalData.numbersArray" placeholder="+..." md-removable="true" readonly="false" md-transform-chip="addNumber($chip, $index)" md-enable-chip-edit="true">
+						<md-chips ng-model="statisticalData.numberJsons" placeholder="+..." md-removable="true" readonly="false" md-transform-chip="addNumber($chip, $index)" md-enable-chip-edit="true">
 							<md-chip-template>
 								{{$chip.number}}
 							</md-chip-template>
@@ -50,7 +50,7 @@
 						<i class="button fas fa-calculator">
 							<md-tooltip md-direction="top">Calculate statistical values</md-tooltip>
 						</i>
-						<i class="button updateButton fas fa-sync-alt">
+						<i ng-click="showConfirm($event, $index, actionType.UPDATE)" class="button updateButton fas fa-sync-alt">
 							<md-tooltip md-direction="right">Update this file</md-tooltip>
 						</i>
 					</div>			        

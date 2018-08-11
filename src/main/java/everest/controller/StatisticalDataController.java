@@ -23,16 +23,16 @@ import java.sql.SQLException;
 @RequestMapping("StatisticalData")
 public class StatisticalDataController 
 {
-	@Autowired
+    @Autowired
     private StatisticalDataService statisticalDataService;
 	
-	private Map<Long, StatisticalData> statisticalDataMap;
-    
-	@PostConstruct
-	private void initializeMap()
-	{
-		statisticalDataMap = statisticalDataService.getStatisticalDataMap();
-	}
+    private Map<Long, StatisticalData> statisticalDataMap;
+
+    @PostConstruct
+    private void initializeMap()
+    {
+        statisticalDataMap = statisticalDataService.getStatisticalDataMap();
+    }
 	
     @GetMapping("/get")
     public Collection<StatisticalData> getStatisticalData()

@@ -40,6 +40,10 @@ public class StatisticalDataManager
 
             return new StatisticalData(name, numbersArray, numbers, total, max, min);	
     	}
+    	catch(NullPointerException ex)
+    	{
+    		throw new NullPointerException("File content is empty");
+    	}
     }
     
     public double[] castStringToNumbers(String textNumbers)

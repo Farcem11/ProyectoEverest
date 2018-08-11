@@ -19,17 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @SpringJUnitConfig
 @SpringBootTest(classes = Application.class)
-public class StatisticalDataTest
+public class StatisticalDataServiceTest
 {	
     @Autowired
     private StatisticalDataService statisticalDataService;
@@ -38,7 +35,7 @@ public class StatisticalDataTest
 
     StatisticalData savedStatisticalData;
     Long lastInsertedId;
-
+    
     @Test
     @DisplayName("Database should not be empty")
     public void emptyDatabaseTest() throws IOException
@@ -46,26 +43,16 @@ public class StatisticalDataTest
         assertFalse(statisticalDataService.getStatisticalDataMap().isEmpty());
     }
 	
-    @Nested
-    class databaseDeleteTest
+    @Test
+    @DisplayName("Test if database delete the data")
+    public void deleteDatabaseTest() throws SQLException, IOException
     {
-        @BeforeEach
-        @DisplayName("Save initial number of rows and add new record")
-        public void addNewStatisticalManager() throws IOException, SQLException
-        {
-            initialDatabaseNumberOfRows = statisticalDataService.getStatisticalDataMap().size();
-            savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
-            lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
-        }
-
-        @Test
-        @DisplayName("Test if database delete the data")
-        public void deleteDatabaseTest() throws SQLException, IOException
-        {
-            statisticalDataService.deleteStatisticalData(lastInsertedId);
-            int databaseNumberOfRowsAfterDelete = statisticalDataService.getStatisticalDataMap().size();
-            assertEquals(initialDatabaseNumberOfRows, databaseNumberOfRowsAfterDelete);
-        }
+        initialDatabaseNumberOfRows = statisticalDataService.getStatisticalDataMap().size();
+        savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
+        lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
+        statisticalDataService.deleteStatisticalData(lastInsertedId);
+        int databaseNumberOfRowsAfterDelete = statisticalDataService.getStatisticalDataMap().size();
+        assertEquals(initialDatabaseNumberOfRows, databaseNumberOfRowsAfterDelete);
     }
 
     @Nested

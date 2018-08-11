@@ -27,7 +27,7 @@ app.service('common', function()
 
 	common.dialogs[common.actionType.UPDATE] =
 	{
-		"title" : "Would you like to update an existing file?",
+		"title" : "Would you like to update this file?",
 		"content" : "This will update this file in the system, the numbers and name file be overwritten"
 	};
 
@@ -51,6 +51,21 @@ app.service('common', function()
 			list.push({"number" : number})
 		});
 		return list;
+	};
+
+	common.castToList = function(numberJsons) 
+	{
+		var list = [];
+		angular.forEach(numberJsons, function(json)
+		{
+			list.push(json.number);
+		});
+		return list;
+	};
+
+	common.areNumberArraysEqual = function(array1, array2)
+	{
+		return (JSON.stringify(array1.sort()) === JSON.stringify(array2.sort()));
 	};
 
 	return common;

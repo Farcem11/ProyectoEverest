@@ -16,7 +16,7 @@ import everest.model.StatisticalData;
 @Service
 public class StatisticalDataService 
 {
-	@Autowired
+    @Autowired
     private StatisticalDataDao statisticalDataDao;
     
     public Map<Long, StatisticalData> getStatisticalDataMap()
@@ -24,17 +24,17 @@ public class StatisticalDataService
         Map<Long, StatisticalData> statisticalDataMap = new HashMap<>(); 
         try
         {
-			for(StatisticalData statisticalData : statisticalDataDao.get())
-			{
-			    statisticalDataMap.put(statisticalData.getId(), statisticalData);
-			}
+            for(StatisticalData statisticalData : statisticalDataDao.get())
+            {
+                statisticalDataMap.put(statisticalData.getId(), statisticalData);
+            }
 			return statisticalDataMap;
-		} 
+        } 
         catch (SQLException ex) 
         {
-        	Logger.getLogger(StatisticalDataDao.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex);
+            Logger.getLogger(StatisticalDataDao.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex);
             return Collections.emptyMap();
-		}
+        }
     }
     
     public Long saveStatisticalData(StatisticalData newStatisticalData) throws SQLException

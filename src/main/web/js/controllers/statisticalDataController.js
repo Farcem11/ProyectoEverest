@@ -31,6 +31,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
             }
             reader.onerror = function(event) 
             {
+            	document.getElementById("fileForUpload").value = null;
             	$rootScope.setErrorMessage("There was an error while uploading the file, please try again");
                 $scope.$apply();
             }
@@ -48,7 +49,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
     			return null;
     		};
 
-	        $scope.statisticalDataList[index].numbersArray.push({"number" : number});
+	        $scope.statisticalDataList[index].numberJsons.push({"number" : parseInt(number)});
     	});
         return null;
     };
@@ -60,7 +61,8 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		{
 	    	angular.forEach(response.data, function(statisticalData, index)
 	    	{
-	    		response.data[index].numbersArray = $scope.castToJsonList(statisticalData.numbersArray);
+	    		response.data[index].numberJsons = common.castToJsonList(statisticalData.numbersArray);
+		    	response.data[index].originalName = statisticalData.name;
 	    	});
 	    	$scope.statisticalDataList = response.data;
 		})
@@ -72,6 +74,12 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 
 	$scope.saveStatisticalData = function() 
 	{
+		if($scope.fileName == null || $scope.fileContent == null)
+		{
+			$rootScope.setWarningMessage("Please select a file first");
+			return;
+		};
+
 		var data =
 		{
 			"fileName" : $scope.fileName,
@@ -82,7 +90,43 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		.then(function(response)
 	    {
 	    	$scope.getStatisticalData();
+	    	$scope.fileName = null;
+	    	$scope.fileContent = null;
 	    	$rootScope.setSuccessMessage("File saved successfully");
+	    	document.getElementById("fileForUpload").value = null;
+	    })
+	    .catch(function(response)
+	    {
+	    	$scope.fileName = null;
+	    	$scope.fileContent = null;
+		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    document.getElementById("fileForUpload").value = null;
+	    });
+	};
+
+	$scope.updateStatisticalData = function(index) 
+	{
+		var numbersArrayFromInput = common.castToList($scope.statisticalDataList[index].numberJsons);
+		var sameArrays = common.areNumberArraysEqual(numbersArrayFromInput, $scope.statisticalDataList[index].numbersArray);
+		var sameName = $scope.statisticalDataList[index].name == $scope.statisticalDataList[index].originalName;
+		if(sameArrays && sameName)
+		{
+			$rootScope.setErrorMessage("The numbers and name are the same, change them to update");
+			return;
+		};
+
+		var data =
+		{
+			"id" : $scope.statisticalDataList[index].id,
+			"newName" : $scope.statisticalDataList[index].name,
+			"newNumbers" : numbersArrayFromInput.toString()
+		};
+
+		request.post("StatisticalData/update", data)
+		.then(function(response)
+	    {
+	    	$scope.getStatisticalData();
+	    	$rootScope.setSuccessMessage("File updated successfully");
 	    })
 	    .catch(function(response)
 	    {
@@ -126,14 +170,15 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			    case $scope.actionType.DELETE:
 			    	$scope.deleteStatisticalData(index);
 			        break;
+			     case $scope.actionType.SAVE:
+			    	$scope.saveStatisticalData();
+			        break;
+			     case $scope.actionType.UPDATE:
+			    	$scope.updateStatisticalData(index);
+			        break;
 			    default:
-			        $rootScope.setErroMessage("Something went wrong with the dialog");
+			        $rootScope.setErrorMessage("Something went wrong");
 			};
-			$rootScope.setInformationMessage("Confirm");
-		}, 
-		function() 
-		{
-			$rootScope.setInformationMessage("Cancel");
 		});
 	};
 
