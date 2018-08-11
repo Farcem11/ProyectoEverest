@@ -1,8 +1,9 @@
-app.controller("statisticalDataController", function($scope, $rootScope, request)
+app.controller("statisticalDataController", function($scope, $rootScope, request, $mdDialog, common)
 {
 	$scope.statisticalDataList = [];
-	$scope.fileName = "";
-	$scope.fileContent = "";
+	$scope.fileName = null;
+	$scope.fileContent = null;
+	$scope.actionType = common.actionType;
 
 	$scope.castToJsonList = function(numbersArray) 
 	{
@@ -17,7 +18,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
     $scope.uploadFile = function()
     {
         var file = document.getElementById("fileForUpload").files[0];
-        if(file) 
+        if(file)
         {
             $scope.fileName = file.name;
             var reader = new FileReader();
@@ -41,7 +42,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
     	var numbers = chip.split(",", -1);
     	angular.forEach(numbers, function(number, iterator)
     	{
-    		if(isNaN(number))
+    		if(isNaN(number) || number === "")
     		{
     			$rootScope.setWarningMessage("Invalid input : Adding only numbers.");
     			return null;
@@ -106,6 +107,34 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    {
 		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
 	    });
+	};
+
+	$scope.showConfirm = function(event, index, actionType) 
+	{
+		var confirm = $mdDialog.confirm()
+			.title(common.dialogs[actionType].title)
+			.textContent(common.dialogs[actionType].content)
+			.targetEvent(event)
+			.ok('Confirm')
+			.cancel('Cancel');
+
+		$mdDialog.show(confirm).then(
+		function() 
+		{
+			switch(actionType)
+			{
+			    case $scope.actionType.DELETE:
+			    	$scope.deleteStatisticalData(index);
+			        break;
+			    default:
+			        $rootScope.setErroMessage("Something went wrong with the dialog");
+			};
+			$rootScope.setInformationMessage("Confirm");
+		}, 
+		function() 
+		{
+			$rootScope.setInformationMessage("Cancel");
+		});
 	};
 
 	$scope.getStatisticalData();

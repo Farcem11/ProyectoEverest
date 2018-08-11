@@ -41,7 +41,7 @@
 						<input ng-model="statisticalData.name">
 					</md-input-container>
 					<div class="buttons">
-						<i ng-click="deleteStatisticalData($index)" class="button deleteButton fas fa-trash-alt">
+						<i ng-click="showConfirm($event, $index, actionType.DELETE)" class="button deleteButton fas fa-trash-alt">
 							<md-tooltip md-direction="left">Delete this file</md-tooltip>
 						</i>
 						<i class="button downloadButton fas fa-file-download">
