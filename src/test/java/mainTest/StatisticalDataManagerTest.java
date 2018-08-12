@@ -77,5 +77,13 @@ public class StatisticalDataManagerTest
         	StatisticalData statisticalData = StatisticalDataManager.getInstance().validateAndParse("", numbers);
         	assertEquals(CalculationTypeEnum.values().length, StatisticalDataManager.getInstance().getStatisticalCalculations(statisticalData).size());
         }
+        
+        @Test
+        public void zeroCalculationsTest() throws IOException
+        {
+        	String numbers = "0";
+        	StatisticalData statisticalData = StatisticalDataManager.getInstance().validateAndParse("", numbers);
+        	assertEquals(CalculationTypeEnum.values().length, StatisticalDataManager.getInstance().getStatisticalCalculations(statisticalData).size());
+        }
     }
 }

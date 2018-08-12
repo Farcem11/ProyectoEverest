@@ -50,7 +50,8 @@ deploy_dev:
     - master
   tags:
       - localhostRunner
-
+  when: manual
+  
 deploy_qa:
   stage: deploy_qa
   script:

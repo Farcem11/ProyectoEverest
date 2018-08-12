@@ -77,6 +77,22 @@ public class CalculationsTest
         }
         
         @Test
+        void testQuartileOneOneValue() throws IOException
+        {
+        	String one = "1";
+            data = StatisticalDataManager.getInstance().validateAndParse("", one);
+        	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
+        }
+        
+        @Test
+        void testQuartileThreeOneValue() throws IOException
+        {
+        	String one = "1";
+            data = StatisticalDataManager.getInstance().validateAndParse("", one);
+        	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+        }
+        
+        @Test
         void testQuartileOne()
         {
             assertEquals(0.8, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));

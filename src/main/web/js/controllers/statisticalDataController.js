@@ -68,7 +68,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		})
 	    .catch(function(response)
 	    {
-		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
 
@@ -99,7 +99,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    {
 	    	$scope.fileName = null;
 	    	$scope.fileContent = null;
-		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 		    document.getElementById("fileForUpload").value = null;
 	    });
 	};
@@ -130,7 +130,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    })
 	    .catch(function(response)
 	    {
-		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
 
@@ -149,7 +149,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    })
 	    .catch(function(response)
 	    {
-		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
 
@@ -170,7 +170,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    })
 	    .catch(function(response)
 	    {
-		    $rootScope.setErrorMessage(response.data.error + ":" + response.data.message);
+		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
 

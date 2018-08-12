@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.DoubleStream;
 import everest.common.algorithms.sorting.QuickSort;
@@ -42,9 +43,9 @@ public class StatisticalDataManager
 
             return new StatisticalData(name, numbersArray, numbers, total, max, min);	
     	}
-    	catch(NullPointerException ex)
+    	catch(NoSuchElementException ex)
     	{
-    		throw new NullPointerException("File content is empty");
+    		throw new NoSuchElementException("The file is empty");
     	}
     }
     
@@ -52,12 +53,19 @@ public class StatisticalDataManager
     {
         List<Double> numbersList = new ArrayList<>();
         String[] textNumbersList = textNumbers.split(",");
-        for(String textNumber : textNumbersList)
+        try 
         {
-            double number = Double.parseDouble(textNumber);
-            numbersList.add(number);
+            for(String textNumber : textNumbersList)
+            {
+                double number = Double.parseDouble(textNumber);
+                numbersList.add(number);
+            }
+            return castListToArray(numbersList);        	
         }
-        return castListToArray(numbersList);        
+        catch(NumberFormatException ex)
+        {
+        	throw new NumberFormatException("The file needs to have only numbers");
+        }
     }
     
     private double[] castListToArray(List<Double> numbersList)
