@@ -29,7 +29,7 @@ public class StatisticalDataController
     private Map<Long, StatisticalData> statisticalDataMap;
 
     @PostConstruct
-    private void initializeMap()
+    private void initializeMap() throws SQLException
     {
         statisticalDataMap = statisticalDataService.getStatisticalDataMap();
     }

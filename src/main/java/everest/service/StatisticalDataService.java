@@ -19,22 +19,15 @@ public class StatisticalDataService
     @Autowired
     private StatisticalDataDao statisticalDataDao;
     
-    public Map<Long, StatisticalData> getStatisticalDataMap()
+    public Map<Long, StatisticalData> getStatisticalDataMap() throws SQLException
     {
         Map<Long, StatisticalData> statisticalDataMap = new HashMap<>(); 
-        try
+        
+        for(StatisticalData statisticalData : statisticalDataDao.get())
         {
-            for(StatisticalData statisticalData : statisticalDataDao.get())
-            {
-                statisticalDataMap.put(statisticalData.getId(), statisticalData);
-            }
-			return statisticalDataMap;
-        } 
-        catch (SQLException ex) 
-        {
-            Logger.getLogger(StatisticalDataDao.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex);
-            return Collections.emptyMap();
+            statisticalDataMap.put(statisticalData.getId(), statisticalData);
         }
+		return statisticalDataMap;
     }
     
     public Long saveStatisticalData(StatisticalData newStatisticalData) throws SQLException

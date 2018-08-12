@@ -38,7 +38,7 @@ public class StatisticalDataServiceTest
     
     @Test
     @DisplayName("Database should not be empty")
-    public void emptyDatabaseTest() throws IOException
+    public void emptyDatabaseTest() throws IOException, SQLException
     {
         assertFalse(statisticalDataService.getStatisticalDataMap().isEmpty());
     }

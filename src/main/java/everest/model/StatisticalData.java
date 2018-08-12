@@ -5,7 +5,7 @@ public class StatisticalData
     private long id;
     private final String name;
     private final String numbers;
-    private final double[] numbersArray;
+    private double[] numbersArray;
     private final double total;
     private final double max;
     private final double min;
@@ -66,5 +66,9 @@ public class StatisticalData
 
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public void setNumbersArray(double[] numbersArray) {
+    	this.numbersArray = numbersArray;
     }
 }

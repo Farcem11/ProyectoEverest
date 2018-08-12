@@ -21,9 +21,9 @@ public class MySqlConnection
     {
         try
         {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             databaseFileProperty = new FileInputStream(FILE_PATH);
             databaseProperties.load(databaseFileProperty);
+            Class.forName(databaseProperties.getProperty("DB_DRIVER"));
             connection = DriverManager.getConnection(
                 databaseProperties.getProperty("DB_URL"),
                 databaseProperties.getProperty("DB_USERNAME"),
@@ -48,9 +48,6 @@ public class MySqlConnection
         return instance;
     }
     
-    /**
-     * @return the connection
-     */
     public Connection getConnection() 
     {
         return connection;

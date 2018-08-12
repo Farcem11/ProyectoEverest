@@ -54,7 +54,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
         return null;
     };
 
-	$scope.getStatisticalData = function() 
+	$scope.getStatisticalData = function(successMessage) 
 	{
 		request.get('StatisticalData/get')
 		.then(function(response)
@@ -65,6 +65,9 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		    	response.data[index].originalName = statisticalData.name;
 	    	});
 	    	$scope.statisticalDataList = response.data;
+	
+	    	if(sucessMessage != null)
+		    	$rootScope.setSuccessMessage(sucessMessage);
 		})
 	    .catch(function(response)
 	    {
@@ -89,11 +92,10 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		request.post("StatisticalData/save", data)
 		.then(function(response)
 	    {
-	    	$scope.getStatisticalData();
+	    	$scope.getStatisticalData("File saved successfully");
 	    	$scope.fileName = null;
 	    	$scope.fileContent = null;
 	    	$rootScope.setSuccessMessage("File saved successfully");
-	    	document.getElementById("fileForUpload").value = null;
 	    })
 	    .catch(function(response)
 	    {
@@ -125,8 +127,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		request.post("StatisticalData/update", data)
 		.then(function(response)
 	    {
-	    	$scope.getStatisticalData();
-	    	$rootScope.setSuccessMessage("File updated successfully");
+	    	$scope.getStatisticalData("File updated successfully");
 	    })
 	    .catch(function(response)
 	    {
@@ -144,8 +145,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		request.post("StatisticalData/delete", data)
 		.then(function(response)
 	    {
-	    	$scope.getStatisticalData();
-	    	$rootScope.setSuccessMessage("File deleted successfully");
+	    	$scope.getStatisticalData("File deleted successfully");
 	    })
 	    .catch(function(response)
 	    {
@@ -212,5 +212,5 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		function(){});
 	};
 
-	$scope.getStatisticalData();
+	$scope.getStatisticalData(null);
 });

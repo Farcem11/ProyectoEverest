@@ -69,35 +69,59 @@ public class CalculationsTest
             data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
             assertEquals(4.0, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.MODE, data));
         }
-        
-        @Test
-        void testQuartileThree()
+                
+        @Nested
+        class quartileOneTest
         {
-            assertEquals(8.7, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+            @Test
+            void testQuartileOneOneValue() throws IOException
+            {
+            	String one = "1";
+                data = StatisticalDataManager.getInstance().validateAndParse("", one);
+            	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
+            }
+            
+            @Test
+            void testQuartilePairOne() throws IOException
+            {
+            	String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4, 9.5";
+                data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
+                assertEquals(0.825, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
+            }
+            
+            @Test
+            void testQuartileOneOddTest() throws IOException
+            {
+                assertEquals(0.8, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
+            }
         }
-        
-        @Test
-        void testQuartileOneOneValue() throws IOException
+
+        @Nested
+        class quartileThreeTest
         {
-        	String one = "1";
-            data = StatisticalDataManager.getInstance().validateAndParse("", one);
-        	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
-        }
+            @Test
+            void testQuartileThreeOneValue() throws IOException
+            {
+            	String one = "1";
+                data = StatisticalDataManager.getInstance().validateAndParse("", one);
+            	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+            }
         
-        @Test
-        void testQuartileThreeOneValue() throws IOException
-        {
-        	String one = "1";
-            data = StatisticalDataManager.getInstance().validateAndParse("", one);
-        	assertEquals(1, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+            @Test
+            void testQuartilePairThree() throws IOException
+            {
+            	String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4, 9.5";
+                data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
+                assertEquals(9.225, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+            }
+            
+            @Test
+            void testQuartileOddThree() throws IOException
+            {
+                assertEquals(8.7, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+            }
         }
-        
-        @Test
-        void testQuartileOne()
-        {
-            assertEquals(0.8, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
-        }
-        
+                
         @Test
         void testVariance()
         {

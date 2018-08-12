@@ -1,5 +1,9 @@
 package everest.common.calculations;
 
+import java.util.Arrays;
+
+import everest.common.CalculationTypeEnum;
+import everest.common.StatisticalCalculator;
 import everest.model.StatisticalData;
 
 public class QuartileOneCalculation implements CalculationStrategy
@@ -7,11 +11,13 @@ public class QuartileOneCalculation implements CalculationStrategy
     @Override
     public double doCalculation(StatisticalData statisticalData) 
     {
-    	if(statisticalData.getNumbersArray().length == 1)
+    	double[] originalArray = statisticalData.getNumbersArray();
+    	if(originalArray.length == 1)
     	{
-    		return statisticalData.getNumbersArray()[0];
+    		return originalArray[0];
     	}
-        int quartileOneIndex = (statisticalData.getNumbersArray().length + 1) / 4;
-        return statisticalData.getNumbersArray()[quartileOneIndex - 1];
+    	double[] firstHalf = Arrays.copyOfRange(originalArray, 0, (originalArray.length/2));
+    	statisticalData.setNumbersArray(firstHalf);
+    	return StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.MEDIAN, statisticalData);
     }
 }
