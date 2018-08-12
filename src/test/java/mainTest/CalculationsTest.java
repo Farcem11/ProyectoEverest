@@ -84,9 +84,9 @@ public class CalculationsTest
             @Test
             void testQuartilePairOne() throws IOException
             {
-            	String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4, 9.5";
+            	String numbers = "30, 36, 47, 50, 52, 52, 56, 60, 63, 70, 70, 110";
                 data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
-                assertEquals(0.825, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
+                assertEquals(47.0, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_ONE, data));
             }
             
             @Test
@@ -110,9 +110,9 @@ public class CalculationsTest
             @Test
             void testQuartilePairThree() throws IOException
             {
-            	String numbers = "-5, -4, 7.5, 8.7, 3.4, 9.4, 0.8, 1.5, 2.6, 0.9, 0.6, 9.4, 8.4, 6.6 , 9.4, 9.5";
+            	String numbers = "30, 36, 47, 50, 52, 52, 56, 60, 63, 70, 70, 110";
                 data = StatisticalDataManager.getInstance().validateAndParse("", numbers);
-                assertEquals(9.225, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
+                assertEquals(63.0, StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.QUARTILE_THREE, data));
             }
             
             @Test
