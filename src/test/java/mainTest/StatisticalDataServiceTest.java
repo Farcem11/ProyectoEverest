@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringJUnitConfig
 @SpringBootTest(classes = Application.class)
@@ -57,15 +55,8 @@ public class StatisticalDataServiceTest
         assertEquals(initialDatabaseNumberOfRows, databaseNumberOfRowsAfterDelete);
     }
     
-    @Test
-    @DisplayName("Test null on save")
-    public void saveNullDatabaseTest() throws SQLException, IOException
-    {
-        assertThrows(NullPointerException.class, () -> statisticalDataService.saveStatisticalData(null));
-    }
-
     @Nested
-    class databaseSaveTest
+    class databaseNestedTest
     {
         @BeforeEach
         @DisplayName("Save initial number of rows and add new record")
@@ -92,28 +83,10 @@ public class StatisticalDataServiceTest
             int databaseNumberOfRowsAfterSave = statisticalDataService.getStatisticalDataMap().size();
             assertEquals(initialDatabaseNumberOfRows + 1, databaseNumberOfRowsAfterSave);
         }
-
-        @AfterEach()
-        public void deleteRecord() throws SQLException
-        {
-            statisticalDataService.deleteStatisticalData(lastInsertedId);
-        }
-    }
-
-    @Nested
-    class databaseUpdateTest
-    {
-        @BeforeEach
-        @DisplayName("Save initial number of rows and add new record")
-        public void addNewStatisticalManager() throws IOException, SQLException
-        {
-            savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("Name", "1,2,3,4,5");
-            lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
-        }
-
+        
         @Test
         @DisplayName("Test if data is updated correctly")
-        public void saveDatabaseDataTest() throws SQLException, IOException
+        public void updateDatabaseDataTest() throws SQLException, IOException
         {
             StatisticalData newStatisticalData = StatisticalDataManager.getInstance().validateAndParse("NewFileName", "6,7,8,9,10");
             newStatisticalData.setId(lastInsertedId);
@@ -132,19 +105,19 @@ public class StatisticalDataServiceTest
     private boolean compareStatisticalDataObjects(StatisticalData statisticalData1, StatisticalData statisticalData2)
     {
         if(statisticalData1.getId() != statisticalData2.getId())
-                return false;
+        	return false;
         else if(statisticalData1.getMax() != statisticalData2.getMax())
-                return false;
+            return false;
         else if(statisticalData1.getMin() != statisticalData2.getMin())
-                return false;
+            return false;
         else if(!statisticalData1.getName().equals(statisticalData2.getName()))
-                return false;
+            return false;
         else if(!statisticalData1.getNumbers().equals(statisticalData2.getNumbers()))
-                return false;
+            return false;
         else if(!Arrays.equals(statisticalData1.getNumbersArray(), statisticalData2.getNumbersArray()))
-                return false;
+            return false;
         else if(statisticalData1.getTotal() != statisticalData2.getTotal())
-                return false;
+            return false;
         return true;
     }
 }

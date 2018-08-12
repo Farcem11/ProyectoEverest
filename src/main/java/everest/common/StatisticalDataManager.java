@@ -2,7 +2,9 @@ package everest.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.DoubleStream;
 import everest.common.algorithms.sorting.QuickSort;
@@ -68,5 +70,17 @@ public class StatisticalDataManager
         }
         QuickSort.getInstance().sort(numbers);
         return numbers;
+    }
+    
+    public Map<String, Double> getStatisticalCalculations(StatisticalData statisticalData)
+    {
+    	Map<String, Double> calculationsMap = new HashMap<>();
+    	
+    	for(CalculationType calculationType : CalculationType.values()) 
+    	{
+        	calculationsMap.put(calculationType.name(), StatisticalCalculator.getInstance().calculate(calculationType, statisticalData));
+		}
+    	
+    	return calculationsMap;
     }
 }

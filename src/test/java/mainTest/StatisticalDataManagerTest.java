@@ -1,11 +1,14 @@
 package mainTest;
 
+import everest.common.CalculationType;
 import everest.common.StatisticalDataManager;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import everest.model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -65,6 +68,14 @@ public class StatisticalDataManagerTest
         	String numbers = "\r\n" + 
             		"1,2,3,4,5,6,7,8,9,10";
             assertThrows(IOException.class, () -> StatisticalDataManager.getInstance().validateAndParse("", numbers));
+        }
+        
+        @Test
+        public void allCalculationsTest() throws IOException
+        {
+        	String numbers = "1,2,3,4,5";
+        	StatisticalData statisticalData = StatisticalDataManager.getInstance().validateAndParse("", numbers);
+        	assertEquals(CalculationType.values().length, StatisticalDataManager.getInstance().getStatisticalCalculations(statisticalData).size());
         }
     }
 }
