@@ -1,6 +1,6 @@
 package everest.common;
 
-public enum CalculationType
+public enum CalculationTypeEnum
 {
 	AVERAGE,
 	MEDIAN,

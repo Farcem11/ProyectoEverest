@@ -76,7 +76,7 @@ public class StatisticalDataManager
     {
     	Map<String, Double> calculationsMap = new HashMap<>();
     	
-    	for(CalculationType calculationType : CalculationType.values()) 
+    	for(CalculationTypeEnum calculationType : CalculationTypeEnum.values()) 
     	{
         	calculationsMap.put(calculationType.name(), StatisticalCalculator.getInstance().calculate(calculationType, statisticalData));
 		}

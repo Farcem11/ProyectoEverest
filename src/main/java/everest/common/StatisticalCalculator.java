@@ -16,7 +16,7 @@ public class StatisticalCalculator
     
 	private final StatisticalCalculatorStrategyFactory statisticalCalculatorStrategyFactory = new StatisticalCalculatorStrategyFactory();
 
-	public double calculate(CalculationType calculationType, StatisticalData statisticalData) 
+	public double calculate(CalculationTypeEnum calculationType, StatisticalData statisticalData) 
 	{
         CalculationStrategy calculationStrategy = statisticalCalculatorStrategyFactory.getCalculationStrategy(calculationType);
         

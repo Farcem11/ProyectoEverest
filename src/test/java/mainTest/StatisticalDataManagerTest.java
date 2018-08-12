@@ -1,6 +1,6 @@
 package mainTest;
 
-import everest.common.CalculationType;
+import everest.common.CalculationTypeEnum;
 import everest.common.StatisticalDataManager;
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -75,7 +75,7 @@ public class StatisticalDataManagerTest
         {
         	String numbers = "1,2,3,4,5";
         	StatisticalData statisticalData = StatisticalDataManager.getInstance().validateAndParse("", numbers);
-        	assertEquals(CalculationType.values().length, StatisticalDataManager.getInstance().getStatisticalCalculations(statisticalData).size());
+        	assertEquals(CalculationTypeEnum.values().length, StatisticalDataManager.getInstance().getStatisticalCalculations(statisticalData).size());
         }
     }
 }

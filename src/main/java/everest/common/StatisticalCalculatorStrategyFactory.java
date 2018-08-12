@@ -27,7 +27,7 @@ public class StatisticalCalculatorStrategyFactory
     private final CalculationStrategy standardDeviationCalculation = new StandardDeviationCalculation();
     private final CalculationStrategy noCalculation = new NoCalculation();
     
-    public CalculationStrategy getCalculationStrategy(CalculationType calculationType) 
+    public CalculationStrategy getCalculationStrategy(CalculationTypeEnum calculationType) 
     {
         switch (calculationType) 
         {

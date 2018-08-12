@@ -1,6 +1,6 @@
 package everest.common.calculations;
 
-import everest.common.CalculationType;
+import everest.common.CalculationTypeEnum;
 import everest.common.StatisticalCalculator;
 import everest.model.StatisticalData;
 
@@ -10,7 +10,7 @@ public class VarianceCalculation implements CalculationStrategy
     public double doCalculation(StatisticalData statisticalData) 
     {
         double[] numbers = statisticalData.getNumbersArray();
-        double average = StatisticalCalculator.getInstance().calculate(CalculationType.AVERAGE, statisticalData);
+        double average = StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.AVERAGE, statisticalData);
 
         double variance = 0;
         for(double number : numbers)

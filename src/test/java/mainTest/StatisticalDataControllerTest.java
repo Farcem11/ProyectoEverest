@@ -1,7 +1,7 @@
 package mainTest;
 
 import everest.Application;
-import everest.common.CalculationType;
+import everest.common.CalculationTypeEnum;
 import everest.common.StatisticalDataManager;
 import everest.dao.StatisticalDataDao;
 import everest.model.StatisticalData;
