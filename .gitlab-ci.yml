@@ -1,8 +1,5 @@
 image: gradle:alpine
 
-before_script:
-  - set GRADLE_USER_HOME=`pwd`/.gradle
-
 stages:
   - clean
   - build
