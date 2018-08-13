@@ -14,6 +14,7 @@
 		{{message}}
 	</div>
 	<!-- Main Content -->
+	<div class="lds-dual-ring" ng-show="loading"></div>
 	<div ng-controller="statisticalDataController" id="container-content">
 		<div class="buttonsContainer buttons">
 			<md-button class="md-raised">
@@ -23,7 +24,7 @@
 				<input id="fileForUpload" type="file" custom-on-change="uploadFile" style="display:none"/>
 			</md-button>
 			<md-button ng-click="showConfirm($event, $index, actionType.SAVE)" class="md-raised" ng-click="saveStatisticalData()">
-					Add File
+				Add File
 			</md-button>
 		</div>
 		<div id="filesContainer">

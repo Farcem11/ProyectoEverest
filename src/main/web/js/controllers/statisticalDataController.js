@@ -66,8 +66,11 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    	});
 	    	$scope.statisticalDataList = response.data;
 	
-	    	if(sucessMessage != null)
-		    	$rootScope.setSuccessMessage(sucessMessage);
+	    	if(successMessage != null)
+		    {
+		    	$rootScope.toogleLoading();
+		    	$rootScope.setSuccessMessage(successMessage);
+		    }
 		})
 	    .catch(function(response)
 	    {
@@ -89,16 +92,17 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			"fileContent" : $scope.fileContent
 		};
 
+		$rootScope.toogleLoading();
 		request.post("StatisticalData/save", data)
 		.then(function(response)
 	    {
 	    	$scope.getStatisticalData("File saved successfully");
 	    	$scope.fileName = null;
 	    	$scope.fileContent = null;
-	    	$rootScope.setSuccessMessage("File saved successfully");
 	    })
 	    .catch(function(response)
 	    {
+	    	$rootScope.toogleLoading();
 	    	$scope.fileName = null;
 	    	$scope.fileContent = null;
 		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
@@ -124,6 +128,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			"newNumbers" : numbersArrayFromInput.toString()
 		};
 
+		$rootScope.toogleLoading();
 		request.post("StatisticalData/update", data)
 		.then(function(response)
 	    {
@@ -131,6 +136,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    })
 	    .catch(function(response)
 	    {
+	    	$rootScope.toogleLoading();
 		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
@@ -142,6 +148,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			"id" : $scope.statisticalDataList[index].id,
 		};
 
+		$rootScope.toogleLoading();
 		request.post("StatisticalData/delete", data)
 		.then(function(response)
 	    {
@@ -149,6 +156,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	    })
 	    .catch(function(response)
 	    {
+	    	$rootScope.toogleLoading();
 		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
 	    });
 	};
@@ -160,12 +168,14 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			"id" : $scope.statisticalDataList[index].id,
 		};
 
+		$rootScope.toogleLoading();
 		request.post("StatisticalData/calculate", data)
 		.then(function(response)
 	    {
 	    	var fileContent = common.castToCsv(response.data);
 	    	var fileName = "Statistical Calculation - " + $scope.statisticalDataList[index].originalName;
 	    	common.downloadFile(fileName, fileContent);
+	    	$rootScope.toogleLoading();
 	    	$rootScope.setSuccessMessage("Statistical calculation successful");	
 	    })
 	    .catch(function(response)
@@ -177,11 +187,11 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 	$scope.showConfirm = function(event, index, actionType) 
 	{
 		var confirm = $mdDialog.confirm()
-			.title(common.dialogs[actionType].title)
-			.textContent(common.dialogs[actionType].content)
-			.targetEvent(event)
-			.ok('Confirm')
-			.cancel('Cancel');
+		.title(common.dialogs[actionType].title)
+		.textContent(common.dialogs[actionType].content)
+		.targetEvent(event)
+		.ok('Confirm')
+		.cancel('Cancel');
 
 		$mdDialog.show(confirm).then(
 		function() 
@@ -206,7 +216,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			    	$scope.calculateStatisticalData(index);
 			        break;				         
 			    default:
-			        $rootScope.setErrorMessage("Something went wrong");
+			        $rootScope.setErrorMessage("Something went wrong with the dialog");
 			};
 		},
 		function(){});

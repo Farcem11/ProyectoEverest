@@ -4,6 +4,13 @@ var app = angular.module("app",['ngMaterial','ngMessages']);
 
 app.run(function($rootScope)
 {
+	$rootScope.loading = false;
+
+	$rootScope.toogleLoading = function()
+	{
+		$rootScope.loading = !$rootScope.loading;		
+	};
+
 	$rootScope.setSuccessMessage = function(message)
 	{
 		$rootScope.messageType = "success";
