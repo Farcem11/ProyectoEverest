@@ -29,7 +29,7 @@ public class StatisticalDataManagerTest
         @Test
         public void notCsvFormatTest() throws IOException
         {
-            String numbers = "1,1,2,3,4,5\r\n" + 
+            String numbers = "1\r\n" + 
             		"2\r\n" + 
             		"3\r\n" + 
             		"4\r\n" + 
@@ -44,7 +44,7 @@ public class StatisticalDataManagerTest
         @Test
         public void notNumbersTest() throws IOException
         {
-        	String numbers = "Computer, -7.5, Lake, TV";
+        	String numbers = "14, -7.5, 19A, TV";
             assertThrows(NumberFormatException.class, () -> StatisticalDataManager.getInstance().validateAndParse("", numbers));
         }
         

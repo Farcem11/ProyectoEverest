@@ -73,7 +73,7 @@ public class StatisticalDataServiceTest
         public void saveDatabaseDataTest() throws SQLException, IOException
         {
             StatisticalData statisticalDataInTheDatabase = statisticalDataService.getStatisticalDataMap().get(lastInsertedId);
-            assertTrue(compareStatisticalDataObjects(savedStatisticalData,statisticalDataInTheDatabase));
+            assertTrue(compareStatisticalDataObjects(savedStatisticalData, statisticalDataInTheDatabase));
         }
 
         @Test

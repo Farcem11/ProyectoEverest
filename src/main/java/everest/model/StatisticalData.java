@@ -1,14 +1,11 @@
 package everest.model;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class StatisticalData implements Cloneable
+public class StatisticalData
 {
     private long id;
     private final String name;
     private final String numbers;
-    private double[] numbersArray;
+    private final double[] numbersArray;
     private final double total;
     private final double max;
     private final double min;
@@ -33,20 +30,6 @@ public class StatisticalData implements Cloneable
         this.min = min;
         this.name = name;
         this.numbers = numbers;
-    }
-    
-    @Override
-    public StatisticalData clone() 
-    {
-        try 
-        {
-			return (StatisticalData)super.clone();
-		} 
-        catch (CloneNotSupportedException e) 
-        {
-        	Logger.getLogger(StatisticalData.class.getName()).log(Level.SEVERE, "Clone Not Supported Exception {0}", e.getMessage());
-			return null;
-		}
     }
     
     public String getName() 
@@ -86,10 +69,5 @@ public class StatisticalData implements Cloneable
     public void setId(long id) 
     {
         this.id = id;
-    }
-    
-    public void setNumbersArray(double[] numbersArray) 
-    {
-    	this.numbersArray = numbersArray;
     }
 }
