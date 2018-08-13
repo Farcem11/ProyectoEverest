@@ -1,5 +1,7 @@
 package everest.common;
 
+import org.springframework.stereotype.Component;
+
 import everest.common.calculations.AverageCalculation;
 import everest.common.calculations.CalculationStrategy;
 import everest.common.calculations.VarianceCalculation;
@@ -13,6 +15,7 @@ import everest.common.calculations.MidRangeCalculation;
 import everest.common.calculations.MedianCalculation;
 import everest.common.calculations.MinCalculation;
 
+@Component
 public class StatisticalCalculatorStrategyFactory
 {
 	private final CalculationStrategy averageCalculation = new AverageCalculation();

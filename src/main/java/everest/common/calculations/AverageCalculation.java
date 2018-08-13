@@ -1,12 +1,15 @@
 package everest.common.calculations;
 
+import java.util.Arrays;
+import java.util.List;
+
 import everest.model.StatisticalData;
 
 public class AverageCalculation implements CalculationStrategy
 {
-    @Override
-    public double doCalculation(StatisticalData statisticalData) 
+	@Override
+    public List<Double> doCalculation(StatisticalData statisticalData) 
     {
-        return statisticalData.getTotal() / statisticalData.getNumbersArray().length;
+		return Arrays.asList((statisticalData.getTotal() / statisticalData.getNumbersArray().length));
     }
 }

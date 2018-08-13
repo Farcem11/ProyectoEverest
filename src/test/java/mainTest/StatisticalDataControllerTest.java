@@ -38,6 +38,9 @@ public class StatisticalDataControllerTest
     @Autowired
     private StatisticalDataDao statisticalDataDao;
     
+    @Autowired
+	private StatisticalDataManager statisticalDataManager;
+    
     @Test
     public void getStatisticalDataRestTest() throws Exception
     {
@@ -67,7 +70,7 @@ public class StatisticalDataControllerTest
     @Test
     public void updateStatisticalDataRestTest() throws Exception 
     {
-    	StatisticalData savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
+    	StatisticalData savedStatisticalData = statisticalDataManager.validateAndParse("", "1,2,3,4,5");
         Long lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
         
     	Map<String, String> request = new HashMap<>();
@@ -88,7 +91,7 @@ public class StatisticalDataControllerTest
     @Test
     public void deleteStatisticalDataRestTest() throws Exception 
     {
-    	StatisticalData savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
+    	StatisticalData savedStatisticalData = statisticalDataManager.validateAndParse("", "1,2,3,4,5");
         Long lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
         
     	Map<String, String> request = new HashMap<>();

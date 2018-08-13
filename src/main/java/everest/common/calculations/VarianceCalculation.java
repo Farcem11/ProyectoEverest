@@ -1,23 +1,25 @@
 package everest.common.calculations;
 
-import everest.common.CalculationTypeEnum;
-import everest.common.StatisticalCalculator;
+import java.util.Arrays;
+import java.util.List;
+
 import everest.model.StatisticalData;
 
 public class VarianceCalculation implements CalculationStrategy
 {
+	private final CalculationStrategy averageCalculation = new AverageCalculation();
+	
     @Override
-    public double doCalculation(StatisticalData statisticalData) 
+    public List<Double> doCalculation(StatisticalData statisticalData) 
     {
         double[] numbers = statisticalData.getNumbersArray();
-        double average = StatisticalCalculator.getInstance().calculate(CalculationTypeEnum.AVERAGE, statisticalData);
+        double average = averageCalculation.doCalculation(statisticalData).get(0);
 
         double variance = 0;
         for(double number : numbers)
         {
             variance += Math.pow((number - average), 2);
         }
-        
-        return variance / numbers.length;
+        return Arrays.asList(variance / numbers.length);
     }   
 }

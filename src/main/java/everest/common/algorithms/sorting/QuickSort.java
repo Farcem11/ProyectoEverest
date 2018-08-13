@@ -1,16 +1,10 @@
 package everest.common.algorithms.sorting;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class QuickSort
 {
-    private static final QuickSort instance = new QuickSort();
-    
-    private QuickSort(){}
-
-    public static QuickSort getInstance()
-    {
-        return instance;
-    }
-
     public void sort(double[] array) 
     {     
         if(array == null || array.length == 0) 

@@ -8,20 +8,22 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.DoubleStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import everest.common.algorithms.sorting.QuickSort;
 import everest.model.StatisticalData;
 
+@Component
 public class StatisticalDataManager 
 {
-    private StatisticalDataManager() {}
-
-	private static final StatisticalDataManager instance = new StatisticalDataManager();
+	@Autowired
+	StatisticalCalculator statisticalCalculator;
 	
-    public static synchronized StatisticalDataManager getInstance()
-    {
-        return instance;
-    }
-
+	@Autowired
+	QuickSort quickSort;
+	
     public StatisticalData validateAndParse(String name, String fileContent) throws IOException
     {
     	try(Scanner scanner = new Scanner(fileContent))
@@ -76,17 +78,17 @@ public class StatisticalDataManager
         {
             numbers[i] = numbersList.get(i);
         }
-        QuickSort.getInstance().sort(numbers);
+        quickSort.sort(numbers);
         return numbers;
     }
     
-    public Map<String, Double> getStatisticalCalculations(StatisticalData statisticalData)
+    public Map<String, List<Double>> getStatisticalCalculations(StatisticalData statisticalData)
     {
-    	Map<String, Double> calculationsMap = new HashMap<>();
+    	Map<String, List<Double>> calculationsMap = new HashMap<>();
     	
     	for(CalculationTypeEnum calculationType : CalculationTypeEnum.values()) 
     	{
-        	calculationsMap.put(calculationType.name(), StatisticalCalculator.getInstance().calculate(calculationType, statisticalData));
+        	calculationsMap.put(calculationType.name(), statisticalCalculator.calculate(calculationType, statisticalData));
 		}
     	
     	return calculationsMap;

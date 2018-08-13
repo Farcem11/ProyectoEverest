@@ -31,6 +31,9 @@ public class StatisticalDataServiceTest
     @Autowired
     private StatisticalDataService statisticalDataService;
     
+    @Autowired
+	StatisticalDataManager statisticalDataManager;
+    
     int initialDatabaseNumberOfRows;
 
     StatisticalData savedStatisticalData;
@@ -48,7 +51,7 @@ public class StatisticalDataServiceTest
     public void deleteDatabaseTest() throws SQLException, IOException
     {
         initialDatabaseNumberOfRows = statisticalDataService.getStatisticalDataMap().size();
-        savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
+        savedStatisticalData = statisticalDataManager.validateAndParse("", "1,2,3,4,5");
         lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
         statisticalDataService.deleteStatisticalData(lastInsertedId);
         int databaseNumberOfRowsAfterDelete = statisticalDataService.getStatisticalDataMap().size();
@@ -63,7 +66,7 @@ public class StatisticalDataServiceTest
         public void addNewStatisticalManager() throws IOException, SQLException
         {
             initialDatabaseNumberOfRows = statisticalDataService.getStatisticalDataMap().size();
-            savedStatisticalData = StatisticalDataManager.getInstance().validateAndParse("", "1,2,3,4,5");
+            savedStatisticalData = statisticalDataManager.validateAndParse("", "1,2,3,4,5");
             lastInsertedId = statisticalDataService.saveStatisticalData(savedStatisticalData);
             savedStatisticalData.setId(lastInsertedId);
         }
@@ -88,7 +91,7 @@ public class StatisticalDataServiceTest
         @DisplayName("Test if data is updated correctly")
         public void updateDatabaseDataTest() throws SQLException, IOException
         {
-            StatisticalData newStatisticalData = StatisticalDataManager.getInstance().validateAndParse("NewFileName", "6,7,8,9,10");
+            StatisticalData newStatisticalData = statisticalDataManager.validateAndParse("NewFileName", "6,7,8,9,10");
             newStatisticalData.setId(lastInsertedId);
             statisticalDataService.updateStatisticalData(newStatisticalData);
             StatisticalData statisticalDataInTheDatabase = statisticalDataService.getStatisticalDataMap().get(lastInsertedId);

@@ -9,9 +9,11 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MySqlConnection 
 {
-    private static final MySqlConnection instance = new MySqlConnection();
     private Connection connection;
     private static final String FILE_PATH = "database/database.properties";
     private Properties databaseProperties= new Properties();
@@ -41,11 +43,6 @@ public class MySqlConnection
         {
             Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "Class Not Found Exception {0}", ex.getMessage());
         }        
-    }
-    
-    public static MySqlConnection getInstance()
-    {
-        return instance;
     }
     
     public Connection getConnection() 

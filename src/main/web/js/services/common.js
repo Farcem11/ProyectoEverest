@@ -87,7 +87,7 @@ app.service('common', function()
 		var csv = "";
 		Object.keys(json).forEach(function(key)
 		{
-    		csv += key + "," + json[key] + "\n";
+    		csv += key + "," + json[key].join(" - ") + "\n";
 		});
 		return csv;
 	};

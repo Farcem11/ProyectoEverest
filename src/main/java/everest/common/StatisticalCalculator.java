@@ -1,22 +1,20 @@
 package everest.common;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import everest.common.calculations.CalculationStrategy;
 import everest.model.StatisticalData;
 
+@Component
 public class StatisticalCalculator 
 {
-	private StatisticalCalculator() {}
+	@Autowired
+	private StatisticalCalculatorStrategyFactory statisticalCalculatorStrategyFactory;
 
-	private static final StatisticalCalculator instance = new StatisticalCalculator();
-	
-    public static synchronized StatisticalCalculator getInstance()
-    {
-        return instance;
-    }
-    
-	private final StatisticalCalculatorStrategyFactory statisticalCalculatorStrategyFactory = new StatisticalCalculatorStrategyFactory();
-
-	public double calculate(CalculationTypeEnum calculationType, StatisticalData statisticalData) 
+	public List<Double> calculate(CalculationTypeEnum calculationType, StatisticalData statisticalData) 
 	{
         CalculationStrategy calculationStrategy = statisticalCalculatorStrategyFactory.getCalculationStrategy(calculationType);
         
