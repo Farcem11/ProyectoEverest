@@ -99,6 +99,7 @@ public class StatisticalDataServiceTest
         }
 
         @AfterEach()
+        @DisplayName("Delete the last saved record")
         public void deleteRecord() throws SQLException
         {
             statisticalDataService.deleteStatisticalData(lastInsertedId);

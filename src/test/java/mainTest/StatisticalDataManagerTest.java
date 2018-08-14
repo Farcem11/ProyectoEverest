@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 import everest.model.StatisticalData;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
