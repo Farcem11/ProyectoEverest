@@ -125,17 +125,17 @@ public class CalculationsTest
         @Test
         void testQuartileOneOneValue() throws IOException
         {
-        	assertEquals((Double)1.0, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataOne).get(0));
+        	assertEquals(Collections.emptyList(), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataOne));
         }
         
         @Test
-        void testQuartilePairOne() throws IOException
+        void testQuartileOnePair() throws IOException
         {
-            assertEquals((Double)0.8, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersPair).get(0));
+            assertEquals((Double)0.8250000000000001, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersPair).get(0));
         }
         
         @Test
-        void testQuartileOneOddTest() throws IOException
+        void testQuartileOneOdd() throws IOException
         {
             assertEquals((Double)0.8, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersOdd).get(0));
         }
@@ -147,17 +147,17 @@ public class CalculationsTest
         @Test
         void testQuartileThreeOneValue() throws IOException
         {
-        	assertEquals((Double)1.0, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataOne).get(0));
+        	assertEquals(Collections.emptyList(), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataOne));
         }
     
         @Test
-        void testQuartilePairThree() throws IOException
+        void testQuartileThreePair() throws IOException
         {
-            assertEquals((Double)8.7, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersPair).get(0));
+            assertEquals((Double)9.225, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersPair).get(0));
         }
         
         @Test
-        void testQuartileOddThree() throws IOException
+        void testQuartileThreeOdd() throws IOException
         {
             assertEquals((Double)8.7, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersOdd).get(0));
         }
