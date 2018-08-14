@@ -62,37 +62,37 @@ public class CalculationsTest
     @Test
     void testAverage()
     {
-        assertEquals((Double)4.013333333333334, statisticalCalculator.calculate(CalculationTypeEnum.AVERAGE, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(4.013333333333334), statisticalCalculator.calculate(CalculationTypeEnum.AVERAGE, dataNumbersOdd));
     }
     
     @Test
     void testMax()
     {
-        assertEquals((Double)9.4, statisticalCalculator.calculate(CalculationTypeEnum.MAX, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(9.4), statisticalCalculator.calculate(CalculationTypeEnum.MAX, dataNumbersOdd));
     }
     
     @Test
     void testMin()
     {
-        assertEquals((Double)(-5.0), statisticalCalculator.calculate(CalculationTypeEnum.MIN, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(-5.0), statisticalCalculator.calculate(CalculationTypeEnum.MIN, dataNumbersOdd));
     }
     
     @Test
     void testMedianOdd()
     {
-        assertEquals((Double)3.4, statisticalCalculator.calculate(CalculationTypeEnum.MEDIAN, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(3.4), statisticalCalculator.calculate(CalculationTypeEnum.MEDIAN, dataNumbersOdd));
     }
     
     @Test
     void testMedianPair()
     {
-        assertEquals((Double)5.0, statisticalCalculator.calculate(CalculationTypeEnum.MEDIAN, dataNumbersPair).get(0));
+        assertEquals(Arrays.asList(5.0), statisticalCalculator.calculate(CalculationTypeEnum.MEDIAN, dataNumbersPair));
     }
 
     @Test
     void testMidRange()
     {
-        assertEquals((Double)2.2, statisticalCalculator.calculate(CalculationTypeEnum.MID_RANGE, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(2.2), statisticalCalculator.calculate(CalculationTypeEnum.MID_RANGE, dataNumbersOdd));
     }
     
     @Nested
@@ -115,7 +115,7 @@ public class CalculationsTest
 	    @Test
 	    void testRepeatedMode()
 	    {
-	        assertEquals((Double)9.4, statisticalCalculator.calculate(CalculationTypeEnum.MODE, dataNumbersOdd).get(0));
+	        assertEquals(Arrays.asList(9.4), statisticalCalculator.calculate(CalculationTypeEnum.MODE, dataNumbersOdd));
 	    }
     }
             
@@ -131,13 +131,13 @@ public class CalculationsTest
         @Test
         void testQuartileOnePair() throws IOException
         {
-            assertEquals((Double)0.8250000000000001, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersPair).get(0));
+            assertEquals(Arrays.asList(0.8250000000000001), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersPair));
         }
         
         @Test
         void testQuartileOneOdd() throws IOException
         {
-            assertEquals((Double)0.8, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersOdd).get(0));
+            assertEquals(Arrays.asList(0.8), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataNumbersOdd));
         }
     }
 
@@ -153,25 +153,25 @@ public class CalculationsTest
         @Test
         void testQuartileThreePair() throws IOException
         {
-            assertEquals((Double)9.225, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersPair).get(0));
+            assertEquals(Arrays.asList(9.225), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersPair));
         }
         
         @Test
         void testQuartileThreeOdd() throws IOException
         {
-            assertEquals((Double)8.7, statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersOdd).get(0));
+            assertEquals(Arrays.asList(8.7), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataNumbersOdd));
         }
     }
             
     @Test
     void testVariance()
     {
-        assertEquals((Double)22.19448888888889, statisticalCalculator.calculate(CalculationTypeEnum.VARIANCE, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(22.19448888888889), statisticalCalculator.calculate(CalculationTypeEnum.VARIANCE, dataNumbersOdd));
     }
     
     @Test
     void testStandardDeviation()
     {
-        assertEquals((Double)4.711102725359413, statisticalCalculator.calculate(CalculationTypeEnum.STANDARD_DEVIATION, dataNumbersOdd).get(0));
+        assertEquals(Arrays.asList(4.711102725359413), statisticalCalculator.calculate(CalculationTypeEnum.STANDARD_DEVIATION, dataNumbersOdd));
     }
 }
