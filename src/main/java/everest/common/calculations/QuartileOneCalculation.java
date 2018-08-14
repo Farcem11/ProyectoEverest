@@ -10,11 +10,18 @@ public class QuartileOneCalculation implements CalculationStrategy
     @Override
     public List<Double> doCalculation(StatisticalData statisticalData) 
     {
-    	if(statisticalData.getNumbersArray().length == 1)
+    	double quartileOneDouble = (statisticalData.getNumbersArray().length + 1) / 4;
+
+		if((quartileOneDouble == Math.floor(quartileOneDouble))) 
     	{
-    		return Arrays.asList(statisticalData.getNumbersArray()[0]);
+            return Arrays.asList(statisticalData.getNumbersArray()[(int) Math.rint(quartileOneDouble - 1)]);
     	}
-        int quartileOneIndex = (statisticalData.getNumbersArray().length + 1) / 4;
-        return Arrays.asList(statisticalData.getNumbersArray()[quartileOneIndex - 1]);
+    	else
+    	{
+    		double quartileOneInteger = Math.floor(quartileOneDouble);
+
+    		quartileOneDouble = (quartileOneInteger + (quartileOneInteger + 1)) / 2;
+    		return Arrays.asList(statisticalData.getNumbersArray()[(int) Math.rint(quartileOneDouble - 1)]);
+    	}
     }
 }
