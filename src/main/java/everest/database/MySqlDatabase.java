@@ -12,14 +12,14 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MySqlConnection 
+public class MySqlDatabase
 {
     private Connection connection;
     private static final String FILE_PATH = "database/database.properties";
     private Properties databaseProperties= new Properties();
     private FileInputStream databaseFileProperty = null;
     
-    private MySqlConnection()
+    private MySqlDatabase()
     {
         try
         {
@@ -33,15 +33,15 @@ public class MySqlConnection
         }
         catch(IOException e)
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "IO Exception {0}", e.getMessage());
+            Logger.getLogger(MySqlDatabase.class.getName()).log(Level.SEVERE, "IO Exception {0}", e.getMessage());
         } 
         catch(SQLException ex) 
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
+            Logger.getLogger(MySqlDatabase.class.getName()).log(Level.SEVERE, "SQL Exception {0}", ex.getMessage());
         } 
         catch(ClassNotFoundException ex) 
         {
-            Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, "Class Not Found Exception {0}", ex.getMessage());
+            Logger.getLogger(MySqlDatabase.class.getName()).log(Level.SEVERE, "Class Not Found Exception {0}", ex.getMessage());
         }        
     }
     

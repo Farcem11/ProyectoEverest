@@ -36,8 +36,8 @@ public class StatisticalCalculatorStrategyFactory
     	calculationStrategyMap.put(CalculationTypeEnum.STANDARD_DEVIATION, new StandardDeviationCalculation());
     }
     
-    public CalculationStrategy getCalculationStrategy(CalculationTypeEnum calculationType) 
+    public CalculationStrategy getCalculationStrategy(CalculationTypeEnum calculationTypeEnum) 
     {
-        return calculationStrategyMap.get(calculationType);
+        return calculationStrategyMap.get(calculationTypeEnum);
     }
 }

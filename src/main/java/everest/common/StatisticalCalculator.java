@@ -14,9 +14,9 @@ public class StatisticalCalculator
 	@Autowired
 	private StatisticalCalculatorStrategyFactory statisticalCalculatorStrategyFactory;
 
-	public List<Double> calculate(CalculationTypeEnum calculationType, StatisticalData statisticalData) 
+	public List<Double> calculate(CalculationTypeEnum calculationTypeEnum, StatisticalData statisticalData) 
 	{
-        CalculationStrategy calculationStrategy = statisticalCalculatorStrategyFactory.getCalculationStrategy(calculationType);
+        CalculationStrategy calculationStrategy = statisticalCalculatorStrategyFactory.getCalculationStrategy(calculationTypeEnum);
         
         return calculationStrategy.doCalculation(statisticalData);
     }

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import everest.common.StatisticalDataManager;
+import everest.database.MySqlDatabase;
 import everest.model.StatisticalData;
-import everest.database.MySqlConnection;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @Repository 
@@ -22,13 +22,13 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
 	StatisticalDataManager statisticalDataManager;
 	
 	@Autowired
-	MySqlConnection mySqlConnection;
+	MySqlDatabase database;
 	
     @Override
     public List<StatisticalData> get() throws SQLException
     {
         List<StatisticalData> statisticalDataList = new ArrayList<>();
-        try(Statement statement = mySqlConnection.getConnection().createStatement())
+        try(Statement statement = database.getConnection().createStatement())
         {
             try(ResultSet resultSet = statement.executeQuery("call getStatisticalDataManagers()"))
             {
@@ -53,7 +53,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     public Long save(StatisticalData object) throws SQLException
     {
         String procedure = "call saveStatisticalDataManagers(?, ?, ?, ?, ?)";
-        try(PreparedStatement preparedStatement = mySqlConnection.getConnection().prepareStatement(procedure))
+        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement(procedure))
         {
             preparedStatement.setString(1, object.getName());
             preparedStatement.setDouble(2, object.getTotal());
@@ -86,7 +86,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public void update(StatisticalData object) throws SQLException
     {
-        try(PreparedStatement preparedStatement = mySqlConnection.getConnection().prepareStatement("call updateStatisticalDataManagers(?, ?, ?, ?, ?, ?)"))
+        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call updateStatisticalDataManagers(?, ?, ?, ?, ?, ?)"))
         {
             preparedStatement.setLong(1, object.getId());
             preparedStatement.setString(2, object.getName());
@@ -110,7 +110,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public void delete(Long id) throws SQLException
     {
-        try(PreparedStatement preparedStatement = mySqlConnection.getConnection().prepareStatement("call deleteStatisticalDataManagers(?)"))
+        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call deleteStatisticalDataManagers(?)"))
         {
             preparedStatement.setLong(1, id);            
             preparedStatement.execute();	
