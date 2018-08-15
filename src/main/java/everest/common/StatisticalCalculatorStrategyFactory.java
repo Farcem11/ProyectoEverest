@@ -1,5 +1,8 @@
 package everest.common;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 import everest.common.calculations.AverageCalculation;
@@ -8,7 +11,6 @@ import everest.common.calculations.VarianceCalculation;
 import everest.common.calculations.QuartileThreeCalculation;
 import everest.common.calculations.MaxCalculation;
 import everest.common.calculations.ModeCalculation;
-import everest.common.calculations.NoCalculation;
 import everest.common.calculations.StandardDeviationCalculation;
 import everest.common.calculations.QuartileOneCalculation;
 import everest.common.calculations.MidRangeCalculation;
@@ -18,44 +20,24 @@ import everest.common.calculations.MinCalculation;
 @Component
 public class StatisticalCalculatorStrategyFactory
 {
-	private final CalculationStrategy averageCalculation = new AverageCalculation();
-    private final CalculationStrategy medianCalculation = new MedianCalculation();
-    private final CalculationStrategy modeCalculation = new ModeCalculation();
-    private final CalculationStrategy midRangeCalculation = new MidRangeCalculation();
-    private final CalculationStrategy maxCalculation = new MaxCalculation();
-    private final CalculationStrategy minCalculation = new MinCalculation();
-    private final CalculationStrategy quartileOneCalculation = new QuartileOneCalculation();
-    private final CalculationStrategy quartileThreeCalculation = new QuartileThreeCalculation();
-    private final CalculationStrategy varianceCalculation = new VarianceCalculation();
-    private final CalculationStrategy standardDeviationCalculation = new StandardDeviationCalculation();
-    private final CalculationStrategy noCalculation = new NoCalculation();
+    private final Map<CalculationTypeEnum, CalculationStrategy> calculationStrategyMap = new HashMap<>();
+    
+    public StatisticalCalculatorStrategyFactory()
+    {
+    	calculationStrategyMap.put(CalculationTypeEnum.AVERAGE, new AverageCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.MEDIAN, new MedianCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.MODE, new ModeCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.MID_RANGE, new MidRangeCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.MAX, new MaxCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.MIN, new MinCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.QUARTILE_ONE, new QuartileOneCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.QUARTILE_THREE, new QuartileThreeCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.VARIANCE, new VarianceCalculation());
+    	calculationStrategyMap.put(CalculationTypeEnum.STANDARD_DEVIATION, new StandardDeviationCalculation());
+    }
     
     public CalculationStrategy getCalculationStrategy(CalculationTypeEnum calculationType) 
     {
-        switch (calculationType) 
-        {
-            case AVERAGE: 
-            	return averageCalculation;
-            case MEDIAN: 
-            	return medianCalculation;
-            case MODE: 
-            	return modeCalculation;
-            case MID_RANGE:
-            	return midRangeCalculation;
-            case MAX:
-            	return maxCalculation;
-            case MIN:
-            	return minCalculation;
-            case QUARTILE_ONE:
-            	return quartileOneCalculation;
-            case QUARTILE_THREE:
-            	return quartileThreeCalculation;
-            case VARIANCE:
-            	return varianceCalculation;
-            case STANDARD_DEVIATION:
-            	return standardDeviationCalculation;
-            default:
-            	return noCalculation;
-        }
+        return calculationStrategyMap.get(calculationType);
     }
 }
