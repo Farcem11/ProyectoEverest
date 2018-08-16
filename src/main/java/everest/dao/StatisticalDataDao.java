@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import everest.common.StatisticalDataManager;
 import everest.database.MySqlDatabase;
@@ -23,7 +24,8 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
 	
 	@Autowired
 	MySqlDatabase database;
-	
+
+    @Transactional
     @Override
     public List<StatisticalData> get() throws SQLException
     {
@@ -49,6 +51,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         }
     }
 
+    @Transactional
     @Override
     public Long save(StatisticalData object) throws SQLException
     {
@@ -83,6 +86,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         }
     }
 
+    @Transactional
     @Override
     public void update(StatisticalData object) throws SQLException
     {
@@ -107,6 +111,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         }
     }    
 
+    @Transactional
     @Override
     public void delete(Long id) throws SQLException
     {
