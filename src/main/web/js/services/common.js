@@ -92,5 +92,16 @@ app.service('common', function()
 		return csv;
 	};
 
+	common.isCsvFile = function(fileName)
+	{
+		var splitFileName = fileName.split(".", -1);
+		var extension = splitFileName[splitFileName.length-1];
+		if(extension === "csv")
+		{
+			return true;
+		}
+		return false;
+	}
+
 	return common;
 });

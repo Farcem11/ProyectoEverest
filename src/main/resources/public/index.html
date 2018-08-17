@@ -21,7 +21,7 @@
 				<label id="labelFileUpLoad" for="fileForUpload">
 					Upload File
 				</label>
-				<input id="fileForUpload" type="file" custom-on-change="uploadFile" style="display:none"/>
+				<input id="fileForUpload" type="file" accept=".csv" class="required" custom-on-change="uploadFile" style="display:none"/>
 			</md-button>
 			<md-button ng-click="showConfirm($event, $index, actionType.SAVE)" class="md-raised" ng-click="saveStatisticalData()">
 				Add File
