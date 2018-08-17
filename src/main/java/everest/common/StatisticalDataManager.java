@@ -32,11 +32,11 @@ public class StatisticalDataManager
             
             if(numbers.isEmpty())
             {
-                throw new IOException("First line is empty: " + name);
+                throw new IOException("The first line of the file is empty");
             }
             else if(scanner.hasNextLine())
             {
-                throw new IOException("File has more than one line: " + name);
+                throw new IOException("The file has more than one line");
             }
             double[] numbersArray = castStringToNumbers(numbers);
             double total = DoubleStream.of(numbersArray).sum();

@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.min.css"/>	
 </head>
 <body>
-	<div ng-class="{success:'success', error:'error', information:'info', warning:'warning'}[messageType]">
+	<div class="statusBar" ng-class="{success:'success', error:'error', information:'info', warning:'warning'}[messageType]">
 		<i ng-class="{success:'fa fa-check', error:'fa fa-times-circle', information:'fa fa-info-circle', warning:'fa fa-exclamation-triangle'}[messageType]"></i>
 		{{message}}
 	</div>

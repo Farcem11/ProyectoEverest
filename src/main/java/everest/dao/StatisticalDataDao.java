@@ -117,7 +117,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     {
         try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call deleteStatisticalDataManagers(?)"))
         {
-            preparedStatement.setLong(1, id);            
+            preparedStatement.setLong(1, id);
             preparedStatement.execute();	
         }
     }
