@@ -1,8 +1,6 @@
 package everest.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.EnumMap;
 import org.springframework.stereotype.Component;
 
 import everest.common.calculations.AverageCalculation;
@@ -20,7 +18,7 @@ import everest.common.calculations.MinCalculation;
 @Component
 public class StatisticalCalculatorStrategyFactory
 {
-    private final Map<CalculationTypeEnum, CalculationStrategy> calculationStrategyMap = new HashMap<>();
+    private final EnumMap<CalculationTypeEnum, CalculationStrategy> calculationStrategyMap = new EnumMap<>(CalculationTypeEnum.class);
     
     public StatisticalCalculatorStrategyFactory()
     {

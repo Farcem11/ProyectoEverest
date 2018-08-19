@@ -26,6 +26,10 @@ public class StatisticalDataManager
 	
     public StatisticalData validateAndParse(String name, String fileContent) throws IOException
     {
+    	if(fileContent == null)
+    	{
+    		throw new IOException("The file can't be null");
+    	}
     	try(Scanner scanner = new Scanner(fileContent))
     	{
             String numbers = scanner.nextLine();

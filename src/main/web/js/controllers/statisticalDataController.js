@@ -55,7 +55,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
     			return null;
     		};
 
-	        $scope.statisticalDataList[index].numberJsons.push({"number" : parseInt(number)});
+	        $scope.statisticalDataList[index].numberJsons.push({"number" : parseFloat(number)});
     	});
         return null;
     };

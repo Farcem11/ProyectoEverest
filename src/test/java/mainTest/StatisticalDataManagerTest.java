@@ -31,7 +31,7 @@ public class StatisticalDataManagerTest
         @Test
         public void notExistingFileTest() throws IOException
         {
-            assertThrows(NullPointerException.class, () -> statisticalDataManager.validateAndParse("", null));
+            assertThrows(IOException.class, () -> statisticalDataManager.validateAndParse("", null));
         }
         
         @Test
