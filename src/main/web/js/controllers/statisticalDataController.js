@@ -20,13 +20,13 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
         var file = document.getElementById("fileForUpload").files[0];
         if(file)
         {
-            $scope.fileName = file.name;
             if(!common.isCsvFile(file.name))
             {
             	$rootScope.setWarningMessage("Upload only csv files");
             	$scope.$apply();
             	return;
             }
+            $scope.fileName = file.name.split(".", -1)[0];
             var reader = new FileReader();
             reader.readAsText(file, "UTF-8");
             reader.onload = function(event)

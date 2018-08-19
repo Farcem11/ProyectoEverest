@@ -72,7 +72,7 @@ app.service('common', function()
 	{
 		var element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
-		element.setAttribute('download', fileName);
+		element.setAttribute('download', fileName + ".csv");
 
 		element.style.display = 'none';
 		document.body.appendChild(element);
@@ -87,7 +87,7 @@ app.service('common', function()
 		var csv = "";
 		Object.keys(json).forEach(function(key)
 		{
-    		csv += key + "," + json[key].join(" - ") + "\n";
+    		csv += key + "," + json[key].join(" | ") + "\n";
 		});
 		return csv;
 	};
