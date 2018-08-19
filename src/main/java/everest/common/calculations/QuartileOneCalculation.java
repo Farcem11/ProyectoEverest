@@ -13,9 +13,9 @@ public class QuartileOneCalculation implements CalculationStrategy
     {
     	double[] numbers = statisticalData.getNumbersArray();
 
-    	if(numbers.length < 2)
+    	if(numbers.length < 4)
     	{
-    		return Collections.emptyList(); 
+    		return Arrays.asList(numbers[0]);
     	}
     	
     	double quartileOneIndex = (numbers.length + 1.0) / 4.0;

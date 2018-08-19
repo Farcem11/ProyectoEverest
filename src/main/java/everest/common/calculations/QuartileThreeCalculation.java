@@ -13,9 +13,9 @@ public class QuartileThreeCalculation implements CalculationStrategy
     {
     	double[] numbers = statisticalData.getNumbersArray();
 
-    	if(numbers.length < 2)
+    	if(numbers.length < 4)
     	{
-    		return Collections.emptyList(); 
+    		return Arrays.asList(numbers[numbers.length-1]);
     	}
     	
     	double quartileThreeIndex = (3.0 * (numbers.length + 1.0)) / 4.0;

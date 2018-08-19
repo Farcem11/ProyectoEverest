@@ -37,8 +37,12 @@ public class CalculationsTest
     private String numbersMultipleRepeated = "1,1,1,2,2,3,3,3,4,5,5,5,6,6,7,7";
     private String numbersNoRepeated = "1,2,3,4,5,6,7";
     private String one = "1";
+    private String twoNumbers = "1,2";
+    private String threeNumbers = "1,2,3";
 
     private StatisticalData dataOne;
+	private StatisticalData dataTwoNumbers;
+	private StatisticalData dataThreeNumbers;
 	private StatisticalData dataNumbersOdd;
 	private StatisticalData dataNumbersPair;
 	private StatisticalData dataMultipleRepeated;
@@ -56,7 +60,9 @@ public class CalculationsTest
         dataNumbersPair = statisticalDataManager.validateAndParse("", numbersPair);
         dataOne = statisticalDataManager.validateAndParse("", one);
         dataMultipleRepeated = statisticalDataManager.validateAndParse("", numbersMultipleRepeated);
-        dataNoRepeated = statisticalDataManager.validateAndParse("", numbersNoRepeated);		
+        dataNoRepeated = statisticalDataManager.validateAndParse("", numbersNoRepeated);	
+        dataTwoNumbers = statisticalDataManager.validateAndParse("", twoNumbers);
+        dataThreeNumbers = statisticalDataManager.validateAndParse("", threeNumbers);
 	}
     
     @Test
@@ -125,7 +131,19 @@ public class CalculationsTest
         @Test
         void testQuartileOneOneValue() throws IOException
         {
-        	assertEquals(Collections.emptyList(), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataOne));
+        	assertEquals(Arrays.asList(1.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataOne));
+        }
+        
+        @Test
+        void testQuartileOneTwoNumbers() throws IOException
+        {
+            assertEquals(Arrays.asList(1.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataTwoNumbers));
+        }
+        
+        @Test
+        void testQuartileOneThreeNumbers() throws IOException
+        {
+        	assertEquals(Arrays.asList(1.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_ONE, dataThreeNumbers));
         }
         
         @Test
@@ -147,7 +165,19 @@ public class CalculationsTest
         @Test
         void testQuartileThreeOneValue() throws IOException
         {
-        	assertEquals(Collections.emptyList(), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataOne));
+        	assertEquals(Arrays.asList(1.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataOne));
+        }
+        
+        @Test
+        void testQuartileThreeTwoNumbers() throws IOException
+        {
+            assertEquals(Arrays.asList(2.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataTwoNumbers));
+        }
+        
+        @Test
+        void testQuartileThreeThreeNumbers() throws IOException
+        {
+        	assertEquals(Arrays.asList(3.0), statisticalCalculator.calculate(CalculationTypeEnum.QUARTILE_THREE, dataThreeNumbers));
         }
     
         @Test
