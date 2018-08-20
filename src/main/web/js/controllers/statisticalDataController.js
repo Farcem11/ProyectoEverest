@@ -25,7 +25,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
             	$rootScope.setWarningMessage("Upload only csv files");
             	$scope.$apply();
             	return;
-            }
+            };
             $scope.fileName = file.name.split(".", -1)[0];
             var reader = new FileReader();
             reader.readAsText(file, "UTF-8");
@@ -41,7 +41,9 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
             	$rootScope.setErrorMessage("There was an error while uploading the file, please try again");
                 $scope.$apply();
             }
-        }
+        };
+
+        document.getElementById("fileForUpload").value = "";
     };
 
     $scope.addNumber = function(chip, index) 
@@ -126,7 +128,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			$rootScope.setErrorMessage("The numbers and name are the same, change them to update");
 			return;
 		};
-
+		
 		var data =
 		{
 			"id" : $scope.statisticalDataList[index].id,
@@ -169,25 +171,52 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 
 	$scope.calculateStatisticalData = function(index)
 	{
-		var data =
+		if(!$scope.dataHasChanged(index))
 		{
-			"id" : $scope.statisticalDataList[index].id,
-		};
+			var data =
+			{
+				"id" : $scope.statisticalDataList[index].id
+			};
 
-		$rootScope.toogleLoading();
-		request.post("StatisticalData/calculate", data)
-		.then(function(response)
-	    {
-	    	var fileContent = common.castToCsv(response.data);
-	    	var fileName = "Statistical Calculation - " + $scope.statisticalDataList[index].originalName;
+			$rootScope.toogleLoading();
+			request.post("StatisticalData/calculate", data)
+			.then(function(response)
+		    {
+		    	var fileContent = common.castToCsv(response.data);
+		    	var fileName = "Statistical Calculation - " + $scope.statisticalDataList[index].originalName;
+		    	common.downloadFile(fileName, fileContent);
+		    	$rootScope.toogleLoading();
+		    	$rootScope.setSuccessMessage("Statistical calculation successful");	
+		    })
+		    .catch(function(response)
+		    {
+			    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
+		    });
+		}
+	};
+
+	$scope.dataHasChanged = function(index)
+	{
+		var numbersArrayFromInput = common.castToList($scope.statisticalDataList[index].numberJsons);
+		var sameArrays = common.areNumberArraysEqual(numbersArrayFromInput, $scope.statisticalDataList[index].numbersArray);
+		var sameName = $scope.statisticalDataList[index].name == $scope.statisticalDataList[index].originalName;
+		if(!sameArrays || !sameName)
+		{
+			$rootScope.setWarningMessage("The data has changed, please update (the sync blue buttom) to calculate the data");
+			return true;
+		};
+		return false;
+	};
+
+	$scope.downloadFile = function(index)
+	{
+		if(!$scope.dataHasChanged(index))
+		{
+			var fileName = $scope.statisticalDataList[index].originalName;
+	     	var fileContent = $scope.statisticalDataList[index].numbersArray.toString();
 	    	common.downloadFile(fileName, fileContent);
-	    	$rootScope.toogleLoading();
-	    	$rootScope.setSuccessMessage("Statistical calculation successful");	
-	    })
-	    .catch(function(response)
-	    {
-		    $rootScope.setErrorMessage(response.data.error + ": " + response.data.message);
-	    });
+	    	$rootScope.setSuccessMessage("File downloaded successfully");
+		};
 	};
 
 	$scope.showConfirm = function(event, index, actionType) 
@@ -214,9 +243,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			    	$scope.updateStatisticalData(index);
 			        break;
 			     case $scope.actionType.DOWNLOAD:
-			     	var fileName = $scope.statisticalDataList[index].originalName;
-			     	var fileContent = $scope.statisticalDataList[index].numbersArray.toString();
-			    	common.downloadFile(fileName, fileContent);
+			     	$scope.downloadFile(index);
 			        break;
 			     case $scope.actionType.CALCULATE:
 			    	$scope.calculateStatisticalData(index);
