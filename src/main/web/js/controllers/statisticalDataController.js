@@ -128,7 +128,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			$rootScope.setErrorMessage("The numbers and name are the same, change them to update");
 			return;
 		};
-		
+
 		var data =
 		{
 			"id" : $scope.statisticalDataList[index].id,
@@ -202,7 +202,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		var sameName = $scope.statisticalDataList[index].name == $scope.statisticalDataList[index].originalName;
 		if(!sameArrays || !sameName)
 		{
-			$rootScope.setWarningMessage("The data has changed, please update (the sync blue buttom) to calculate the data");
+			$rootScope.setWarningMessage("The data has changed, please update (the sync blue buttom) to download the data");
 			return true;
 		};
 		return false;
