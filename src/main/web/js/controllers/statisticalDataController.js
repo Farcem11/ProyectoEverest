@@ -202,7 +202,7 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 		var sameName = $scope.statisticalDataList[index].name == $scope.statisticalDataList[index].originalName;
 		if(!sameArrays || !sameName)
 		{
-			$rootScope.setWarningMessage("The data has changed, please update (the sync blue buttom) to download the data");
+			$rootScope.setWarningMessage("The data of "+ $scope.statisticalDataList[index].name +" has changed, please update (the sync blue buttom) to download the data");
 			return true;
 		};
 		return false;
