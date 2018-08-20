@@ -236,17 +236,17 @@ app.controller("statisticalDataController", function($scope, $rootScope, request
 			    case $scope.actionType.DELETE:
 			    	$scope.deleteStatisticalData(index);
 			        break;
-			     case $scope.actionType.SAVE:
-			    	$scope.saveStatisticalData();
-			        break;
-			     case $scope.actionType.UPDATE:
-			    	$scope.updateStatisticalData(index);
-			        break;
-			     case $scope.actionType.DOWNLOAD:
-			     	$scope.downloadFile(index);
-			        break;
-			     case $scope.actionType.CALCULATE:
-			    	$scope.calculateStatisticalData(index);
+				case $scope.actionType.SAVE:
+					$scope.saveStatisticalData();
+					break;
+				case $scope.actionType.UPDATE:
+					$scope.updateStatisticalData(index);
+					break;
+				case $scope.actionType.DOWNLOAD:
+					$scope.downloadFile(index);
+					break;
+				case $scope.actionType.CALCULATE:
+					$scope.calculateStatisticalData(index);
 			        break;				         
 			    default:
 			        $rootScope.setErrorMessage("Something went wrong with the dialog");
