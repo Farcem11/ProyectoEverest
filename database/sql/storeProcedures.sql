@@ -1,24 +1,24 @@
-DROP PROCEDURE IF EXISTS getStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS getStatisticalsData;
 DELIMITER //
-CREATE PROCEDURE getStatisticalDataManagers()
+CREATE PROCEDURE getStatisticalsData()
 BEGIN
 	SELECT
-		idStatisticalDataManager,
+		idStatisticalData,
 	  	name, 
  		total, 
 	  	max, 
 	  	min,
         numbers
 	FROM
-		StatisticalDataManager;
+		StatisticalData;
 END //
 DELIMITER ;
 
-call getStatisticalDataManagers();
+call getStatisticalsData();
 
-DROP PROCEDURE IF EXISTS saveStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS saveStatisticalData;
 DELIMITER //
-CREATE PROCEDURE saveStatisticalDataManagers
+CREATE PROCEDURE saveStatisticalData
 (
 	IN pName VARCHAR(100),
 	IN pTotal FLOAT,
@@ -27,7 +27,7 @@ CREATE PROCEDURE saveStatisticalDataManagers
     IN pNumbers LONGTEXT
 )
 BEGIN
-	INSERT INTO StatisticalDataManager
+	INSERT INTO StatisticalData
 	(
 	  	name, 
  		total, 
@@ -48,13 +48,13 @@ BEGIN
 END //
 DELIMITER ;
 
-call saveStatisticalDataManagers('Numbers', 15, 5, 1, '1,2,3,4,5');
+call saveStatisticalData('Numbers', 15, 5, 1, '1,2,3,4,5');
 
-DROP PROCEDURE IF EXISTS updateStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS updateStatisticalData;
 DELIMITER //
-CREATE PROCEDURE updateStatisticalDataManagers
+CREATE PROCEDURE updateStatisticalData
 (
-	IN pIdStatisticalDataManager BIGINT,
+	IN pIdStatisticalData BIGINT,
 	IN pName VARCHAR(260),
 	IN pTotal FLOAT,
 	IN pMax FLOAT,
@@ -63,7 +63,7 @@ CREATE PROCEDURE updateStatisticalDataManagers
 )
 BEGIN
 	UPDATE 
-		StatisticalDataManager
+		StatisticalData
 	SET
 		name = pName,
 		total = pTotal,
@@ -71,23 +71,23 @@ BEGIN
 		min = pMin,
         numbers = pNumbers
 	WHERE 
-		pIdStatisticalDataManager = idStatisticalDataManager;
+		pIdStatisticalData = idStatisticalData;
 END //
 DELIMITER ;
 
-call updateStatisticalDataManagers(31, 'files/data/MyFile.txt', 40, 6, 10, '6,7,8,9,10');
+call updateStatisticalData(1170, 'MyFile', 40, 6, 10, '6,7,8,9,10');
 
-DROP PROCEDURE IF EXISTS deleteStatisticalDataManagers;
+DROP PROCEDURE IF EXISTS deleteStatisticalData;
 DELIMITER //
-CREATE PROCEDURE deleteStatisticalDataManagers(IN pIdStatisticalDataManager BIGINT)
+CREATE PROCEDURE deleteStatisticalData(IN pIdStatisticalDataManager BIGINT)
 BEGIN
 	DELETE FROM 
-		StatisticalDataManager
+		StatisticalData
 	WHERE 
-		pIdStatisticalDataManager = idStatisticalDataManager;
+		pIdStatisticalData = idStatisticalData;
 END //
 DELIMITER ;
 
-call deleteStatisticalDataManagers(4);
+call deleteStatisticalData(1171);
 
-select * from statisticaldatamanager;
+select * from statisticaldata;

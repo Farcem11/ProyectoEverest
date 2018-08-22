@@ -32,11 +32,11 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
         List<StatisticalData> statisticalDataList = new ArrayList<>();
         try(Statement statement = database.getConnection().createStatement())
         {
-            try(ResultSet resultSet = statement.executeQuery("call getStatisticalDataManagers()"))
+            try(ResultSet resultSet = statement.executeQuery("call getStatisticalsData()"))
             {
                 while(resultSet.next())
                 {
-                    long id = resultSet.getLong("idStatisticalDataManager");
+                    long id = resultSet.getLong("idStatisticalData");
                     String name = resultSet.getString("name");
                     String numbers = resultSet.getString("numbers");
                     double total = resultSet.getDouble("total");
@@ -55,7 +55,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public Long save(StatisticalData object) throws SQLException
     {
-        String procedure = "call saveStatisticalDataManagers(?, ?, ?, ?, ?)";
+        String procedure = "call saveStatisticalData(?, ?, ?, ?, ?)";
         try(PreparedStatement preparedStatement = database.getConnection().prepareStatement(procedure))
         {
             preparedStatement.setString(1, object.getName());
@@ -90,7 +90,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public void update(StatisticalData object) throws SQLException
     {
-        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call updateStatisticalDataManagers(?, ?, ?, ?, ?, ?)"))
+        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call updateStatisticalData(?, ?, ?, ?, ?, ?)"))
         {
             preparedStatement.setLong(1, object.getId());
             preparedStatement.setString(2, object.getName());
@@ -115,7 +115,7 @@ public class StatisticalDataDao implements DataAcessObject<StatisticalData>
     @Override
     public void delete(Long id) throws SQLException
     {
-        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call deleteStatisticalDataManagers(?)"))
+        try(PreparedStatement preparedStatement = database.getConnection().prepareStatement("call deleteStatisticalData(?)"))
         {
             preparedStatement.setLong(1, id);
             preparedStatement.execute();	
