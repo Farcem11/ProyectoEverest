@@ -6,7 +6,7 @@ Grunt
 SASS  
   
 BackEnd:  
-Java/ Spring boot:  
+Java / Spring Boot:  
 https://spring.io/guides/gs/spring-boot/  
   
 Testing:   
