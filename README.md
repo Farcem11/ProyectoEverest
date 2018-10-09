@@ -16,7 +16,7 @@ Jacoco
 Build automation:  
 Gradle  
   
-Continuos Inspection:  
+Continuous Inspection:  
 Sonarqube  
   
 Database:  
