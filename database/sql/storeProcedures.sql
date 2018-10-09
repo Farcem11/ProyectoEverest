@@ -75,11 +75,11 @@ BEGIN
 END //
 DELIMITER ;
 
-call updateStatisticalData(1170, 'MyFile', 40, 6, 10, '6,7,8,9,10');
+call updateStatisticalData(3, 'MyFile', 40, 6, 10, '6,7,8,9,10');
 
 DROP PROCEDURE IF EXISTS deleteStatisticalData;
 DELIMITER //
-CREATE PROCEDURE deleteStatisticalData(IN pIdStatisticalDataManager BIGINT)
+CREATE PROCEDURE deleteStatisticalData(IN pIdStatisticalData BIGINT)
 BEGIN
 	DELETE FROM 
 		StatisticalData
@@ -88,6 +88,6 @@ BEGIN
 END //
 DELIMITER ;
 
-call deleteStatisticalData(1171);
+call deleteStatisticalData(3);
 
 select * from statisticaldata;

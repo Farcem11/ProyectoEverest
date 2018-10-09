@@ -19,10 +19,10 @@ import everest.model.StatisticalData;
 public class StatisticalDataManager 
 {
 	@Autowired
-	StatisticalCalculator statisticalCalculator;
+	private StatisticalCalculator statisticalCalculator;
 	
 	@Autowired
-	QuickSort quickSort;
+	private QuickSort quickSort;
 	
     public StatisticalData validateAndParse(String name, String fileContent) throws IOException
     {

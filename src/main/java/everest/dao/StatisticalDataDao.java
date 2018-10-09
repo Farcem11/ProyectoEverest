@@ -20,10 +20,10 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class StatisticalDataDao implements DataAcessObject<StatisticalData>
 {
 	@Autowired
-	StatisticalDataManager statisticalDataManager;
+	private StatisticalDataManager statisticalDataManager;
 	
 	@Autowired
-	MySqlDatabase database;
+	private MySqlDatabase database;
 
     @Transactional
     @Override

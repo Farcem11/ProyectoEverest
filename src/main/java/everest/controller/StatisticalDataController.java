@@ -28,7 +28,7 @@ public class StatisticalDataController
     private StatisticalDataService statisticalDataService;
     
     @Autowired
-	StatisticalDataManager statisticalDataManager;
+	private StatisticalDataManager statisticalDataManager;
 	
     private Map<Long, StatisticalData> statisticalDataMap;
 
