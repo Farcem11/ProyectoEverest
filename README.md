@@ -1,10 +1,10 @@
 # ProyectoEverest
 
 FrontEnd:
-AngularJS
-Grunt
-SASS
-
+AngularJS  
+Grunt  
+SASS  
+  
 BackEnd:
 Java/ Spring boot:
 https://spring.io/guides/gs/spring-boot/
